@@ -1,0 +1,126 @@
+
+Day09(25.07.16)
+
+
+1. React
+    [JSX 스타일링]
+        - 인라인 스타일링  
+            - style 속성에 자바스크립트 객체({{}}) 형태로 스타일을 직접 전달
+            - CSS 속성은 카멜 표기법 사용 (예: backgroundColor, fontSize)
+            - 스타일이 많아지면 가독성 저하
+
+        - 외부 CSS 파일
+            - .css 파일을 따로 만들어 스타일 분리
+            - 컴포넌트에서 import './파일명.css'로 불러오기
+            - JSX에서는 className 사용
+
+
+    [React Bootstrap 사용]
+        - react 경로 파일에 cmd창에서 npm install react-bootstrap bootstrap 명령어로 설치
+        - index.js -> import 'bootstrap/dist/css/bootstrap.min.css'; 
+
+
+    [SASS(Syntactically Awesome Stylesheets)]
+        - react 경로 파일에 cmd창에서 npm i sass 명령어로 설치
+
+        - CSS의 확장 기능을 제공하는 스타일 시트 언어
+        - CSS보다 더 강력한 기능을 제공하며, 코드 재사용성과 유지보수성을 높이는 데 도움을 줌
+        - React 프로젝트에서 SASS를 사용하면 스타일을 더 효율적으로 관리 가능
+        
+    [주요 기능]
+        변수(Variables): 색상, 폰트 크기 등을 변수로 정의하여 재사용 가능.
+        중첩(Nesting): CSS 선택자를 중첩하여 구조적으로 작성 가능.
+        믹스인(Mixins): 반복되는 스타일을 함수처럼 정의하여 재사용 가능.
+        확장(Extend): 기존 스타일을 상속받아 재사용 가능.
+        연산(Operations): 수학 연산을 사용하여 동적인 스타일 작성 가능.
+
+
+    [Props]
+        src/components2/App4.jsx
+        src/components2/Profile.jsx
+
+        - 부모 컴포넌트가 자식 컴포넌트에게 전달하는 데이터(속성)
+
+        특징 
+            1) 단방향 데이터 흐름 : 항상 부모에서 자식으로만 흐름
+            2) 읽기 전용 : 자식 컴포넌트는 전달받은 props를 직접 수정할 수 없음
+
+        역할 : 데이터 흐름을 예측하기 쉬워지고, 컴포넌트의 재사용성이 극대화됨.
+
+
+    [리액트의 이벤트 처리]
+        src/components2/EventTest.jsx
+
+        - 이벤트
+            - 웹 페이지에서 발생하는 사용자의 행위
+            - ex) 클릭, 키보드 입력, 스크롤 등
+
+        - 이벤트 핸들링
+            - 이벤트가 발생했을 때 지정된 함수(이벤트 핸들러)를 실행하여 상호작용을 구현하는 것
+
+        - 이벤트 핸들링 규칙
+            - 이벤트 이름은 카멜 표기법
+            - 문자열이 아니라 함수로 전달
+
+    [이벤트 전달]
+        src/components2/InputComponent.jsx
+        src/components2/InputParent.jsx           
+
+        - 자식에서 이벤트 발생 -> 부모로 이벤트 전달
+        - 자식 -> 부모 값 전달 
+
+
+    [Hook]      
+        src/components2/Counter.jsx  
+        - 함수형 컴포넌트에서 클래스형 컴포넌트의 기능을 
+          사용할 수 있도록 도와주는 React 16.8에서 새롭게 도입된 기능
+        
+        특징
+            1) 이름이 use로 시작함
+            2) 함수형 컴포넌트의 최상단(Top Level)에서만 사용 가능
+            3) 조건문, 반복문, 일반 함수 내부에서는 사용할 수 없음
+
+
+    [useState()]
+        src/components2/UserProfile.jsx
+        - useState : 컴포넌트 내에서 상태를 관리할수 있게 해주는 React Hook
+                     값이 변경되면 자동으로 컴포넌트를 재렌더링
+                     함수형 컴포넌트에서만 사용 가능
+        - useState의 사용법
+            const [light, setLight] = useState('off');
+                State변수, set함수      생성자(초깃값)    
+
+
+    [useState로 배열 상태 다루기]
+        src/components2/Say.jsx
+
+
+    [카운터 앱 만들기]
+            src/components2/Controller.jsx
+            src/components2/App5.jsx
+            src/components2/Viewer.jsx
+
+
+    [컴포넌트의 생명주기(Lifecycle)]
+        src/components2/LifeCycleParent.jsx
+        src/components2/LifeCycleChild.jsx
+        - 컴포넌트가 브라우저에 나타나고, 업데이트되고, 사라지기까지의 과정
+
+        주요단계
+        1) 마운트 : 컴포넌트가 생성되어 DOM에 처음 삽입될 때
+        2) 업데이트 : props나 state가 변경되어 리렌더링될 때
+        3) 언마운트 : 컴포넌트가 DOM에서 제거될 때
+
+
+    [useEffect(), Cleanup]
+        src/components2/App5.jsx
+        - 이 컴포넌트는 렌더링 이후에 이런 부가적인 작업(Side Effect)을 수행해야 한다고 리액트에게 알려주는 Hook
+
+        사이드 이펙트(Side Effect) : 컴포넌트의 주된 역할인 렌더링 외의 모든 작업
+        ex) 서버API호출, setInterval 설정, 외부 라이브러리 연동 등        
+
+
+    [useRef로 DOM 요소에 접근]
+        src/components2/RefTest.jsx
+        - 최초값이 ReRendering되었을때 다시 초기화되지 않는 값이 필요할때
+                           

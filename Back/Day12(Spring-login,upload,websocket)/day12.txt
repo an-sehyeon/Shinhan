@@ -1,0 +1,73 @@
+Day12(25.6.5)
+
+
+
+
+1. javascript 연습 
+    - JSON Data 화면 출력
+    webapp\resources\js\empAll_json.js
+    webapp\resources\js\empDetail_json.js
+    views\emp\empAll.jsp
+    views\emp\empByCondition.jsp
+    views\emp\empinsert.jsp
+
+2. 로그인 로그아웃
+    controller\LoginController.java
+    webapp\WEB-INF\views\auth\login.jsp
+    resources\js\loginExternal.js
+
+3. 업로드 다운로드
+    - pom.xml > dependency 추가
+    <dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>1.2.2</version>
+    </dependency>
+    <dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>1.3.2</version>
+    </dependency>
+    <dependency>
+    <groupId>net.coobird</groupId>
+    <artifactId>thumbnailator</artifactId>
+    <version>0.4.6</version>
+    </dependency>
+    
+
+    - appServlet\servlet-context-no.xml > bean 추가
+    <bean name="multipartResolver"
+    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <property name="maxUploadSize" value="10000000"/>
+    </bean>
+
+    - spring\util\UploadFileUtils.java
+    - controller\UploadController.java
+    - views\upload\uploadForm.jsp
+    - views\upload\downLoadForm.jsp
+    
+4. WebSocket
+    - ws 프로토콜을 기반으로 클라이언트와 서버 사이에 양방향 연결 스트림을 만들어 주는 기술
+    - 접속 후에는 요청없이 실시간 응답 받기가 가능하다.
+
+    - springLegacyProject\pom.xml > dependency 추가
+
+    <dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-websocket</artifactId>
+		<version>${org.springframework-version}</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.websocket</groupId>
+		<artifactId>javax.websocket-api</artifactId>
+		<version>1.1</version>
+	</dependency>
+	<dependency>
+		<groupId>com.googlecode.json-simple</groupId>
+		<artifactId>json-simple</artifactId>
+		<version>1.1.1</version>
+	</dependency>
+
+    - controller\ChattingController.java
+    - socket\WebSocketServer.java
+    - views\chat\chatting.jsp

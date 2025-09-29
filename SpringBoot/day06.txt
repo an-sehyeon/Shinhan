@@ -1,0 +1,32 @@
+Day06(25.08.14)
+
+
+
+1.
+
+
+AOP
+
+
+업로드
+    [application.properties]에 추가
+        Spring.servlet.multipart.enabled=true
+        spring.servlet.multipart.location=C:\\upload
+        spring.servlet.multipart.max-request-size=30MB
+        spring.servlet.multipart.max-file-size=10MB
+        com.shinhan.upload.path=C:\\upload
+
+    [dependency] 추가
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.13</version>
+        </dependency>
+
+시큐리티
+
+[dependency] 추가
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-security</artifactId>
+</dependency>

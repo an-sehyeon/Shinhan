@@ -1,0 +1,82 @@
+Day05(25.4.24)
+
+
+1. 복습 LAB7풀이
+
+2. MVC2모델(EmpView, EmpDAO, EmpService, EmpController)
+    - MVC 모델1 : 뷰와 컨트롤러의 역할이 합쳐져 있음.
+        - 상대적으로 설계가 간단하여 개발 속도가 빠르고 작은 프로젝트에 적합
+        - 소스가 복잡해지고 읽기가 어려워져 유지보수가 힘들다.
+
+    - MVC 모델2 : JSP는 뷰의 역할만 하고, 컨트롤러 역할을 Servlet이 수행
+        - 모델은 MVC 1 방식과 동일
+
+    사용자 요청-> Servlet(Controller) 요청-> model 쿼리-> DB 쿼리-> model 응답-> Servlet(Controller) -> JSP(View) 응답-> 사용자 
+    DAO -> Service -> Controller
+
+
+3. 객체 종류
+    - 데이터 사전
+        - 사용자 테이블과 데이터 사전으로 나뉨.
+        - 사용자 테이블은 데이터베이스를 통해 관리할 데이터를 저장하는 테이블을 뜻함.
+        - 데이터 사전은 데이터베이스를 구성하고 운영하는데 필요한 모든 정보를 저장하는 특수한 테이블
+        - 오라클 데이터베이스를 운영하는데 중요한 데이터를 보관관
+
+    - 인덱스 
+        - 목차, 색인 : 검색 속도를 향상하기 위해 생성
+        - 주로 검색에 많이 사용되는 칼럼이 있다면 index만든다.
+        - Oracle은 primary key를 설정하면 자동으로 index가 만들어진다. 
+        - 더 빠른 검색을 위한 인덱스
+        
+        - primary key : not null, unique
+        
+        - 인덱스 생성 문법
+            create index 인덱스이름
+            on 테이블이름(칼럼이름)
+
+
+    - 뷰
+        - 가상 테이블
+        - view : 테이블을 보는 창, select문만 저장
+        - 복잡한 select문을 간소화하기 위함.
+        - 보안 목적으로 사용
+
+        view 생성 문법
+            ex)
+            create view view_emp_city
+            as 
+            select employee_id, first_name, city
+            from employees, departments, locations
+            where employees.department_id = departments.department_id
+            and departments.location_id = locations.location_id;
+
+            select * from view_emp_city;
+
+    
+    - 시퀀스
+        - 규칙에 따라 순번을 생성하는 객체
+        - 사용자에게 계속 다음 번호를 만들어 주는 역할
+        - 자동번호 생성기
+
+         - sequence 생성 문법
+            create sequence 시퀀스 이름
+            insert into tbl_board values(seq_no.nextval,...)
+
+
+    - 동의어
+        - 테이블, 뷰, 시퀀스 등 객체 이름 대신 사용할 수 있는 다른 이름을 부여하는 객체
+        
+        - 기본형식
+            ex) create synonym 동의어 for 테이블 이름
+                create synonym emp for employees;
+                select * from emp
+
+
+
+    - 제약조건 
+        - NOT NULL :  
+        - UNIQUE : 
+        - PRIMARY KEY : 
+        - FOREIGN KEY : 
+        - CHECK : 
+

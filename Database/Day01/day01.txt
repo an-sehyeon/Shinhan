@@ -1,0 +1,82 @@
+Day01(25.4.18)
+
+
+1. Oracle11 64bit 다운로드받기
+    - https://www.oracle.com/database/technologies/xe-prior-release-downloads.html 
+    - 압축풀기
+    - 작업관리자 -> 서비스 -> Oracle1ServiceXE, Oracle1XETNSListener 실행중 확인
+
+    
+    - SQL Developer (Windows 64-bit with JDK 17 included)  https://www.oracle.com/kr/database/sqldeveloper/technologies/download/
+    - 압축해제(경로 변경X)
+
+    [ SQL Command에서 lock 해제 ]
+        show user
+        conn system/1234
+        alter user hr identified by hr account unlock;
+        conn hr/hr
+
+    [ eclipse ] Test
+        Data Source Exploer -> Database Connections 우클릭 -> new -> Oracle 
+        -> new Driver Definition -> Oracle Thin Driver11 -> JAR List remove -> add
+
+    [ Oracle SQL developer] 연결
+
+    [ SQL Command ]
+        conn system/1234
+        create user scott identified by tiger;
+        default tablespace users quota unlimited on users;
+        grant create session, create table to scott;
+        conn scott/tiger
+        @C:\temp\doitoracle_scott.sql
+        select * from tab   
+        purge resycle
+
+
+
+2. 오라클 데이터베이스
+    
+    DDL : Data Definition Language : 테이블을 포함한 여러 객체를 생성, 수정, 삭제하는 명령어
+    DQL : Data Query Language : 데이터를 조회하는 명령어
+    DML : Data Manopulation Language : 데이터를 저장, 수정, 삭제하는 명령어어
+    TCL : Transaction Control Language : 트랜잭션 데이터의 영구 저장, 취소 등과 관련된 명령어
+
+    [Key]
+        - 기본키 : primary Key = 중복되지 않는 값만 가질 수 있는 키, 유일한 값, null 값을 가질 수 없음
+        - 후보키 : candidate Key = 기본키가 될 수 있는 모든 키를 의미, 후보키 중 기본키로 지정되지 않은 키를 보조키 또는 대체키라고 함
+        - 외래키 : foreign Key = 특정 테이블에 포함되어 있으면서 다른 테이블의 기본키로 지정된 키, 다른 테이블과 join하기 위함
+        - 복합키 : composite key = 여러 열을 조합하여 기본키 역할을 할 수 있게 만든 키키
+
+
+    [자료형]
+            - VARCHAR2(길이) : 4000byte만큼의 가변 길이 문자열 데이터 저장
+            - NUMBER(전체자릿수, 소수점 이하 자릿수) : +,- 38자릿수의 숫자 저장가능, 
+                        NUMBER(p,s)와 같이 표기할 경우 s자리만큼 소수점 이하 자릿수 표현
+                        이 소수점 자리를 포함한 전체 p자리만큼 숫자 데이터 저장
+            - DATE : 날짜 형식을 저장하기 위해 사용하는 자료형으로 세기, 연, 월, 일, 시, 분, 초 저장 
+            - CHAR : 4000byte만큼의 고정 길이 문자열 데이터 저장
+
+
+
+    [객체]
+        - 테이블(table) : 데이터를 저장하는 장소
+        - 인덱스(index)  : 테이블의 검색 효율을 높이기 위해 사용
+        - 뷰(view) : 하나 또는 여러 개의 선별된 데이터를 논리적으로 연결하여 하나의 테이블처럼 사용하게 해 줌
+        - 시퀀스(sequence) : 일련 번호를 생성
+        - 시노님(synonym) : 오라클 객체의 별칭을 지정정
+
+
+    [select문 작성 순서]
+    3.select      
+    1.from         table의 정보는 oracle의 data사전에서 가져온다.
+    2.where       
+    4.order by    
+
+
+            식별자(identifier) :  table 이름, 칼럼이름, 별칭(특수문자가 있으면 "" 사용)
+            " "칼럼이름이나 테이블이름 (식별자)
+            ' '는 값
+            NULL값을 계산하면 결과는 NULL이다.
+            
+            distinct 중복제거
+            

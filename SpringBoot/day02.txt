@@ -1,0 +1,94 @@
+Day02(25.08.08)
+
+
+
+1. 복습
+
+2. JAP 쿼리작성 - JPQL(JPA Query Language)
+    - 복잡한 구조 (각종 join, 여러 조건문 등) 을 가질 경우 자동 생성되는 쿼리 메서드 한계
+    - @Query을 사용하면 각종 요청에 대처 가능(실제 DB종속적 쿼리는 아니지만 SQL문과 비슷)
+    c:\shinhanDS\work\sts-workspace\sbproject\src\main\java\com\shinhan\sbroject\repository\BoardRepository.java
+
+3. Querydsl (Domain Specific Language)
+    - Qdomain이라고 부르는 자바 코드를 생성하는 플러그인
+    - Qdomain에는 실제 도메인 객체의 모든 필드들에 대해서 사용가능한 모든 Operation을 호출할 수 있는 메서드들이 정의 되어 있다.
+
+
+    - dependency 추가
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-apt</artifactId>
+                <version>5.0.0</version>
+                <classifier>jakarta</classifier>
+                <scope>provided</scope>
+                </dependency>
+                
+                <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-jpa</artifactId>
+                <version>5.0.0</version>
+                <classifier>jakarta</classifier>
+            </dependency>
+
+    - plugin 추가
+        	<plugin>
+				<groupId>com.mysema.maven</groupId>
+				<artifactId>apt-maven-plugin</artifactId>
+				<version>1.1.3</version>
+				<executions>
+				<execution>
+				<goals>
+				  <goal>process</goal>
+				</goals>
+				<configuration>
+					<outputDirectory>target/generated-sources/java</outputDirectory>
+					<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+				</configuration>
+				</execution>
+				</executions>
+			</plugin>
+
+    4. Querydsl를 이용한 동적 SQL 처리
+        - @MappedSuperclass : 공통 맵핑 정보가 필요할 때 사용하며, 부모 클래스에서 선언하고 속성만 상속 받아서 사용하고 싶을 때 사용.
+        - @EntityListeners(AuditingEntityListener::class) : entity객체가 생성/변경되는 것을 감지.
+        - @CreatedDate : 생성 일자를 관리하는 필드에 현재 날짜를 주입.
+        - @Column(updatable = false) : 수정불가로 설정
+
+        - @EnablejpaAuditing : application에 설정(수정일자, 수정자를 위한 공통 엔티티 생성)
+        @Getter @ToString
+        @MappedSuperclass       // table 생성안됨
+        @EntityListeners(value = {AuditingEntityListener.class})
+        public abstract class BaseEntity {
+            @CreatedDate
+            @Column(name="regdate", updatable = false)
+            private LocalDateTime regDate;
+            @LastModifiedDate
+            @Column(name="moddate")
+            private LocalDateTime modDate;
+        }
+
+    
+    5. 공통 엔티티 생성
+        - @EnablejpaAuditing : application에 설정(수정일자, 수정자를 위한 공통 엔티티 생성)
+        @Getter @ToString
+        @MappedSuperclass       // table 생성안됨
+        @EntityListeners(value = {AuditingEntityListener.class})
+        public abstract class BaseEntity {
+            @CreatedDate
+            @Column(name="regdate", updatable = false)
+            private LocalDateTime regDate;
+            @LastModifiedDate
+            @Column(name="moddate")
+            private LocalDateTime modDate;
+        }
+
+
+    6. ModelMapper : 어떤 Object에 있는 Filed값들을 원하는 Object로 Mapping 시켜줌.
+        dependency 추가
+            	<dependency>
+                    <groupId>org.modelmapper</groupId>
+                    <artifactId>modelmapper</artifactId>
+                    <version>2.3.8</version>
+                </dependency>
+
+    

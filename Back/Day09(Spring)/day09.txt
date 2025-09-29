@@ -1,0 +1,36 @@
+Day09(25.5.30)
+
+https://mvnrepository.com 
+- 중앙 지역 저장소 사이트
+    - Maven Repository : 프로젝트에 사용되는 프로젝트 jar 파일, 라이브러리 jar...들이 위치
+
+1. Spring Web MVC
+
+    - 요청 주소 연습
+    spring\controller\SampleController.java
+    views\section02\sample1.jsp
+
+        - @RequestMapping
+        - @GetMapping
+        - @ResponseBody
+            - 응답문서에 data를 보낸다.
+            - @ResponseBody가 없으면 jsp페이지로 forward가 default이다.
+        
+
+
+    - parameter 연습
+    spring\controller\SampleController2.java
+    views\section02\paramtest.jsp
+    views\section02\inputForm.jsp
+    views\dept\deptinsert.jsp
+    views\dept\deptlist.jsp
+    spring\controller\DeptController.java
+    views\dept\result.jsp
+        - @RequestParam
+        - @RequestMapping
+        - @PostMapping
+        - @ModelAttribute  
+            -> param으로 받은 data를 다시 view에서 사용하기 위해 저장,받은 데이터를 다른 페이지로 전달
+
+
+    <meta http-equiv="refresh" content="2;url=deptlist.do"> : 2초 뒤 페이지 이동        

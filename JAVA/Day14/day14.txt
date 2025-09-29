@@ -1,0 +1,8 @@
+Day14(25.4.18)
+
+
+(package : shinhan.day14)
+1. JSON 복습(AipExample.java)
+    - 빗썸 api JSON형태 데이터 추출
+
+2. DB + Eclipce 연동(EmployeeDTO.java)

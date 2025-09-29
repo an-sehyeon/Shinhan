@@ -1,0 +1,70 @@
+-- 1.지점별 월급을 가장 많이 받는 사람
+create table EMPLOYEES (
+    ID NUMBER NOT NULL,
+    NAME VARCHAR2(20) NOT NULL,
+    SALARY NUMBER(4,1) NOT NULL,
+    BRANCH_ID NUMBER NOT NULL
+);
+
+insert into EMPLOYEES values(3191,'Amari',270,4);
+insert into EMPLOYEES values(3700,'Jamie',370,4);
+insert into EMPLOYEES values(3883,'Jocelyn',470,4);
+insert into EMPLOYEES values(3232,'Vincent',370,7);
+insert into EMPLOYEES values(3385,'Claire',350,7);
+insert into EMPLOYEES values(3472,'Andrea',370,7);
+insert into EMPLOYEES values(3825,'Arielle',330,7);
+insert into EMPLOYEES values(3223,'Lucy',270,9);
+insert into EMPLOYEES values(2679,'Milkayla',500,10);
+
+select e.branch_id, e.name
+from employees e
+join (
+    select branch_id, max(salary) as max_salary
+    from employees
+    group by branch_id
+    ) m on e.branch_id = m.branch_id and e.salary = m.max_salary
+order by e.branch_id asc, e.name asc;
+
+
+-- 2.버그에 영향을 받은 레코드
+create table cart_products (
+    id number,
+    cart_id number,
+    name varchar2(50),
+    price number
+);
+create table coupons (
+    id number,
+    cart_id number,
+    minmum_requlrement number,
+    discount_amount number
+);
+
+insert into cart_products values(5508,287,'Facial Tissue',10900);
+insert into cart_products values(5509,287,'Dish Detergent',4900);
+insert into cart_products values(5510,287,'Vegetable',2480);
+insert into cart_products values(8434,448,'Toilet Paper',19500);
+insert into cart_products values(8452,448,'Diaper',18900);
+insert into cart_products values(8438,448,'Laundry Care',12900);
+insert into cart_products values(19129,977,'Yogurt',2980);
+insert into cart_products values(19130,977,'Butter',4890);
+insert into cart_products values(19131,977,'Chicken',6180);
+
+insert into coupons values(0,287,100000,9000);
+insert into coupons values(3,977,50000,5000);
+insert into coupons values(5,448,50000,3000);
+
+select * from cart_products;
+select * from coupons;
+
+select ca.cart_id, case 
+                    when sum(ca.price) >= co.minmum_requlrement then 0
+                    else 1
+                    end as abused
+from cart_products ca join coupons co on co.cart_id = ca.cart_id
+group by ca.cart_id, co.minmum_requlrement
+order by cart_id asc;
+
+
+
+

@@ -1,0 +1,1201 @@
+INSERT_SQL
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김준혁', '770209-7057211', '010-5006-3549', '광주',
+        5, 13, '2016',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박준서', '890116-3512523', '010-3288-9920', '서울',
+        1, 13, '2024',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '백아름', '760920-5159786', '010-1508-4773', '강원',
+        0, 5, '2018',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박보람', '920618-6318203', '010-8662-5559', '울산',
+        4, 4, '2012',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '양성현', '130202-2020160', '010-6478-5756', '인천',
+        7, 9, '2008',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '양재호', '060728-1796217', '010-1661-2679', '충북',
+        7, 10, '2012',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이지연', '040321-6121221', '010-1559-8358', '충남',
+        0, 2, '2008',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김승민', '981024-8910178', '010-3480-3401', '강원',
+        5, 9, 'vip',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이지후', '121006-5194138', '010-3894-9682', '경남',
+        3, 13, '2010',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김선영', '050810-1088898', '010-5066-1271', '충남',
+        3, 2, '2016',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이정수', '240121-2671184', '010-1259-4870', '제주',
+        0, 13, '2012',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '오시우', '751021-9759491', '010-4567-8050', '인천',
+        6, 11, '2020',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '홍영미', '000214-1183766', '010-8655-6132', '인천',
+        7, 9, '2012',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박정수', '010607-6950596', '010-4542-5415', '서울',
+        4, 13, 'vip',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '송지원', '801007-9164054', '010-1936-1565', '경북',
+        1, 10, '2016',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '윤지은', '871217-1791933', '010-9469-2148', '전남',
+        1, 14, '2024',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김준서', '120607-6458058', '010-4750-1137', '서울',
+        6, 0, '2024',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이진호', '910425-7034222', '010-3330-9439', '울산',
+        3, 10, '2012',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김진우', '160420-7910426', '010-7114-2663', '인천',
+        4, 16, '2017',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '서영길', '850319-3376901', '010-1050-3408', '서울',
+        3, 14, '2019',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '강성현', '870607-1858346', '010-9310-4269', '경북',
+        4, 0, '2009',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박지훈', '900711-3262798', '010-3403-6846', '대구',
+        1, 6, '2017',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '황도현', '780201-3488511', '010-1237-5035', '울산',
+        6, 13, '2012',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박지원', '020515-4531997', '010-9384-1506', '경남',
+        2, 1, '2009',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박예원', '930212-7632029', '010-6909-9368', '광주',
+        1, 5, '2008',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김준혁', '051105-6301186', '010-6013-1244', '경남',
+        6, 1, '2014',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박채원', '780916-4810499', '010-9744-6742', '충북',
+        7, 7, '2013',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '문준영', '200613-3229609', '010-8441-3457', '강원',
+        7, 14, '2015',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '황아름', '751104-5200880', '010-1861-6779', '제주',
+        4, 2, '2008',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이영철', '180418-2075228', '010-6572-4145', '부산',
+        6, 11, '2021',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박경자', '200605-6855596', '010-4051-6784', '울산',
+        0, 10, '2021',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '장경숙', '200603-9828436', '010-8776-3431', '제주',
+        7, 8, '2017',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '남옥순', '871011-7538456', '010-1861-5394', '울산',
+        3, 9, '2009',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '유영진', '200917-2848432', '010-4310-9532', '울산',
+        5, 16, '2016',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '황정호', '900226-8759942', '010-7049-8565', '전남',
+        5, 6, '2015',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이영자', '120621-7365430', '010-8867-7335', '부산',
+        6, 6, '2010',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '홍정웅', '780403-4877467', '010-7331-1485', '경기',
+        7, 7, '2022',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '구은지', '000712-8039374', '010-9631-9228', '인천',
+        0, 9, '2009',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '양명자', '151019-6869639', '010-5324-9980', '울산',
+        4, 100, '2024',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김중수', '790710-8626707', '010-6732-4352', '서울',
+        4, 9, '2013',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '조영길', '230216-4850160', '010-2761-7755', '제주',
+        0, 5, '2013',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김재현', '931002-4879687', '010-7631-1666', '충남',
+        3, 3, '2009',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '강유진', '920218-9937291', '010-1723-6579', '부산',
+        5, 0, '2009',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김도현', '021219-5538928', '010-8994-9443', '대전',
+        4, 2, '2021',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박주원', '130527-7877504', '010-9171-1671', '경북',
+        7, 8, '2011',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '서상현', '860315-7733828', '010-1389-7724', '전북',
+        5, 8, '2013',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '최성현', '110304-8470180', '010-4989-5573', '제주',
+        2, 14, '2015',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '전성수', '761005-1119274', '010-5588-7464', '강원',
+        5, 10, '2017',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '윤정희', '820409-3202262', '010-1156-9384', '강원',
+        1, 15, '2018',
+        'N', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박은경', '150501-5091289', '010-6129-7688', '제주',
+        2, 0, '2011',
+        'Y', 24
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '오성민', '831028-6510191', '010-9016-7732', '전북',
+        6, 0, '2021',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '최채원', '210923-5800837', '010-9347-7537', '광주',
+        1, 14, '2011',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '문진우', '161111-9453281', '010-2264-1980', '경남',
+        5, 11, '2016',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '심지아', '930712-4334658', '010-1464-9234', '경기',
+        2, 7, '2013',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이명숙', '231113-9316446', '010-9418-1648', '부산',
+        5, 6, '2021',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '진수빈', '181217-6969916', '010-6040-8797', '전남',
+        0, 100, '2023',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박준혁', '911227-9131969', '010-8591-1077', '부산',
+        4, 15, '2021',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '한미영', '810802-5710438', '010-5503-9406', '경북',
+        0, 5, '2014',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김정남', '780111-7917166', '010-8945-6995', '충북',
+        5, 3, '2017',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '안은주', '160702-5793120', '010-6587-6692', '경남',
+        2, 13, '2021',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김민서', '920826-8934733', '010-2935-9296', '서울',
+        6, 2, '2015',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '서은정', '850220-6216219', '010-3760-9317', '전북',
+        0, 9, '2024',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이재현', '770118-8774841', '010-4495-7978', '경남',
+        2, 1, '2016',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이은영', '740914-8445791', '010-6452-9130', '경북',
+        4, 2, '2011',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김광수', '900721-2339658', '010-1503-9061', '경기',
+        2, 15, '2022',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '황현지', '840712-3067320', '010-3538-8206', '경기',
+        2, 0, '2023',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '손준영', '030128-1713252', '010-2520-4655', '경남',
+        6, 2, '2021',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이지연', '930106-1106608', '010-9819-2146', '경기',
+        4, 2, '2013',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '한지후', '970720-8437622', '010-4948-6853', '울산',
+        3, 100, '2020',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '고서윤', '041105-9285284', '010-1757-5525', '서울',
+        3, 14, '2014',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '진현지', '910124-6275655', '010-5207-1326', '대전',
+        4, 11, '2023',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '최은영', '710616-7328519', '010-6204-3581', '경남',
+        2, 12, '2012',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이중수', '130901-9778263', '010-2210-9314', '충북',
+        6, 13, '2024',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김채원', '051009-5700233', '010-5895-7782', '강원',
+        4, 5, '2017',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김승민', '100707-9800017', '010-1752-3046', '대전',
+        4, 7, '2014',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김하은', '820527-3665743', '010-3300-8974', '인천',
+        1, 6, 'vip',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '차정희', '700411-9527168', '010-1882-9937', '대구',
+        7, 0, '2018',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '정순자', '210326-9918525', '010-3162-4591', '전북',
+        1, 13, '2010',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김동현', '731214-2622238', '010-3107-9266', '경남',
+        5, 0, '2016',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김성수', '970814-2014540', '010-2743-9426', '충북',
+        2, 8, '2019',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '서명숙', '170120-3173611', '010-1318-7462', '제주',
+        2, 16, '2020',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박예진', '860528-5875192', '010-9920-2776', '제주',
+        0, 8, '2016',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '윤현숙', '040405-5225115', '010-9544-2080', '광주',
+        5, 12, '2021',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이영식', '850218-7478941', '010-7381-4033', '전북',
+        4, 1, '2008',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '최지은', '860114-9363833', '010-1854-4449', '충북',
+        2, 3, '2016',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이순자', '910116-6491589', '010-3665-9655', '울산',
+        3, 0, '2019',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김예진', '850710-8331586', '010-7620-1013', '대전',
+        6, 3, '2021',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김건우', '211109-8285238', '010-4341-5334', '충남',
+        1, 1, '2024',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '강춘자', '770626-5012192', '010-4562-5332', '경북',
+        5, 4, '2018',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이병철', '171116-7293933', '010-3191-4126', '전북',
+        4, 4, '2022',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '구우진', '920925-7060839', '010-9834-1259', '부산',
+        2, 15, '2008',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박정숙', '871005-8179082', '010-8988-7440', '인천',
+        3, 16, '2015',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김민준', '150915-2157842', '010-3025-4033', '제주',
+        0, 0, '2018',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '권하윤', '720206-7345253', '010-2749-5516', '대전',
+        0, 8, '2022',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이정식', '700807-7103950', '010-6814-1463', '경기',
+        5, 4, '2013',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김성수', '821113-2326588', '010-7216-7016', '경남',
+        0, 2, '2011',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박동현', '140411-4274242', '010-2830-5419', '인천',
+        3, 0, '2011',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이예지', '870118-3490096', '010-9922-8294', '충북',
+        3, 2, '2024',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김재호', '860606-6851771', '010-8394-6455', '경북',
+        7, 10, '2008',
+        'Y', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김성훈', '860708-6619721', '010-7143-9857', '전북',
+        6, 12, '2013',
+        'N', 34
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이경숙', '870604-6273191', '010-3133-2630', '전북',
+        4, 5, '2017',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이숙자', '870516-6297468', '010-3308-3411', '경북',
+        3, 3, '2011',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박민석', '901215-2107021', '010-1387-1890', '경남',
+        0, 7, '2013',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김혜진', '230301-8622686', '010-8581-1324', '대구',
+        7, 8, '2015',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '장은정', '090416-3031909', '010-5544-1568', '울산',
+        1, 16, '2014',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이주원', '790111-2672659', '010-5354-2382', '전남',
+        0, 7, '2019',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박정남', '020503-4272933', '010-1369-9951', '대전',
+        5, 6, '2011',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박건우', '750413-1834606', '010-2478-9253', '충남',
+        5, 0, '2013',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김순옥', '820112-3860895', '010-6939-1301', '부산',
+        6, 13, '2019',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '노윤서', '720610-8473126', '010-8204-9387', '강원',
+        2, 13, '2011',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '황현우', '710102-1011766', '010-5485-2354', '대구',
+        3, 10, '2015',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '윤우진', '140813-5644791', '010-6906-7675', '전남',
+        5, 16, '2011',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이정자', '041201-6966892', '010-5078-7280', '전남',
+        2, 7, '2016',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '윤미숙', '150708-7332745', '010-9742-7957', '경북',
+        0, 5, '2009',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '곽중수', '010204-4181079', '010-9016-3304', '경남',
+        6, 3, '2009',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이성현', '780310-9618795', '010-2284-2024', '강원',
+        6, 0, '2010',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이민지', '090121-5541888', '010-6655-8486', '전남',
+        2, 8, '2015',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김현우', '101214-3782443', '010-4032-3239', '충북',
+        5, 7, '2014',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '최성수', '880716-1269250', '010-5656-6407', '전남',
+        3, 16, '2017',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박성민', '150317-4362488', '010-9999-8998', '경북',
+        5, 4, '2014',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김수진', '230318-7750276', '010-8575-2273', '경남',
+        3, 15, '2024',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '엄정훈', '991017-3278952', '010-9259-3082', '부산',
+        5, 15, '2019',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이지후', '200728-7223094', '010-2070-3641', '전남',
+        6, 7, '2021',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김영철', '741111-3936991', '010-9950-4925', '경기',
+        2, 10, '2013',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이상현', '181004-8694869', '010-7930-7667', '인천',
+        7, 10, '2013',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김민석', '180112-5371604', '010-2153-2931', '경북',
+        4, 100, '2018',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김현우', '020222-5921776', '010-2493-7963', '대전',
+        0, 100, '2022',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '유경숙', '761219-3868599', '010-3341-9751', '전북',
+        5, 11, '2021',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '최현준', '860115-4249713', '010-3594-4809', '서울',
+        5, 16, '2013',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '심정남', '131018-4611853', '010-3390-1680', '전북',
+        5, 11, '2020',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '서민수', '100609-5292647', '010-2389-3952', '울산',
+        3, 16, '2012',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '강민수', '961022-1152143', '010-4711-3118', '충북',
+        2, 3, '2024',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이지아', '930914-2058363', '010-8664-5787', '광주',
+        6, 5, '2009',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이미영', '190317-3828079', '010-3841-3934', '인천',
+        0, 5, '2017',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '장영길', '800520-8437341', '010-2411-8716', '경북',
+        3, 12, '2023',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '권영진', '011019-5956631', '010-9191-2615', '제주',
+        7, 9, '2009',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '문승현', '140607-1683739', '010-6154-5561', '전북',
+        5, 13, '2008',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '이지원', '790420-2981306', '010-8292-5998', '울산',
+        1, 11, '2016',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '윤정수', '011013-7469232', '010-1486-9616', '경기',
+        0, 2, '2009',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '안경자', '871116-2712322', '010-3688-9382', '대구',
+        1, 9, '2014',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '진예은', '710109-7328576', '010-5525-5689', '강원',
+        2, 11, '2024',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '최선영', '200207-1006612', '010-2892-6782', '울산',
+        5, 0, '2018',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김재호', '020619-6100527', '010-4997-9069', '강원',
+        3, 6, '2017',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '최예준', '900619-7279753', '010-2112-5713', '경남',
+        5, 100, '2014',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '조정희', '791108-5290530', '010-4554-8670', '경남',
+        1, 7, '2015',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '박예은', '170611-6928511', '010-1856-1052', '대구',
+        0, 16, '2020',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김옥순', '201118-9252319', '010-1053-1176', '전북',
+        7, 100, '2012',
+        'N', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '손정식', '750813-1335821', '010-9701-4190', '경기',
+        7, 11, '2018',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김미영', '830124-6446109', '010-4051-9073', '부산',
+        5, 16, '2016',
+        'Y', 48
+    );"
+"INSERT INTO applicant_info (
+        name, reg_no, phone, address, dependent_count,
+        non_home_start_date, account_open_date, is_married, housing_area)
+    VALUES (
+        '김도현', '960725-9268927', '010-5647-5898', '경남',
+        3, 8, '2018',
+        'N', 48
+    );"

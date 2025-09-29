@@ -1,0 +1,138 @@
+Day11(25.6.4)
+
+
+
+1. 동적 SQL
+    controller\EmpController.java
+    model\emp\EmpDAOMybatis.java
+    model\emp\EmpService.java
+    resources\mybatis\mappers\empMapper.xml
+    webapp\WEB-INF\views\emp\empAll.jsp
+    webapp\resources\js\empAll2.js
+        - 부서전체, 직책전체, 조건조회시 모든 데이터 출력
+        - 입사일 체크박스 선택 시 조건 무시
+
+2. Log
+    springLegacyProject\pom.xml
+        <!-- SQL문 로그남기기를 위해 추가 -->
+		<dependency>
+			<groupId>org.lazyluke</groupId>
+			<artifactId>log4jdbc-remix</artifactId>
+			<version>0.2.7</version>
+		</dependency>
+    
+    webapp\WEB-INF\spring\root-context-oracle.xml
+        <bean id="dataSource2"
+			class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+			<constructor-arg ref="dataSourceOriginal" />
+			<property name="logFormatter">
+				<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+					<property name="loggingType" value="SINGLE_LINE"></property>
+					<property name="sqlPrefix" value="[ ------SQL문장------ ] "></property>
+				</bean>
+			</property>
+		</bean>
+
+        <!-- 같은 타입의 빈이 여려개인 경우 Autowired시 선택되는 빈이라면 primary="true" -->
+        <bean id="dataSourceOriginal" 
+		 	primary="true"
+		 	class="org.apache.commons.dbcp2.BasicDataSource">
+
+    resources\log4j.xml
+        - 로그 우선순위 : debug > info > warn > error
+
+
+3. 트랜잭션 
+    - 여러개의 DML 명령문을 하나의 논리적인 작업 단위로 묶어서 관리하는 것
+    - All 또는 Nothing 방식으로 작업을 처리함으로써 작업의 일관성을 유지함
+
+    - 테이블 생성
+        create table cust_account
+        ( accountNo varchar2(10) primary key,
+        custName varchar2(20),
+        balance number(10,2)
+        );
+        insert into cust_account values('112', '홍길동', 1000000);
+        insert into cust_account values('113', '김유신', 1000000);
+        commit;
+        select * from cust_account;
+
+    1) mapper생성
+    mappers\accountMapper.xml
+
+    2) 트랜잭션 처리를 위해 dependency 추가
+    springLegacyProject\pom.xml
+        <!-- 트랜잭션처리하기 위해 추가 (하나의 작업단위의 DML들의 모두 성공하면 DB반영, 하나라도 오류가 생기면 Rollback) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		
+		<!-- (트랜잭션처리)AOP AspectJ를 이용하기 위해 추가 (aspectjrt는 아래부분에 기본적으로 추가됨)-->		
+		<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjweaver</artifactId>		<!-- Runtime 시 weaving되면서 메서드 시간을 trace해준다. -->
+		<version>${org.aspectj-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId><!-- Aspectj 컴파일 -->
+			<version>${org.aspectj-version}</version>
+		</dependency>
+
+    3) 트랜잭션 처리를 위해 추가 (적용범위, 포인트컷 지정)
+    WEB-INF\spring\root-context-tx.xml
+        <context:component-scan base-package="com.shinhan.spring.model"></context:component-scan>
+        <!-- 트랜잭션 처리를 위해 추가-->
+		<bean id="transactionManager"
+			class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource2"></property>
+		</bean>
+			<tx:annotation-driven
+				transaction-manager="transactionManager" />
+				
+		<!-- transaction적용범위 지정 (advice) -->		
+		<tx:advice id="txAdvice" 
+			transaction-manager="transactionManager">
+		<tx:attributes>
+		 <tx:method name="*" /> <!--메서드별로 제약조건 별도설정 가능 -->
+		</tx:attributes>
+		</tx:advice>
+		<!-- transaction pointcut지정 -->
+		<aop:config>
+		    <aop:advisor advice-ref="txAdvice" pointcut="execution(* aa(..))" />
+		</aop:config>
+
+	4)
+    controller\AccountController.java
+    model\account\AccountDAOMybatis.java
+    model\account\AccountServiceImpl.java
+
+
+4. Restful API
+	[REST (Representational State Transfer)]
+	- HTTP와 URI 기반으로 자원에 접근할 수 있도록 제공하는 어플리케이션 개발 인터페이스
+	
+	- Rest Http Method표현
+		- Rest API 세부규칙
+			- 슬래시(/)는 계층관게를 나타냄
+			- URI 마지막에 슬래시를 포함하지 않는다.
+			- 경로는 소문자를 사용한다.
+			- 경로는 언더바를 사용하지 않고 하이픈(-)을 사용한다.
+
+	- Rest 기능 구현하기
+		- 들어오는 데이터 정의 : consumes
+		- 반환되는 데이터 : produces		
+	
+
+	- 실습(get,post,list,map)
+	controller\EmpRestController.java
+	views\emp\empAll.jsp > Restful API사용하기
+
+	
+
+	
+	

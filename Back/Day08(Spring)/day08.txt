@@ -1,0 +1,137 @@
+Day08(25.5.29)
+
+
+https://mvnrepository.com 
+- 중앙 지역 저장소 사이트
+    - Maven Repository : 프로젝트에 사용되는 프로젝트 jar 파일, 라이브러리 jar...들이 위치
+
+1. IOC와 DI
+    - Inversion Of Control : 제어권을 Spring이 가짐
+    - Dependency Injection : 의존성을 외부에서 주입받는 방식
+
+    myapp\section06
+    resource\section06.xml
+    resource\section06-1.xml
+    myapp\section07
+    resource\section07.xml
+    resource\section07-1.xml
+   
+   1. xml에서 설정파일 가져오기
+        - property : setter라는 메소드를 이용하여 의존하는 객체를 주입
+        - constructor-arg : 의존하는 객체를 생성자를 통해 전달(주입)받는다. (@NoArgsConstructor)
+        - 주입하는 대상이 생성자냐, 메소드냐 차이
+
+    2. 자바config파일 가져오기
+    3. Annotation 이용
+        resource > xml 
+        > <context:component-scan base-package=""></context:component-scan>
+            - @component @Repository @Service @Controller @Autowired 스캔해줌
+
+
+    Bean(Spring에서 객체를 bean이라고 함) > field(private), 기본생성자가 필수!!
+    DTO : Data Transger Object
+    VO : Value Object
+
+
+
+2. AOP(Aspect Oriented Programming)
+    - 관점지향 프로그래밍
+
+        target : 주업무
+        advice : 보조업무
+        pointcut : 보조업무가 들어갈 지점
+    
+
+    - Spring AOP 예제1
+        myapp\section8\Calculator.java      (주관심사)
+        myapp\section8\LoggingAdvice.java   (보조관심사)
+        myapp\section8\StopWatchAdvice.java (보조관심사)
+        resource\aop8.xml에 작성
+        AOP 기능 구현과정
+        1.타깃(Target) 클래스를 지정
+        2.어드바이스(Advice) 클래스를 지정
+        3.설정 파일에서 포인트컷(Pointcut)을 설정
+        4.설정 파일에서 어드바이스와 포인트컷을 결합하는 어드바이저를 설정
+        5.설정 파일에서 스프링의 ProxyFactoryBean 클래스를 이용해 타깃에 어드바이스를 설정
+        6.getBean() 메서드로 빈 객체에 접근해 사용
+
+        - Pointcut 표현식
+            - 관심 조인 포인트를 결정하므로 어드바이스가 실행되는 시기를 제어할 수 있다.
+            
+
+            - pom.xml에 추가
+            <org.aspectj-version>1.9.6</org.aspectj-version>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${org.aspectj-version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjtools</artifactId>
+                        <version>${org.aspectj-version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>aspectj</groupId>
+                    <artifactId>aspectjrt</artifactId>
+                    <version>1.5.4</version>
+            </dependency>
+
+    - Spring AOP 예제2
+        - Annotation활용
+        myapp\section9 > *
+        resource\aop9.xml
+
+            Aspect : pointcut(지점) + advice(보조업무)
+
+
+    - DeptService AOP 적용
+    myapp\aop\dept > *
+
+
+3. Spring Web MVC
+    - 사용자 인터페이스와 비지니스 로직을 분리하여 개발한다.
+    - 서블릿 기반의 MVC Model2 구조를 제공
+    - 전체 애플리케이션을 통합, 관리하기 위해 서버로 들어오는 모든 요청을 먼저 받아서
+        처리하도록 구성된 Front Controller 패턴을 적용
+
+    - Spring MVC 주요 구성요소
+        - DispatcherServlet
+            - 모든 요청을 받아들이는 Front Controller 역할을 수행.
+            - 요청을 적절한 핸들러로 전달하고, 응답을 생성하여 클라이언트로 반환.
+
+        - HandlerMapping
+            - 클라이언트 요청 URL과 이를 처리할 핸들러(Controller)를 매핑.
+            - 요청에 적합한 핸들러를 찾는 역할.
+
+        - Controller
+            - 클라이언트 요청을 처리하고, 비즈니스 로직을 호출하며, 결과를 반환.
+            - 주로 @Controller 또는 @RestController 어노테이션을 사용.
+
+        - ViewResolver
+            - 컨트롤러가 반환한 논리적 뷰 이름을 실제 뷰로 매핑.
+            - JSP, Thymeleaf, FreeMarker 등 다양한 뷰 기술을 지원.
+
+        - ModelAndView
+            - 컨트롤러가 반환하는 데이터와 뷰 정보를 담는 객체.
+            - 모델 데이터와 뷰 이름을 함께 전달.
+
+        - Interceptor
+            - 요청 전후에 공통 작업을 수행할 수 있도록 지원.
+            - 인증, 로깅, 권한 검사 등에 사용.
+
+        - ExceptionResolver
+            - 애플리케이션에서 발생한 예외를 처리하고, 적절한 응답을 생성.
+            - 사용자 정의 예외 처리 로직을 구현 가능.
+
+    - springLegacyProject 생성
+        - servlet-context.xml   
+            - servlet-container에서만 사용되어진다.
+            - 웹과 관련된 어노테이션 Controller, RestController를 스캔
+
+        - root-context.xml
+            - 애플리케이션 전역에서 사용되는 Bean 설정을 정의.
+            - Service, Repository, Component 등의 어노테이션을 스캔
+            

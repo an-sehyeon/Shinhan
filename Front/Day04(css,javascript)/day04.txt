@@ -1,0 +1,45 @@
+Day04(25.5.14)
+
+
+1. css
+    - https://www.w3schools.com
+    
+    - 반응형 웹 디자인 (webapp > 12 > vw.html)
+        - 뷰포트 지정하기
+        <meta name="viewport" content= 속성1 = 속성값, 속성2 = 속성값...>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    - 미디어쿼리 screen (webapp > 12 > mq-result.html)
+    
+    - 레이아웃 (webapp > 12 > flex.html)
+        - 플렉스 박스 레이아웃 
+            - 그리드 레이아웃을 기본으로 플렉스 박스를 원하는 위치에 배치하는 것
+            - 여유 공간에 따라 너비나 높이, 위치를 자유롭게 변형할 수 있음
+
+        - 그리드 레이아웃 (webapp > 12 > grid.html)
+            - css 그리드 레이아웃에는 눈에 보이지 않는 그리드 라인이 포함되어 있음
+            - 그리드 라인을 사용해 그리드 항목을 배치할 수 있음
+
+            grid-template-areas 사용방법
+            #wrapper{
+            width:700px;
+            display:grid;
+            grid-template-columns:repeat(3, 1fr);
+            grid-template-rows:repeat(3, 100px);
+            grid-template-areas: 
+            "box1 box1 box1"
+            "box2 . box3"
+            "box2 . box4";
+             }
+
+2. https://www.w3schools.com -> bootstrap 활용
+    - day03
+
+3. javascript
+    day03 > 3.html
+    day03 > 4js.html
+    day03 > 5js.html
+    day03 > 6js.html(선택자연습) : onkeyup => 추후에 실시간으로 비밀번호 검증 문구출력
+
+    

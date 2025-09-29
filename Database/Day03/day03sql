@@ -1,0 +1,262 @@
+
+
+-- 3일차 group 함수, join
+-- 집계 함수 : 컬럼 이름을 사용하면 null 제외, *를 사용하면 null 포함
+select sum(sal), sum(comm), count(*) "전체(null 포함)", count(empno), count(comm)"comm(null 제외)", avg(sal), max(sal), min(sal)
+from emp;
+
+select *
+from emp
+order by sal;
+
+select empno, sal, ename, substr(ename, 1, 3) "단일행 함수", comm
+from emp;
+
+-- 집계 함수를 사용한 경우, 집계 함수에 사용하지 않은 칼럼은 반드시 groupby에 참여한다.
+-- 해석 순서 : from -> where -> group by -> select -> order by
+select deptno, sum(distinct sal) "sum(중복 제거)", sum(sal), max(ename), min(job) "최소 직책"
+from emp
+where deptno >=10
+group by deptno
+order by 2, "최소 직책";
+
+-- 부서별 직책별 급여의 평균
+select deptno, job, avg(sal)
+from emp
+group by deptno, job
+order by deptno, job;
+
+-- cube : 모든 조합의 집계(명시한 모든 소그룹에 대한 다차원적인 집계)
+select deptno, job, avg(sal)
+from emp
+group by cube(deptno, job)
+order by deptno, job;
+
+-- rollup : 소그룹들과 전체의 집계
+select deptno, job, avg(sal)
+from emp
+group by rollup(deptno, job)
+order by deptno, job;
+
+-- grouping sets : 특정 조합에 대한 집계
+select deptno, job, avg(sal)
+from emp
+group by grouping sets(deptno, job)
+order by deptno, job;
+
+-- grouping : 그룹에 속하면 1 아니면 0으로 표기
+select deptno, job, avg(sal), grouping(deptno) "부서 그룹", decode(grouping(job), 1, '직책합', '') "직책 그룹"
+from emp
+group by cube(deptno, job)
+order by deptno, job;
+
+-- 집계 함수는 where 절에서 사용 불가
+-- 해석 순서 : from -> where -> group by -> having -> select -> order by
+select deptno, job, avg(sal)
+from emp
+group by deptno, job
+having avg(sal) >= 2000 -- group by 와 having은 순서가 바뀌어도 상관 없음
+order by 1, 2;
+
+-- P.212
+-- Q1
+select deptno, floor(avg(sal)) as AVG_SAL, max(sal) as MAX_SAL, min(sal) as MIN_SAL, count(*) as CNT
+from emp
+group by deptno;
+
+-- Q2
+select job, count(*)
+from emp
+group by job
+having count(deptno) >= 3;
+
+-- Q3
+select to_char(hiredate, 'yyyy') as HIRE_YEAR, deptno, count(*) as CNT
+from emp
+group by to_char(hiredate, 'yyyy'), deptno;
+
+-- Q4
+select nvl2(comm, 'O', 'X') as EXIST_COMM, count(*) as CNT
+from emp
+group by nvl2(comm, 'O', 'X');
+
+-- Q5
+select nvl2(deptno, to_char(deptno), ' ')DEPRNO, nvl(to_char(hiredate, 'yyyy'), ' ') as HIRE_YEAR, count(*) as CNT, max(sal) as MAX_SAL, sum(sal) as SUM_SAL, avg(sal) as AVG_SAL
+from emp
+group by rollup(deptno, to_char(hiredate, 'yyyy'));
+
+select nvl(to_char(deptno), '전체합계') deptno,
+       nvl(to_char(hiredate, 'yyyy'),'부서합계') 년도,
+       grouping(deptno) aa, grouping(to_char(hiredate, 'yyyy')) bb,
+       count(*), max(sal), sum(sal), avg(sal)
+from emp
+group by rollup(deptno, to_char(hiredate, 'yyyy'))
+order by 1,2;
+
+-- 부서별 job별 sal의 합계
+-- 이때 부서별합계, 직무별합계, (부서, 직별 합계), 전체 합계 포함
+select deptno, job, sum(sal)
+from emp
+group by grouping sets(deptno, job, (deptno, job), ()); -- ()는 전체
+
+
+select job, deptno, sal
+from emp;
+
+
+-- p209 pivot (교차지점에 결과 보여주기)
+-- for (칼럼)
+-- order by (row)
+-- 교차 max(sal)
+select *
+from(
+    select job, deptno, sal
+    from emp)
+pivot(max(sal)
+    for job in ('CLERK', 'SALESMAN', 'MANAGER', 'ANALYST'))
+    order by deptno;
+    
+    
+-- join(관계형 데이터베이스가 중복배제를 위해 정규화 과정을 거친다.), 테이블이 나누어져서 저장된다.
+-- 연결해서 가져와야 한다.
+select from emp;        -- 14건
+select from dept;       --4건
+
+-- DB 벤더문법 (oraclem.MySQL.......)
+-- 직원이 부서를 참조하기때문에 건수는 직원건수만큼 나온다.
+select emp.*, dname, deptno, dept.dname
+from dept, emp(deptno);
+
+
+ ANSI표준문법
+ select emae dname, loc
+ from deot join emp using(deptno);
+
+
+-- equi join(등가조인) : =연산자로 join문장을 작성
+select emp.*, dept.deptno, date,dname, loc
+from dept emp using( deptno);       -- 칼럼이름 같은 경우 join
+
+where dept.deptno = emp.deptnl;    join조건이 where절에 생성
+add dept.deptno>= 10;
+ 
+ ANSI표준문법
+ select emae dname, loc
+ from deot join emp using(deptno);
+
+
+
+select * from salgrade;
+
+-- non-equi join
+select emp.*, salgrade.grade 
+from emp,salgrade
+where emp.sal between salgrade.losal and salgrade.hisal;
+
+-- ANSI포준
+select emp.*, salgrade.*
+from emp join salgrade on (emp.sal between salgrade.losal and salgrade.hisal);
+
+
+
+-- hr/hr
+-- 1) 벤더문법
+select EMPLOYEE_ID, FIRST_NAME, emp.department_id, dept.department_id, DEPARTMENT_NAME, job_title
+from employees emp, DEPARTMENT dept, jobs
+where emp.department_id = dept.department_id
+and emp.job_id = jobs.job_id;
+
+
+
+-- 2) ANSI표준문법(칼럼이름 같은경우)
+select EMPLOYEE_ID, FIRST_NAME, department_id, DEPARTMENT_NAME, job_title
+from employees emp join DEPARTMENTS dept using(department_id)
+                   join jobs using(job_id);
+
+
+-- 3) ANSI표준문법(칼럼이름 다른경우)
+select EMPLOYEE_ID, FIRST_NAME, emp.department_id, DEPARTMENT_NAME
+from employees emp join DEPARTMENTS dept on(emp.department_id = dept.department_id)
+                   join jobs on(emp.job_id = jobs.job_id);
+
+
+-- self join, outer join
+-- Oracle 벤더문법
+select 직원.employee_id, 직원.first_name, 매니저.first_name 상사이름
+from employees 직원,  employees 매니저
+where 직원.manager_id = 매니저.employee_id(+)
+order by 1;
+
+-- ANSI표준문법
+select 직원.employee_id, 직원.first_name, 매니저.first_name 상사이름
+from employees 직원 left outer join employees 매니저 on(직원.manager_id = 매니저.employee_id)
+order by 1;
+
+select 직원.employee_id, 직원.first_name, 매니저.first_name 상사이름
+from employees 매니저 right outer join employees 직원 on(직원.manager_id = 매니저.employee_id)
+order by 1;
+
+-- 106건 (1건이 부서가 null)
+select *
+from departments join employees using(department_id);
+
+select employees.*, departments.*
+from departments right OUTER join employees on(departments.department_id = employees.employee_id)
+order by 1;
+
+
+-- full (직원과 부서가 일치하는 것도 나오고 일치하지 않은 정보도 함께 나오기)
+select employees.*, departments.*
+from departments full OUTER join employees on(departments.department_id = employees.employee_id)
+order by 1;
+
+insert into jobs values('play','놀자~',10000,20000);
+commit;
+select job_id from employees;
+
+-- 사용하지 않은 job도 결과에 포함하기
+select *
+from employees right outer join jobs on(employees.job_id = jobs.job_id);
+
+
+-- 문제 풀이
+-- q1
+select deptno, dname, empno, ename, sal
+from emp join dept using(deptno)
+where SAL > '2000'
+;
+select emp.deptno, dname, empno, ename, sal
+from emp join dept on(emp.deptno = dept.deptno)
+where SAL > '2000'
+;
+
+-- q2
+select emp.deptno, dname, floor(avg(sal)) AVG_SAL, max(sal) MAX_SAL, min(sal) MIN_SAL, count(*) CNT
+from emp ,dept
+where emp.deptno = dept.deptno
+group by emp.deptno, dname;
+
+select emp.deptno, dname, floor(avg(sal)) AVG_SAL, max(sal) MAX_SAL, min(sal) MIN_SAL, count(*) CNT
+from emp join dept on(emp.deptno = dept.deptno)
+group by emp.deptno, dname;
+
+
+-- q3
+select dept.deptno, dname, empno, ename, job, sal
+from emp right outer join dept on(emp.deptno = dept.deptno)
+order by deptno asc, dname asc;
+
+
+-- q4
+select dept.deptno, dname, 직원.empno, 직원.ename, 직원.job, 직원.sal, 직원.mgr, salgrade.*, 매니저.empno, 매니저.ename
+from emp 직원 right outer join dept on(직원.deptno = dept.deptno)
+         left outer join salgrade on(직원.sal between losal and hisal)
+         left outer join emp 매니저 on (직원.mgr = 매니저.empno)
+order by dept.deptno asc, 직원.empno asc;
+
+
+
+
+
+
+

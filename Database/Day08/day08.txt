@@ -1,0 +1,6 @@
+
+
+1. 프로젝트 -> export -> jar -> .jar 파일 생성
+java -cp "crudproject.jar;work/library/*" com.shinhan.common.FrontController
+
+erdcloud = subscription_nocount

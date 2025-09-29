@@ -1,0 +1,491 @@
+-- scott/tiger
+-- 권한 부여
+grant select on SCOTT.EMP TO hr with grant option;
+grant select on SCOTT.DEPT TO hr with grant option;
+
+-- hr/hr
+select * from SCOTT.emp;
+select * from SCOTT.dept;
+
+
+-- put_line에 의해 출력 setting
+set serveroutput on;
+
+-- pl/sql 구조, 문법 
+declare                 -- 선언
+    v_firstname varchar2(30);       -- 스칼러 타입
+    v_lastname employees.last_name%type; --참조타입
+    v_empRecord employees%rowtype;  -- 참조타입
+begin                   -- 실행
+      select first_name, last_name into v_firstname , v_lastname       
+      from employees
+      where employee_id =101;
+      
+      -- 직원 이름 사용하기
+      dbms_output.put.line('직원의 이름은 '|| v_firstname);
+      dbms_output.put.line('직원의 lastname은 '|| v_lastname);
+      
+      
+      select * into v_empRecord       
+      from employees
+      where employee_id =101;
+      
+      -- 직원 이름 사용하기
+      dbms_output.put.line('직원의 이름은 '|| v_empRecord.first_name);
+      dbms_output.put.line('직원의 lastname은 '|| v_empRecord.last_name);
+      dbms_output.put.line('직원의 salary '|| v_empRecord.salary);
+      dbms_output.put.line('직원의 hire_date '|| to_char(v_empRecord.hire_date,'yyyy/mm/dd hh:mi:ss DAY'));
+end;
+/
+
+-- 변수선언과 대입문
+declare
+    v_empid number :=100;
+    v_empname varchar2(20) :='스티븐';   -- 스칼라 타입
+    v_salary employees.salary%type;     -- 레퍼런스 타입
+    v_empRecord employees%rowtype;      -- 레퍼런스타입 (record), 1건
+    
+begin
+    dbms_output.put_line('v_empid='||v_empid);
+    dbms_output.put_line('v_empname='||v_empname);
+    v_empname :='이름변경';
+    dbms_output.put_line('v_empname='||v_empname);
+    v_salary :=1000.12;
+    dbms_output.put_line('v_salary='||v_salary);
+    
+    select salary into v_salary
+    from employees
+    where employee_id = 100;
+    dbms_output.put_line('100직원의 급여 v_salary='||v_salary);
+    
+    select * into v_empRecord
+    from employees
+    where employee_id = 100;
+    dbms_output.put_line('100직원의 급여 ='||v_empRecord.salary);
+    dbms_output.put_line('100직원의 이름 ='||v_empRecord.first_name);
+    
+end;
+/
+
+-- DB 배열,for문
+declare
+    -- type정의
+    TYPE fnameType IS TABLE OF employees.first_name%TYPE
+    INDEX BY BINARY_INTEGER;
+    -- 변수정의
+    i BINARY_INTEGER := 0;
+    
+    fnameArr fnameType;     -- java ver : String[] fnameArr
+    
+    
+
+begin
+    for emp_record in (select first_name,salary from employees) loop
+        i := i+1;
+        fnameArr(i) := emp_record.first_name;
+        dbms_output.put_line('배열에 저장한 직원이름 :'|| fnameArr(i));
+        
+        // DB if문
+        if emp_record.salary >= 5000 then
+            dbms_output.put_line('당신의 급여는 5000이상 :'|| emp_record.salary);
+        else
+            dbms_output.put_line('당신의 급여는 5000이하 :'|| emp_record.salary);
+        end if;
+    end loop;
+    
+    for j in i..10 loop
+         dbms_output.put_line('j='||j);
+    end loop;
+
+end;
+/
+
+-- 1 ~ 5까지 출력
+declare
+    su number :=1;
+begin
+    loop
+        dbms_output.put_line('su='|| su);
+        su := su +1;
+        if su > 5 then
+            exit;
+        end if;
+    end loop;
+    
+    dbms_output.put_line('-------for loop ------------');
+--    for su2 in 1..5 loop
+    for su2 in reverse 1..5 loop    -- reverse : 거꾸로 
+        dbms_output.put_line('su2='|| su2);
+    end loop;
+    
+    dbms_output.put_line('-------while loop ------------');
+    
+    -- DB while문
+    su := 1;
+    while su <=5 loop
+        dbms_output.put_line('su='|| su);
+        su := su+1;
+    end loop;
+    
+end;
+/
+
+
+-- 저장 프로시저
+-- 직원번호를 주면 직원이름을 out하는 procedure작성
+-- mode : in, out, inout
+create or replace procedure sp_empinfo(v_empno in employees.employee_id%type,
+                                       v_empname out employees.first_name%type)
+is
+    i number :=100;
+begin
+    select first_name into v_empname
+    from employees
+    where employee_id = v_empno;
+    
+    ve_empname := v_empname ||'님';
+
+end;
+/
+execute sp_empinfo (100, aa)
+
+-- LAB 특정직원 1명의 email, salary를 out하는 procedure작성
+create or replace procedure sp_empinfo2(v_empno in employees.employee_id%type,
+                                       v_email out employees.email%type,
+                                       v_salary out employees.salary%type)
+is
+
+begin
+    select email, salary into v_email, v_salary
+    from employees
+    where employee_id = v_empno;
+    
+end;
+/
+desc user_source;
+
+select * from employees; -- 100 AD_PRES 90 03/06/17
+select * from job_history;
+
+update employees
+set department_id = 90
+where employee_id = 100;
+
+
+-- 테이블 타입을 정의
+ TYPE ENAME_TABLE_TYPE IS TABLE OF EMP.ENAME%TYPE
+   INDEX BY BINARY_INTEGER;
+   
+ TYPE JOB_TABLE_TYPE IS TABLE OF EMP.JOB%TYPE
+   INDEX BY BINARY_INTEGER;
+   
+ -- 테이블 타입으로 변수 선언
+ ENAME_TABLE ENAME_TABLE_TYPE;
+ JOB_TABLE JOB_TABLE_TYPE;
+ I BINARY_INTEGER := 0;
+
+
+
+-- trigger : 특정 table에 사건(DML:insert,delete, update)에 의해 자동으로 실행되는 프로시저
+
+
+create or replace trigger trigger_jobs
+after insert on jobs        -- 시점 after, before 사건 : insert, delete, update on:table name
+for each row                -- row 건수만큼인지?
+begin
+    dbms_output.put_line('jobs table의 1건이 insert되었습니다.');
+end;
+/
+
+
+create table job_backup (
+    job_seq number primary key,
+    job_id varchar2(10),
+    regdate date
+);
+
+insert into jobs values('job2','우수개발자2',1000,2000);
+insert into jobs values('job3','우수개발자',1000,2000);
+select * from jobs;
+create sequence seeq_job;
+
+
+create or replace trigger trigger_jobs2
+after insert on jobs
+for each row        -- 각각의 row만큼
+begin
+    insert into job_backup values(job_seq.nextval, :new.job_id,sysdate);
+    dbms_output.put_line('jobs를 insert한 후에 job_backup table에 insert됨');
+end;
+/
+
+
+----------------------------------------------------------------
+-- 부서를 삭제하면 부서번호 부서이름 그리 삭제된 날짜 백업하는 trigger작성
+select * from departments;
+
+-- 1) 백업 테이블 생성
+create table dept_backup(
+    deptid number primary key,
+    deptname varchar2(30),
+    regdate date
+);
+
+-- 2) 트리거 만들기
+create or replace trigger trigger_deptbackup
+after delete on departments
+for each row
+begin
+    insert into dept_backup values(:old.department_id, :olddepartment_name, sysdate);
+    dbms_output.put_line('departments 삭제시 dept_backup에 입력');
+end;
+/
+
+-- 3) departments table의 row를 row삭제하기
+select *
+from departments;
+delete from departments where department_id in(120,130,140);
+select * from dept_backup;
+
+--------------------------------------------------------------
+    
+CREATE TABLE 상품(
+상품코드 CHAR(6) PRIMARY KEY,
+상품명 VARCHAR2(12) NOT NULL,
+제조사 VARCHAR(12),
+소비자가격 NUMBER(8),
+재고수량 NUMBER DEFAULT 0
+);
+CREATE TABLE 입고(
+입고번호 NUMBER(6) PRIMARY KEY,
+상품코드 CHAR(6) REFERENCES 상품(상품코드),
+입고일자 DATE DEFAULT SYSDATE,
+입고수량 NUMBER(6),
+입고단가 NUMBER(8),
+입고금액 NUMBER(8)
+);
+INSERT INTO 상품(상품코드, 상품명, 제조사, 소비자가격)
+VALUES('A00001','세탁기', 'LG', 500);
+INSERT INTO 상품(상품코드, 상품명, 제조사, 소비자가격)
+VALUES('A00002','컴퓨터', 'LG', 700);
+INSERT INTO 상품(상품코드, 상품명, 제조사, 소비자가격)
+VALUES('A00003','냉장고', '삼성', 600);
+
+
+-- 입고되면 입고된 상품의 재고수량이 수정되도록 trigger작성
+-- :old (기존값) :new (신규값) insert시
+create or replace trigger  trigger_updateCount
+after insert on 입고
+for each row
+begin
+    update 상품
+    set 재고수량 = 재고수량 + :new.입고수량
+    where 상품코드 = :new.상품코드;
+    dbms_output.put_line('재고수정됨');
+end;
+/
+
+INSERT INTO 입고(입고번호, 상품코드, 입고수량, 입고단가, 입고금액)
+VALUES(1, 'A00001', 5, 320, 1600);
+INSERT INTO 입고(입고번호, 상품코드, 입고수량, 입고단가, 입고금액)
+VALUES(2, 'A00001', 510, 320, 1600);
+INSERT INTO 입고(입고번호, 상품코드, 입고수량, 입고단가, 입고금액)
+VALUES(3, 'A00001', 40, 320, 1600);
+
+select * from 상품;
+select * from 입고;
+update 입고 set 입고수량 =6 where 입고번호 = 1;
+
+-- 입고된 데이터를 삭제하면 재고 수정하는 트리거 작성
+create or replace trigger trigger_delteCount
+after delete on 입고
+for each row
+begin
+    update 상품
+    set 재고수량 = 재고수량 - :old.입고수량
+    where 상품코드 = :old.상품코드;
+    dbms_output.put_line('재고수정됨...delete trigger');
+end;
+/
+delete from 입고 where 입고번호 = 3
+
+
+create or replace trigger trigger_updateCount
+after update on 입고
+for each row
+begin
+    update 상품
+    set 재고수량 = 재고수량 - :old.입고수량 + :new.입고수량 
+    where 상품코드 = :old.상품코드;
+    dbms_output.put_line('재고수정됨...update trigger');
+end;
+/
+
+
+-- function : return값이 있음
+-- 직원번호가 파라메터로 들어오면 급여의 200%를 return하는 함수를 만든다.
+create or replace function f_bonus(v_empid employees.employee_id%type)
+return number
+is
+    v_salary number;
+begin
+    select salary * 2 into v_salary  
+    from employees 
+    where employee_id = v_empid;
+    return v_salary;
+end;
+/
+
+
+
+select substr('oracle',1,3) from dual;
+select substr(first_name, 1, 3), salary, f_bonus(employee_id) from employees;
+
+
+-- 직원번호를 파라메타로 주면 직원정보(이름, 급여, 입사일을 문자열로 만들어서 return하는 함수만들기)
+select first_name, salary, hire_date, f_empinfo(employee_id)
+from employees;
+
+create or replace function f_empinfo(v_empid employees.employee_id%type)
+return varchar2
+is
+    v_info varchar2(100);
+begin
+    select first_name || '직원의 급여는' || salary || ', 입사일은' || hire_date
+    into v_info
+    from employees
+    where employee_id = v_empid;
+    return v_info;
+end;
+/
+
+
+-------------------------------------------------
+-- 커서 (select건이 여러개인 경우)
+
+set severoutput on;
+
+
+create or replace procedure sp_curser_test
+is 
+    v_empRecord Employees%rowtype;
+    -- 1. 커서 선언
+    cursor cur_emp is select * from employees where department_id = 60;
+begin
+    -- 2. 커서열기
+    open cur_emp;
+    -- 3. 커서사용
+    loop
+        fetch cur_emp into v_empRecord;
+        exit when cur_emp%notfound;
+        dbms_output.put_line('');
+        dbms_output.put_line('직원번호:'||v_empRecord.employee_id);
+        dbms_output.put_line('이름:'||v_empRecord.first_name);
+        dbms_output.put_line('--------------------------------');
+        
+    end loop;
+    -- 4. 커서닫기
+    close cur_emp;
+end;
+/
+execute sp_curser_test;
+
+
+create or replace procedure sp_curser_test2
+is 
+
+begin
+   
+    -- 내부적으로 커서사용(선언 + open + fetch + close)
+    for v_empRecord in(select * from employees where department_id = 60)loop
+       
+        dbms_output.put_line('');
+        dbms_output.put_line('직원번호:'||v_empRecord.employee_id);
+        dbms_output.put_line('이름:'||v_empRecord.first_name);
+        dbms_output.put_line('--------------------------------');
+        
+    end loop;
+    
+end;
+/
+
+execute sp_curser_test2;
+
+
+
+
+-- 패키지 : procedure들 + funtion들의 묶음
+
+create or replace package mypackage 
+is
+-- 1.함수추가
+    function f_empinfo(v_empid employees.employee_id%type)
+    return varchar2;
+
+-- 2. procedure추가
+    procedure sp_empinfo2(v_empno in employees.employee_id%type,
+                                       v_email out employees.email%type,
+                                       v_salary out employees.salary%type);
+
+end;
+/
+
+select mypackage.f_empinfo(employee_id)
+from employees;
+
+create or replace package BODY mypackage 
+is
+-- 1.함수추가
+    function create or replace function f_empinfo(v_empid employees.employee_id%type)
+    return varchar2
+    is
+        v_info varchar2(100);
+    begin
+        select first_name || '직원의 급여는' || salary || ', 입사일은' || hire_date
+        into v_info
+        from employees
+        where employee_id = v_empid;
+        return v_info;
+    end;
+    /
+
+-- 2. procedure추가
+   create or replace procedure sp_empinfo2(v_empno in employees.employee_id%type,
+                                       v_email out employees.email%type,
+                                       v_salary out employees.salary%type)
+    is
+    
+    begin
+        select email, salary into v_email, v_salary
+        from employees
+        where employee_id = v_empno;
+    
+    end;
+    /
+
+end;
+/
+
+270	Payroll		1700
+
+select * from departments
+
+
+
+insert into departments(DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,10LOCATION_ID 
+				values( ?,?,?,?)
+
+selec
+select * from departments where department_id = 10;
+
+
+delete from departments where department_id = 270;2
+
+delete from departments where department_id = 10;
+
+update departments set
+where department_id = 10
+
+update employees
+set department_id = 90
+where employee_id = 100;

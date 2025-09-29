@@ -1,0 +1,93 @@
+-- SQL1 : 결제를 가장 많이한 가게
+create table merchants(
+    id number primary key,       -- 아이디
+    name varchar(50),            -- 상호명
+    business_id varchar(30),     -- 사업자등록번호
+    tax_type varchar(20),        -- 과세유형
+    category_id number           -- 업종분류아이디
+);
+drop table card_usages;
+
+commit;
+
+create table card_usages(
+    id number,          -- 아이디
+    created_at date,    -- 사용일
+    category number,    -- 구분
+    amount number,      -- 금액
+    merchant_id number  -- 결제 가맹점 아이디
+);
+
+insert into merchants values (3907, 'KFC학동역','201-81-89723','일반과세자',1);
+insert into merchants values (4989, '미켈(Mikelle)고깃집','785-49-00298','일반과세자',1);
+insert into merchants values (6297, '뉴발란스 강남점','214-85-50334','일반과세자',6);
+insert into merchants values (27052, '주식회사이마트몰-주식회사이마트몰','104-86-50432','일반과세자',2);
+insert into merchants values (118009, '플라이앤컴퍼니(주)','211-88-57343','일반과세자',1);
+
+insert into card_usages values(195772,TO_DATE('2018-05-02 18:54:43','YYYY-MM-DD HH24:MI:SS'),0,2700,3907);
+insert into card_usages values(2530342,TO_DATE('2019-01-28 09:47:33','YYYY-MM-DD HH24:MI:SS'),0,12300,3907);
+insert into card_usages values(899325,TO_DATE('2018-08-03 16:57:36','YYYY-MM-DD HH24:MI:SS'),0,45000,4989);
+insert into card_usages values(400811,TO_DATE('2018-05-28 12:45:34','YYYY-MM-DD HH24:MI:SS'),0,4000,6297);
+insert into card_usages values(743640,TO_DATE('2018-07-07 11:47:17','YYYY-MM-DD HH24:MI:SS'),0,299000,27052);
+insert into card_usages values(1052039,TO_DATE('2018-08-15 13:40:01','YYYY-MM-DD HH24:MI:SS'),1,-12900,118009);
+insert into card_usages values(1120840,TO_DATE('2018-08-21 06:58:55','YYYY-MM-DD HH24:MI:SS'),0,20800,118009);
+
+select * from MERCHANTS;
+select * from CARD_USAGES;
+
+select id, name,결제금액
+from MERCHANTS "가맹점정보",(
+    select merchant_id,sum(amount)"결제금액"
+    from CARD_USAGES
+    where category != 1
+    group by merchant_id 
+    ) "사용내역"
+where 가맹점정보.id = 사용내역.merchant_id
+order by 결제금액 desc;
+
+
+
+-- SCOTT
+-- SQL2 : 월급 대비 매출
+create table employees (
+    id number not null,             -- 직원ID
+    name varchar(10) not null,      -- 이름
+    salary number(10,2) not null,   -- 월급
+    branch_id number not null       -- 근무하는 대리점 ID
+);
+
+insert into employees values(1015,'Vex',900,1);         
+insert into employees values(3317,'Stephanie',250,3);    
+insert into employees values(3884,'Audrina',470,1);     
+insert into employees values(3912,'Courtney',300,2);    
+
+create table sellings (
+    car_id number not null,         -- 판매한 자동차ID
+    employee_id number not null,    -- 판매한 사원ID
+    created_at date not null,       -- 판매일
+    price number(10,2) not null     -- 판매 가격
+);
+
+insert into sellings values(306,3317,to_date('2016-07-19 12:40:54','YYYY-MM-DD HH24:MI:SS'),500);
+insert into sellings values(414,3884,to_date('2016-07-17 07:53:19','YYYY-MM-DD HH24:MI:SS'),1700);
+insert into sellings values(537,3317,to_date('2016-07-22 18:47:05','YYYY-MM-DD HH24:MI:SS'),1600);
+insert into sellings values(594,3884,to_date('2016-12-02 19:33:28','YYYY-MM-DD HH24:MI:SS'),700);
+insert into sellings values(810,3912,to_date('2016-07-09 03:09:21','YYYY-MM-DD HH24:MI:SS'),4100);
+insert into sellings values(900,1015,to_date('2016-08-14 13:20:56','YYYY-MM-DD HH24:MI:SS'),15300);
+
+select * from employees;
+select * from sellings;
+
+select name, salary
+from employees "직원", (
+        select employee_id, sum(price) "총판매가격"
+        from sellings
+        --where created_at != to_date('2016-07','yyyy-dd')
+        where created_at between '2016-07-01' and '2016-07-31'
+        group by employee_id
+    ) "판매기록"
+where 직원.id = 판매기록.employee_id
+and round(판매기록.총판매가격/salary,1) <=10
+order by 2 desc, 1; 
+
+

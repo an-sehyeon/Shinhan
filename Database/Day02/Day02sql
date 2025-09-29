@@ -1,0 +1,307 @@
+select * from tab;
+select * from EMP;
+
+-- DML문장은 DB반영하기 위해 TCL사용(commit, rollback)
+-- 7876번 삽입
+INSERT INTO EMP VALUES(1000,'연습','CLERK',7788,to_date('1987-07-13','yyyy-mm-dd'),1100,NULL,20);
+delete from emp where empno = 1000;
+INSERT INTO EMP VALUES(7788,'SCOTT','ANALYST',7566,to_date('13-07-87','dd-mm-rr'),3000,NULL,20);
+commit;
+
+-- DQL
+-- select, from 필수
+-- 대소문자 구별안함
+-- 식별자는 ""로 감쌀수있다. 데이터사전은 ""인경우 대소문자 구별.
+-- 값은 ''로 감싼다.
+
+select empno, ename, job "직책", mgr, hiredate, sal, comm, deptno
+from emp
+--where deptno not in (10,20)
+where sal between 1000 and 2000
+--and sal > 2000
+--and mgr <>null
+--and mgr is not null
+and job not like '_A%'
+--where deptno = 10 or deptno =20
+order by 직책 desc
+;
+
+
+-- 직속상관이 있는 직원들 조회
+select *
+from emp
+where mgr is not null;
+
+
+-- union(합집합)
+-- 부서 10, 20번 직원조회
+select * 
+from emp
+where deptno in (10,20);
+
+
+-- 칼럼개수와 타입이 일치하는 경우만 union가능
+-- 직원번호, 이름 (8개) + 부서번호,이름 (3)
+select empno, ename, sal, '직원'
+from emp
+union
+select deptno, dname, 0, '부서'
+from dept
+;
+
+-- union : 중복배제
+-- nuion all : 중복된 값 전부 출력
+select empno, ename, sal, empno
+from emp
+union all   
+select empno, ename, sal, empno
+from emp
+where deptno = 10;
+
+-- p.125 문제풀이
+
+--1)
+select *
+from emp
+where ename like '%S';
+
+--2)
+select empno, ename, job, sal, deptno
+from emp
+where deptno =30
+and job = 'SALESMAN';
+
+--3)
+select empno, ename, job, sal, deptno
+from emp
+where deptno in (20,30)
+and sal > 2000;
+
+--3)
+select *
+from emp
+where sal < 2000 or sal > 3000;
+
+--4)
+select *
+from emp
+where ename like '%E%'
+and deptno = 30
+and sal not between 1000 and 2000;
+
+--5)
+select *
+from emp
+where comm is null
+and mgr is not null
+and job in ('MANAGER','CLERK')
+and ename not like '_L%';
+
+
+-- 단일행 함수
+-- upper, lower, initcap
+select ename, lower(ename), initcap(ename)
+from emp
+;
+
+selec first_name, upper(first_name), lower(first_name), initcap(email)
+from EMPLOYEES;
+
+-- smith의 정보를 조회
+--1) 2번보다 1번이 좋다.
+select *
+from emp
+where ename = upper('smith')
+;
+
+--2) ename이 index되어있다면(목차) 가공한경우 index를 사용하지 않게됨, 가공하지 않는것이 좋다
+select *
+from emp
+where lower(ename) = 'smith'
+;
+
+select ename, length(ename), lengthb(ename)
+from emp;
+
+-- 간단한 계산식, 일자얻기, 단순문장을 1건 처리하기 위해 더미테이블을 제공 (dual)
+select 1+2, sysdate
+from dual;
+
+select * from dual;
+
+select upper('abc'), length('자바'), lengthb('자바')
+from dual;
+
+
+-- substr
+select ename, substr(ename,1,2) "첫2자리", substr(ename,2) "2부터끝까지", substr(ename, -2) "마지막2자리"
+from emp
+;
+
+-- 이름이 TH로 끝나는 직원조회
+select *
+from emp
+where ename like '%TH'
+;
+
+select *
+from emp
+where substr(ename, -2) = 'TH'
+;
+
+-- instr
+select ename, instr(ename, 'A'), instr(ename, 'A',3) "3번째부터 찾아서처음A"
+from emp
+;
+
+
+-- replace
+-- lpad, rpad
+select ename,   instr(ename, 'A'),
+                instr(ename, 'L',1,2) "1번째부터2번째위치",
+                replace(ename, 'L','**') "대체",
+                lpad(ename,10, '#') "왼쪽채우기",
+                rpad(ename,10) "R쪽채우기",
+                rpad(ename,10 ) "R쪽공백채우기"
+from emp;
+
+
+-- conat
+select ename,   instr(ename, 'A'),
+                instr(ename, 'L',1,2) "1번째부터2번째위치",
+                replace(ename, 'L','**') "대체",
+                lpad(ename,10, '#') "왼쪽채우기",
+                rpad(ename,10) "R쪽채우기",
+                rpad(ename,10 ) "R쪽공백채우기",
+                ename ||' '|| job "연결연산자",
+                concat(ename,concat(':',job)) "concat함수"
+from emp;
+
+
+-- trim
+select  length(trim('       oracle      ')), trim('       oracle      '),
+        length(ltrim('       oracle      ')), ltrim('       oracle      '),
+        length(rtrim('      oracle      ')), rtrim('      oracle      '),
+        trim('a' from 'aaoracleaa'),
+        trim(leading'a' from 'aaoricaleaaa')  "A",
+        trim(trailing 'a' from 'aaaoricaleaaa') "B",
+        trim(both 'a' from 'aaoricaleaaa')"C"
+from dual;
+
+
+-- 숫자 함수
+select 3.14, round(3.14), round(3.15,1) 소수1자리, trunc(3.9) "버림", trunc(3.99, 1) "버림2",
+        ceil(3.1) "무조건올림", floor(3.9) "무조건버림",
+        round(123,-1) "정수1자리", round(125,-1) "정수1자리", round(123,-2) "정수2자리", round(153,-2) "정수1자리"
+from dual;
+
+
+-- 날짜 데이터를 다루는 날짜 함수
+-- 일자
+-- sysdate : 오늘 날짜
+select hiredate, hiredate+7 "일주일후", hiredate-7 "일주일전", round(sysdate - hiredate) "일수",
+        trunc(months_between(sysdate, hiredate)) "개월수",
+        ceil(months_between(sysdate, hiredate)/12) "년수",
+        add_months(hiredate, 3) "3개월후",
+        last_day(hiredate)
+from emp;
+
+-- hr계정
+select first_name, hire_date, last_day(hire_date)
+from employees;
+
+select sysdate, next_day(sysdate,'월요일') "다음월요일",
+        next_day(sysdate,'화요일') "다음화요일"
+from dual;
+
+select sysdate, round(sysdate, 'yyyy'), round(sysdate, 'Q'), round(sysdate, 'mm')
+from dual;
+
+
+-- 자료형을 변환하는 형 변환 함수]
+select '100' + 200 '자동형변환', '100a' + 200 "불가"
+from dual;
+
+select sysdate, to_char(sysdate,'yyyy/mm/dd hh24:mi:ss WW DAY MON MONTH am/pm cc')||'...일'
+from dual;
+
+select  to_char(sysdate,'mon', 'NLS_DATE_LANGUAGE = ENGLISH'), 
+        to_char(sysdate,'month', 'NLS_DATE_LANGUAGE = ENGLISH')
+from dual;
+
+-- 주의 : #아님
+select  to_char(100000, '999,999,000')
+        to_char(10000000, '000,000.000.00')
+        --to_char(10000000000, $000,000,000'),
+        --to_char(10000000000, L000,000,000')
+from dual;
+
+-- 숫자형태의 문자는 자동으로 형변환됨
+-- 문자는 숫자형태의 문자가 아니면 자동으로 형변환 안됨
+select to_number('1,000','9,999')+200
+from dual;
+
+-- Null처리 함수
+-- comm이 있으면 있음, 없으면 없다.
+-- coalesce : 맨처음 만나는 null이 아닌값
+select sal, sal+ nvl(comm,0), nvl2(comm,'있음','없음'), -- "null값이 연산에 참여하면 결과는 null"
+            coalesce(null, null, 100) "null아닌값찾기", cmm, mgr, sal,
+            coalesce(comm, mgr, sal)
+from emp;
+
+
+-- decode
+-- case
+-- job : manager ->10% SALESMAN -> 5% ANALYST -> 인상없음, 나머지 직원은 3%
+-- if(job=='manager')
+select ename, sal, job,
+    decode(job, 'MANAGER', sal * 1.1, sal, 'SALESMAN', sal*1.05,'ANALYST', sal, sal*1.03) 급여인상,
+    decode(job, 'MANAGER', '10%인상','SALESMAN','5%인상','ANALYST','인상없음','3%인상') 문자출력,
+    case job when 'MANAGER' then sal*1.1
+             when 'SALESMAN' then sal*1.01
+             when 'ANALYST' then sal
+             else sal*1.03 end 급여인상2,       
+    case when sal >= 1000 then 'A' else 'B' end "등급"         
+from emp
+;
+
+
+-- p174 문제풀이
+-- 1)
+select empno,   substr(to_char(empno),1,2)||'**' "MASKING_EMPNO", 
+                rpad(substr(empno,1,2),length(empno),'**') MASKING_EMPNO2,
+                ename, rpad(substr(ename,1,1),length(ename)-1,'*') masking_ename
+from emp
+where length(ename) >=5 and length(ename) < 6
+;
+
+-- 2)
+select empno, ename, sal, trunc(sal/21.5,2) DAY_PAY, round((sal/21.5)/8,1)
+from emp
+;
+
+-- 3)
+select empno, ename, hiredate, to_char(next_day(add_months(hiredate, 3),'월요일'),'yyyy-mm-dd') r_job,  
+                    nvl2(comm,to_char(comm),'N/A') COMM
+from emp;
+
+
+-- 4)
+select empno, ename, mgr, case
+                    when mgr is null then '0000'
+                    when substr(to_char(mgr),1,2) = '75' then '5555'
+                    when substr(to_char(mgr),1,2) = '76' then '6666'
+                    when substr(to_char(mgr),1,2) = '77' then '7777'
+                    when substr(to_char(mgr),1,2) = '78' then '8888'
+                    else to_char(mgr) end aa
+            , case substr(to_char(mgr),1,2)
+                    when '75' then '5555'
+                    when '76' then '6666'
+                    when '77' then '7777'
+                    when '78' then '8888'
+                    else nvl(to_char(mgr),'0000')
+                    end bb
+from emp
+;
+
+

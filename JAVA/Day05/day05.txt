@@ -1,0 +1,77 @@
+Day05(25.4.7)
+
+
+1. 오버로딩 복습(Student, StudentTest), (Person(day04.ch6), PersonTest(day05))
+    - 객체의 상호작용
+    - public, static, instance, this, 다른 생성자 호출
+    - 접근지정자(modifier) Person.java
+    
+    - this
+        - this() : 생성자가 같은 이름의 다른 생성자 호출 시 사용
+        - 멤버변수와 매개변수가 이름이 같아서 충돌발생, 구분하기 위해 현재 객체를 this라고 함.
+    
+    - OverloadingTest.java
+        - 오버로딩 조건 : 오버로딩 조건 : 함수이름 동일해야됨, 매개변수 타입과 개수가 다름, return타입은 상관없음.
+
+        - 메소드 선언 : 리터타입 메소드명 (매개변수, ... ) { 실행할 코드 작성 : }
+            - void 메소드명(){} : 리턴값의 없는 메소드 선언
+            - double 메소드명(int x, int y){ ... } : double타입 값을 리턴하는 메소드 선언
+
+        - 가변길이 매개변수 : 메소드가 가변길이 매개변수를 가지고 있다면 매개변수의 개수와 상관없이 매개값을 줄 수 있음
+            ex) int sum(int... values){   }
+
+        - return 문 : 메소드의 실행을 강제 종료하고 호출한 곳으로 돌아간다는 의미
+
+        - 인스턴스 멤버 선언 및 사용 
+            - 인스턴스 멤버 : 필드와 메소드 등 객체에 소속된 멤버
+            
+
+
+2. Car.java, ObjectTest.java
+    - Override : (덮어쓰기, 재정의) 부모가 정의한 함수를 변경한다.
+        - 함수의 정의가 같아야 가능 (이름과 매개변수가 같아야하고 return도 같아야 함.)
+
+    - 정적 멤버 선언 : 메소드 영역의 클래스의 고정적으로 위치하는 멤버
+    - 정적 블록 : 정적 필드를 선언할 때 복잡한 초기화 작업이 필요하다면 정적 블록을 이용
+        - 정적 블록은 클래스가 메모리로 로딩될 때 자동으로 실행됨.
+
+3. FinalTest.java, Book.java, BookChild.java
+    - final : 최종을 의미, 한번초기화하고 변경불가
+    - 초기값이 저장되면 이것이 최종적인 값이 되어서 프로그램 실행 도중에 수정 불가.
+    - final 필드에 초기값 주는 방법 
+        1) 필드 선언 시에 초기값 대입
+        2) 생성자에서 초기값 대입
+
+    - 상수 : 불변의 값을 저장하는 필드
+        - 객체마다 저장할 필요가 없고, 여러 개의 값을 가져도 안 되기 때문에 static이면서 final인 특성
+        - 상수 이름은 모두 대문자로 주는 것이 일반적
+        - 클래스명.상수
+
+    - 자바의 패키지(package) : 관련있는 class들의 묶음
+        - window의 폴더
+        - unix는 디렉토리
+
+4. ImportTest.java
+
+5. Computer.java, ComputerTest.java, NoteBook.java
+    - 접근 제한자
+        Modifier : 접근권한 활용방법
+    활용방법 : static, final,...
+     
+    =========(class, field, constructor, method)=========
+    접근 권한은 4가지
+    public 		: 모든 패키지에서 접근가능
+    procected	: 같은 패키지이라면 접근가능, 다른패키지라면 상속받은 경우 접근가능
+    생략(default) 	: 같은 패키지에서 접근가능
+    private		: 자신의 클래스에서만 접근가능
+
+6. 6장LAB4, LAB5 문제풀이(Book.java, BookMgr.java, BookTest.java), 
+                        (Employee.java, EmployeeExam.java), 
+                        (Employee2.java, EmployeeExam.java)
+
+7. 6장 확인문제(Member.java, MemberService.java, Test.java, Printer.java)
+            
+
+
+Overloading 방법 : 마우스 우측버튼 -> source -> Generate Constructor using Fields클릭
+Override 방법 : 마우스 우측버튼 -> source -> Generate toString()클릭

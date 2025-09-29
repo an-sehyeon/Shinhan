@@ -1,0 +1,14 @@
+Day02(25.5.12)
+
+
+
+1. 부서조회 페이지
+    dept.html = 부서조회, 부서입력
+    deptlist.jsp = 부서목록조회
+    deptdetail.jsp = 부서id에 해당하는 부서 상세조회
+    deptupdate.jsp = 부서 내용 수정 & 입력
+    deptinsert.jsp = readonly(읽기전용, 수정불가), required(필수 필드 체크), 
+                    autofocus(페이지를 불러오자마자 원하는 폼 요소에 마우스 커서 표시),
+                    placeholder(입력란에 표시하는 힌트), <textarea>, <select>
+
+    day01-> jsp -> empAll.jsp, empdetail.jsp 복습

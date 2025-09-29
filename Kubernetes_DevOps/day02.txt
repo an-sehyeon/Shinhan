@@ -1,0 +1,105 @@
+Day02(25.07.29)
+
+
+
+
+1. 복습
+    OPS구성
+        - 런타임 기반 애플리케이션 구성
+            패키징(배포)
+
+    [레지스트리 서버]
+    https://quay.io/repository/
+
+    1.패키징
+    podman login quay.io -u "ID"
+    podman tag localhost/kiki-db:0.1 quay.io/"ID"/project-blog/kiki-db:0.1
+    podman push quay.io/nocount334/project-blog/kiki-db:0.1
+    podman tag localhost/kiki-web:0.1 quay.io/nocount334/project-blog/kiki-web:0.1
+    podman push quay.io/nocount334/project-blog/kiki-web:0.1
+
+    - root@pratice-container에서 실행
+    (기존 컨테이너 삭제)
+    podman container rm --force --all
+    podman rmi --all
+    podman container ls --all
+    podman images
+
+    [이미지 배포]
+    https://quay.io/repository/ -> Repository Name 클릭 -> Tags -> Fetch Tag(다운로드) 클릭 -> Podman Pull(by tag) -> 명령어 복사 -> 
+    콘솔 : 로그인 후 push명령어 -> podman images 확인
+
+    - root@pratice-container : 처음 만든 컨테이너에서 실행
+    ssh root@10.0.2.253
+    podman generate kube --podman-only blog --filename blog.yaml
+    less blog.yaml
+    podman kube down blog.yaml
+    podman pod ls :  결과 없으면 정상
+    podman kube play --start --network podman blog.yaml
+    podman pod ls : 결과 확인
+    mv blog.yaml deploy.yaml    : 이름 변경
+
+    - 해당 컨테이너의 deploy.yaml을 pratice-container로 보냄
+    scp deploy.yaml root@"보내려는 ip주소":/root/ -> yes
+
+    - root@pratice-container에서 실행
+    cd ~ : 홈 디렉토리로 이동
+    ls : 전달받은 deploy.yaml 확인
+    dnf install nano -y
+    nano deploy.yaml -> image부분 Podman Pull(by tag) 명령어로 수정
+    podman kube down deploy.yaml
+    podman kube play --start --network podman deploy.yaml
+    podman pod ls
+
+
+
+    - 프로젝트 배포
+    pwd
+    ls
+    cd ..
+    mdkir bettopia
+    lscd bettopia/
+    ls
+    touch Containerfile.db
+    touch Containerfile.web
+    ls
+    touch deploy.yaml
+    ls
+    mv deploy.taml deploy-podman.yaml
+    ls
+    mkdir files
+    ls
+    cd files
+    touch db.sql
+    touch mariadb-jdbc.jar
+    ls
+    cd ..
+    pwd
+    dnf install tree -y
+    tree
+    tree -L 2 .
+    ls -l ../blog/
+    mkdir gambling
+    ls
+    mv gambling/ src-gambling
+    ls
+    touch pon.xml
+    ls
+    touch README.md
+    tree -L 2 .
+
+    cat ../blog/Containerfile.web
+    nano Containerfile.web
+    - tomcat 버전 수정(프로젝트)
+    - EXPOSE 9999(포트번호) 꼭 넣어줘야 함.
+    - Add files/server.xml /usr/local/tomcat/conf/server.xml 명령어 추가
+    - Add 부분 수정한 파일명 확인
+
+    - 프로젝트 빌드
+    git clone https://github.com/kirk0221/chacha_create1.git
+    git pull
+    cd chacha_create1
+    mvn clean package
+    touch Containerfile.web
+
+

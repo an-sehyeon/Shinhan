@@ -1,0 +1,61 @@
+Day13(25.4.17)
+
+(package : shinhan.day13)
+1. stream 확인문제 풀이(Example.java)
+
+2. 18장 데이터 입출력(IOTest.java)
+    [보조 스트림]
+        - 다른 스트림과 연결되어 여러 가지 편리한 기능을 제공해주는 스트림
+        - 자체적으로 입출력을 수행할 수 없기 때문에 입출력 소스로부터 직접 생성된
+          입출력 스트림에 연결해서 사용해야됨.
+          ex) 바이트 입력 스트림인 FileInputStream에 InputStreamReader 보조 스트림 연결
+            InputStream is = new FileInputStream("...");
+            InputStreamReader reader = new InputStreamReader(is);
+
+        - 자주 사용되는 보조 스트림
+         InputStreamREader : 바이트 스트림을 문자 스트림으로 변환
+         BufferedReader : 입출력 성능 향상
+         DataInputStream : 기본 타입 데이터 입출력
+         PrintStream,PrintWriter : 줄바꿈 처리 및 형식화된 문자열 출력
+         ObjectInputStream, ObjectOutputStream : 객체 입출력
+
+
+         - 문자 변환 스트림
+            - 바이트 스트림에서 입출력할 데이터가 문자라면 문자 스트림(Reade, Writer)로 변환
+            ex) InputStream을 Reader로 변환
+            InputStream is = new FileInputStream("src/Temp/test.txt");
+            Reader reader = new InputStreamReader(is);
+
+
+         - 성능 향상 스트림
+            BufferedInputStream bis = new BufferedInputStream(바이트 입력 스트림);
+            BufferedOutputStream bos = new BufferedOutputStream(바이트 출력 스트림);
+
+            BufferedReader br = new BufferedReader(문자 입력 스트림);
+            BufferedWriter bw = new BufferedWriter(문자 출력 스트림);
+    
+        
+         - 기본 타입 스트림
+            FileInputStream fis = new FileInputStream("aa.data");
+		    DataInputStream dis = new DataInputStream(fis);
+
+
+        - 객체 스트림
+            - 직렬화 
+                - 정적 필드(static)는 직렬화에서 제외
+                - transient
+
+                 Modifier(활용방법, 접근권한)
+                    접근권한 : public > protected > 생략 > private
+                    활용방법 : static, final, synchronized, abstract, transient
+
+        
+        - 
+
+
+3. 18장 LAB3 풀이(FileController.java)
+
+4. 18장 LAB4 풀이(FileCalculator.java)
+
+5. 19장 네트워크 입출력(NetworkTest.java, Server1.java, Client1.java)
+    - 

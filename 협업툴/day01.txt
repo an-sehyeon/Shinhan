@@ -1,0 +1,100 @@
+Day01(25.5.7)
+
+
+
+1. 효율적인 협업과 생산성도구 활용
+    - https://git-scm.com/downloads/win 다운로드
+    
+    - 명령어
+    git init : git 저장소 생성, 숨김파일 표시
+    git cofig --list : 
+    git config --global user.email "nocount334@gmail.com.
+    git config --list
+    pwd : 현재 위치
+    mkdir git-test :
+    cd git-test/ : 
+    git init
+    git status : 
+    touch : 파일은 생성 내용은x
+    git add 
+    git commit -m "메시지내용"
+    git log
+    git log -oneline
+
+    echo "My First Git practice" > readme.txt
+    echo "My First Git practice2" >> readme.txt
+
+    echo "app.java에 한줄 추가" >> app.java
+    git diff app.java
+
+    vi 파일명
+    esc -> : wq 누르면 저장 후 파일 닫힘.
+   
+
+    - 브런치 생성, 이동, 병합
+    
+    새 브랜치 생성하고 이동
+    git branch dev : dev 브랜치 생성
+    git wwitch dev : dev 브랜치로 이동
+    git checkout -b dev2 : dev2생성후 이동
+    git branch --list 
+
+    브랜치에서 수정 및 커밋
+    echo "devbranch line" >> readme.txt
+    git add . : 파일 전체 올리기
+    git commit -m "edit:addline in dev branch"
+
+
+    main 브랜치로 돌아가 병합
+    git merge dev : 메인 브랜치에 dev 브랜치 병합
+    
+
+    기능 프랜치 생성 및 이동
+    git checkout -b feature/login : checkout -b는 
+
+
+    기능 완료 후 병합
+
+
+    파일 삭제
+    git rm fileA.txt
+    
+    파일 복원
+    git checkout HEAD~1 fileA.txt
+
+    작업 디렉토리에서 변경된 파일을 원래 상태로 되돌림(stage에서 내림)
+
+
+    Reset 방식별 실습
+    soft : 커밋만 취소하고 파일변경 내용 유지
+        git reset -soft HEAD~1
+
+    mixed : 커밋을 취소하고 stage는 비우지만, 파일 변경사항은 보존
+        git reset --mixed HEAD ~1
+
+    hard : 커밋을 취소하고, stage 및 파일 변경 사항까지 모두 삭제
+        git reset --hard HEAD~1
+
+
+    기록을 남기면서 되돌리기 : Revert
+
+    git push -u origin master
+
+    git push --set-upstream origin develop : main과 똑같은 develop 브랜치 생성
+    develop 브랜치를 deault 브랜치로 설정
+
+
+    복제하기
+    git clone 주소
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+Day03(25.5.13)
+
+
+
+1. 복습 index.html 추가(emp,dept 연결)
+
+2. CSS(css폴더 생성)
+    1. inline stylesheet : tag에 직접 sytle준다. 
+	2. internal stylesheet : html문서 내에서 정의 
+    3. extenal stylesheet : 외부의 css만들고 HTML과 link로 연결
+    
+    - css폴더에서 style 작성 후 index.html 연결
+
+    - webapp -> 06 -> no-style.html (기본 선택자 실습)
+    - webapp -> 06 -> no-style2.html (우선순위 테스트 실습)
+    
+    CSS 우선순위
+    !important > inline > #id선택자 > .class선택자 > tag선택자 > 상위 객체에 의해 상속된 속성
+    
+    !important 사용법 
+    ex)
+    .aa{
+  		border:1px solid blue!important;
+  	}
+
+
+    - webapp -> 07 -> gfont.html (font 실습)
+        구글폰트 이용, 웹 폰트 사용
+        크롬브라우저는 기본 font-size : 16px
+  		p : 16px
+  		h1 : 2em (2배)
+
+    - webapp > day01 > jsp > empAll.jsp(css 추가)
+    - webapp > day01 > jsp > empinsert.jsp(css 추가)
+    

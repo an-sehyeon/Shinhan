@@ -1,0 +1,41 @@
+Day03(25.8.11)
+
+
+1. JAP에서의 연관관계 & ERD의 연관관계
+    - @OneToOne : 한 엔티티의 한 인스턴스가 다른 엔티티의 한 인스턴스와 1:1로 대응되는 관계, 1:1
+    - @OneToMany : 하나의 엔티티가 여러 엔티티를 가지는 관계, 중복 허용/순서 유지가 필요하면 List, 중복 방지 원하면 Set 권장
+    - @ManyToOne : 다수의 엔티티가 하나의 엔티티를 참조. N:1, 일반적으로 fetch를 LAZY로 바꿔서 사용, 컬렉션 접근 시 여러 엔티티를 한번에 조회할때 join fetch 사용
+    - @ManyToMany : 두 엔티티가 서로 여러 개를 참조하는 관계, 
+    
+    - JPA는 방향 설정이 필요
+        - 단방향 참조 : 한쪽의 클래스만이 다른 클래스의 인스턴스를 참조
+        - 양방향 참조 : 양쪽 클래스 모두 다른 클래스의 인스턴스를 참조
+
+    1) 일대다 단방향 처리
+        - @JoinColumn(name = "pdsno") : 이미 존재하는 참조되는 테이블에 pdsno 칼럼이 생성.
+        - @JoinColumn이 없는 경우는 중간테이블이 생성된다. 테이블이름 + 칼럼이름 (예 : tbl_PDSBoard_files)
+        - 영속성 전이는 부모 엔티티나 자식 엔티티의 상태 변화가 자신과 관련 있는 엔티티에 영향을 주는 것을 의미
+        
+        [JPA 종속적인 엔티티의 영속성 전이에 대한 설정(CascadeType)]
+            - ALL : 모든 변경에 대한 전이
+            - PERSIST : 저장 시에만 전이
+            - MERGE : 병합 시에만 전이
+            - REMOVE : 삭제 시에만 전이
+            - REFRESH : 엔티티 매니저의 refresh() 호출 시 전이
+            - DETACH : 부모 엔티티가 detach되면 자식 엔티티 역시 detach
+
+        [@Modifying, @Transactional]
+            - @Query는 기본적으로 select 구문만을 지원
+            - @Modifying을 이용해서 DML 작업을 처리
+            - @Query를 이용해서 update, delete를 사용하는 경우에는 반드시 @Transactional이 필요
+            - @Transactional는 Test에서 Rollback처리되므로 DB반영을 위해 class선언부에 @Commit 추가해야됨.
+
+
+
+    2) 양방향 처리 - 연관관계 설정
+        - @OneToMany로 인해 중간 테이블이 생성된다. (@JoinColumn를 사용하면 반대쪽에 칼럼이 추가되고 중간테이블은 생기지 않음.)
+        - PK쪽에서 mappedBy를 이용하여 자신이 다른 객체에 매여있음을 명시
+        - mappedBy에는 참조한 쪽의 변수를 지정
+        - 지연로딩 fetch=LAZY를 사용하는경우는 연관관계 정보를 가져오기 위해 @Transactional을 사용해야됨.
+        - 양방향 설정을 사용하는 경우 ToString에 주의
+        

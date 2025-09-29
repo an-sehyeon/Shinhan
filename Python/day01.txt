@@ -1,0 +1,40 @@
+Day01(25.7.10)
+
+
+1. 프로젝트 후
+    [1] 프로젝트 배포
+
+        - run as -> maven build에서 Goals: package입력, Skip Test체크 -> run
+
+    [2] 용어 정리
+
+        1)언어
+            C, C++, JAVA : 컴파일 언어
+            JAVA : 컴파일언어, 인터프리터
+            JavaScript, Python : 인터프리터 언어
+
+            Lombok : 자바프로그램 실행, 컴파일 타임에 자동으로 코드를 생성하는 도구
+
+
+        2) IDE(통합개발 툴)
+            Eclipse, STS, Visual Code
+
+        3) Framework
+            SpringFrameWork, SpringBoot, Flask, Django 
+
+2. 파이썬 기초 문법
+    colab에서 실습
+
+    - 파이썬 특징
+        인터프리터 방식
+        구문의 가독성이 좋다
+        유지보수성이 좋다
+        
+    - 파이썬 코딩관례
+        한 줄은 79자까지 작성을 권장
+        최상위 함수와 클래스 정의는 2줄을 띈다
+        클래스내 메소드는 1줄을 띄어 쓴다
+        불필요한 공백을 주지 않는다
+        코드의 일관성을 유지한다
+
+    

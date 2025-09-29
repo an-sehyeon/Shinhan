@@ -1,0 +1,62 @@
+Day07(25.4.9)
+
+(package : shinhan.day07)
+1. 상속 복습(Parent.java, Child1.java, Child2.java, IngeritenceTest.java)
+
+2. 추상화 Tste(Shape.java, Circle.java, Rectangle.java, InheritenceTest.java)
+
+3. 추상클래스(Abstract.java)    
+    - 객체를 생성할 수 있는 클래스인 실체클래스들의 공통적인 필드나 메서드를
+      추출해서 선언한 클래스
+    - 실체 클래스의 부모 역할을 한다.
+    - 실체 클래스는 추상 클래스를 상속해서 공통적인 필드나 메소드를 물려받을 수 있다.
+    - 추상 메소드는 자식 클래스에서 반드시 재정의(오버라이딩) 해야된다.
+
+    if(a instanceof B b)
+
+
+(package : shinhan.day07.inter)
+4. 8장 인터페이스(TV.java, SamsungTV.java)
+    - 두 객체를 연결하는 역할
+    - 다형성 구현에 주된 기술
+
+    - 인터페이스 선언
+        - 인터페이스 선언은 class 키워드 대신 interface 키워드 사용
+
+      - 추상 메서드
+        - 리턴 타입, 메서드명, 매개변수만 기술되고 중괄호{}를 붙이지 않는 메서드     
+        [public abstract 리턴타입 메서드명(매개변수,...)]
+
+      - 디폴트 메서드
+        - 인터페이스에는 완전한 실행 코드를 가진 디폴트 메서드를 선언 가능
+        - 디폴트 메서드는 실행부 있음. default 키워드가 리턴 타입 앞에 붙음
+        [default 리턴타입 메소드명(매개변수,...){...}]
+
+      - 정적 메서드 
+        - 구현 객체가 없어도 인터페이스만으로 호출 가능
+        [public private static 리턴타입 메서드명(매개변수,...){...}]
+
+      - private 메서드
+        - private 메서드 : 구현 객체가 필요한 메서드
+            - 디폴트 메서드 안에서만 호출 가능
+            - 디폴트와 정적 메서드들의 중복 코드를 줄이기 위함
+        - private 정적 메서드 : 구현 객체가 필요 없는 메서드
+            - 디폴트 메서드 + 정적 메서드 안에서 호출 가능
+
+      - 다중 인터페이스(Soundable.java, SamsungTV.java)
+        - 구현 객체는 여러 개의 인터페이스를 implements 가능
+        [public class 구현클래스명 implements 인터페이스a, 인터페이스b{ 모든 추상 메서드 재정의}]
+
+
+      - 인터페이스 상속(InterfaseTest.java)
+        - 인터페이스도 상속이 가능
+        [public interface 자식인터페이스 extends 부모인터페이스1, 부모인터페이스2{...}]
+
+    (package : shinhan.day07.LAB1)
+  5. LAB1 풀이(Volume.java, VolTest.java, TV.java, Speaker.java, Radio.java)
+
+    (package : shinhan.day07.LAB2)
+  6. LAB2 풀이(Shape.java, Resizable.java, Rectangle.java, RectTriangle.java, ShapeTest.java)
+
+   (package : shinhan.day07.inter)
+  7. 문제풀이(Exercise.java, DaoExample.java)

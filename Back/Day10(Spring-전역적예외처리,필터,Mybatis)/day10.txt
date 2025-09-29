@@ -1,0 +1,48 @@
+Day10(25.6.2)
+
+
+
+
+1. Spring Framework
+    - 특징
+        - 경량 컨테이너로 자바 객체를 관리
+        - 의존성 주입(DI) 및 제어의 역전(IoC) 지원
+        - AOP(Aspect-Oriented Programming) 지원
+        - 트랜잭션 관리 및 데이터 접근 통합
+        - MVC 아키텍처 지원
+        - 테스트 용이성 제공
+        - 다양한 외부 라이브러리와의 통합 용이
+
+    - 전역적(global)으로 예외처리
+    controller\ExceptionAdvice.java
+    web.xml -> <!-- 예외에 대한 처리가 되어있는 핸들러가 없다면 예외를 강제로 발생 -->
+                <init-param>
+                    <param-name>throwExceptionIfNoHandlerFound</param-name>
+                    <param-value>true</param-value>
+                </init-param>
+
+    - 필터
+    spring\filter\LoginChkFilter.java
+
+
+2. Mybatis
+    - 라이브러리 추가
+    pom.xml -> <dependency>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis</artifactId>
+                    <version>3.5.6</version>
+                    </dependency>
+                    <dependency>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis-spring</artifactId>
+                    <version>2.0.6</version>
+                </dependency>
+    
+    WEB-INF\spring\root-context-oracle.xml
+    resources\mybatis\sqlMapConfig.xml
+    resources\mybatis\mappers\deptMapper.xml
+    resources\mybatis\mappers\empMapper.xml
+    model\dept\DeptDAOInterface.java
+    model\dept\DeptDAOMybatis.java
+    model\dept\DeptDAOMybatis.java
+    model\emp\EmpDAOMybatis.java

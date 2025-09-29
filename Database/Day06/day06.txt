@@ -1,0 +1,83 @@
+Day06(25.4.25)
+
+ 프로젝트 : 입력, 삭제, 수정, 조회 가능하도록
+    - 테이블 구조
+    - 시스템 구조
+    
+
+1. 사용자 관리
+    - 
+
+    - 롤
+        - 사용자에게 보다 효율적으로 권한을 부여할 수 있도록 여러 개의 권한을 묶은 것
+
+2. PL/SQL
+    - Oracle's Procedural Language extension to SQL 약자
+    - 블록 구조의 언어로서 크게 3부분으로 나뉨
+        - 선언부
+        - 실행부
+        - 예외처리
+
+
+3. 저장 프로시저, 함수, 커서
+    - 저장 프로시저
+       create or,replace 
+
+    - 커서
+    create or replace procedure sp_curser_test
+    is 
+        -- 1. 커서 선언
+    begin
+        -- 2. 커서열기
+        -- 3. 커서사용
+        -- 4. 커서닫기
+    end;
+    /
+
+    create or replace procedure sp_curser_test2
+    is 
+
+    begin
+    
+        -- 내부적으로 커서사용(선언 + open + fetch + close)
+        for v_empRecord in(select * from employees where department_id = 60)loop
+        
+            dbms_output.put_line('');
+            dbms_output.put_line('직원번호:'||v_empRecord.employee_id);
+            dbms_output.put_line('이름:'||v_empRecord.first_name);
+            dbms_output.put_line('--------------------------------');
+            
+        end loop;
+        
+    end;
+    /
+
+    execute sp_curser_test2;
+
+    - 패키지
+
+         
+
+4. ecilpse에서 Procedure(EmpDAO.java)
+    - Stored Procedure를 실행하기
+    - EmpController(10번 함수 작성)
+
+5. 트리거
+    - trigger : 특정 table에 사건(DML:insert,delete, update)에 의해 자동으로 실행되는 프로시저
+
+
+    - 트리거 작성 문법 ex)
+    create or replace trigger trigger_jobs
+    after insert on jobs        -- 시점 after, before 사건 : insert, delete, update on:table name
+    for each row                -- row 건수만큼인지?
+    begin
+        dbms_output.put_line('jobs table의 1건이 insert되었습니다.');
+    end;
+    /
+
+프로젝트 
+1. DTO
+2. DAO -> CRUD
+3. SERVICE
+4. EmpController
+5. VIEW

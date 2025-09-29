@@ -1,0 +1,98 @@
+Day02(25.5.21)
+
+
+
+1. servlet
+    - 절대경로
+        - 변수설정
+        <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />  
+        - 사용
+        <form action="${cpath}/empdetail.do" method="post">
+
+    - 직원 등록, 삭제기능 추가
+        - main\java\com\shinhan\controller2 > 파일
+        - appleShop\src\main\webapp\emp > 파일
+
+    
+2. DataSource이용해서 데이터베이스 연동
+    
+    - Servers > Tomcat > context.xml에 저장
+    <Resource name="jdbc/myoracle" auth="Container"
+              type="javax.sql.DataSource" driverClassName="oracle.jdbc.OracleDriver"
+              url="jdbc:oracle:thin:@127.0.0.1:1521:mysid"                  //수정
+              username="scott" password="tiger" maxTotal="20" maxIdle="10"  //수정
+              maxWaitMillis="-1"/>
+
+    - emp > DBUtil > public static Connection getConnection()에서 실습
+    - Connection Pooling이용
+        - WAS가 미리 Connection을 만들고 일정만큼 유지, 필요시 Connection 얻어서 사용
+        Context initContext = new InitialContext();
+        Context envContext  = (Context)initContext.lookup("java:/comp/env");
+        DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle");
+        Connection conn = ds.getConnection();
+    
+
+    - context.xml의 <Resource> name과 
+      DBUtil의 DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle") 코드의 이름이 같아야 함
+
+
+3. 서블릿 확장 API 사용
+    - 서블릿의 여러가지 포워드 방법
+
+    - 바인딩
+        - 웹 프로그램 실행 시 자원(데이터)를 서블릿 관련 객체에 저장하는 방법법
+        - 주로 HttpServletRequest, HttpSession, ServletContext객체에서 사용
+        - data를 바인딩
+		  1. request : 요청을하고 응답 후 사라진다.
+		  2. session : 브라우저에서 여러 요청을 하는동안 유지하기 위함, 브라우저 닫으면 사라짐.
+		  3. application : 서버가 종료되면 사라짐
+
+            - HttpServletRequest
+
+            - HttpSession
+
+            - ServletContext
+
+        
+        
+        - 서블릿 객체에서 사용되는 바인딩 관련 메서드
+            - setAttribute(String name, Object obj) : 자원(데이터)을 각 객체에 바인딩
+            - getAttribute(String name) : 각 객체에 바인딩된 자원(데이터)을 name으로 가져옴
+            - removeAttribute(String name) : 각 객체에 바인딩된 자원(데이터)을 name으로 제거
+
+    - 바인딩 실습(Attribute,sendRedirect,HttpServletRequest,HttpSession,ServletContext)
+        - controller3 > ShinhanServlet1.java, ShinhanServlet2.java, SetServlet.java
+        - webapp > jsp > one.jsp       
+        
+    
+    - web.xml에서 웹어플리케이션에 파라메터 전달
+
+
+4. 쿠키와 세션
+    - 쿠키 실습
+    controller3 > SetCookieServlet.java, GetCookieServlet.java
+    쿠키 유효시간 설정 : .setMaxAge();
+
+    - 장바구니 담기 (쿠키에 저장)
+    controller3 > CartServletCookie.java
+    controller3 > CartViewServletCookie.java
+    webapp > jsp > addCart.jsp
+    
+    - 세션 
+        - 웹 페이지들 사이의 공유 정보를 서버의 메모리에 저장해 놓고 사용하는 방법
+
+    - 세션의 특징
+        - 정보가 서버의 메모리에 저장
+        - 서버에 부하를 줄수 있음
+        - 브라우저당 한 개의 세션이 생성됨
+        - 세션은 유효 시간을 가짐(기본유효시간은 30분)
+        - 로그인 상태 유지 기능이나 쇼핑몰의 장바구니 기능 구현에 사용
+        
+    - 세션 실습(로그인기능)
+    controller > loginServlet.java
+    webapp > auth > login.jsp
+    webapp > emp > empinsert.jsp
+
+
+
+

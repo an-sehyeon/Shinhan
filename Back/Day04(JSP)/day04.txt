@@ -1,0 +1,141 @@
+Day04(25.5.23)
+
+
+
+1. JSP(자바스크립트)
+    - JSP의 구성요소
+        - HTML태그, CSS & 자바스크립트 코드
+
+    - 공통되는 코드 
+        - 정적 자원 실습
+        webapp\common\header.jsp
+        webapp\emp\empinsert.jsp
+
+        - 동적 자원 실습
+            webapp\common\header.jsp
+            webapp\emp\empinsert.jsp
+                - JSTL은 자동으로 contextpath인식
+                - 각각의 jsp를 컴파일후에 합친다
+                - HTML tag는 자동으로 contextpath인식못함
+
+
+    - 스크립트릿 문법
+    webapp\jsp\jsptest.jsp
+        
+    - 스크립트 요소 이용해 실습
+    webapp\dept\deptlist.jsp : <th>선택</th> 기능 추가
+    shinhan\controller\dept\DeptDeleteServlet.java : doPost(){} 코드
+
+    - 스크립트 내장객체(내장 변수) 기능
+    c:\shinhanDS\work\appleShop\src\main\webapp\jsp\jsptest2.jsp
+    - JSP 내장 객체 종류와 설명
+        request: 클라이언트의 요청 정보를 담고 있는 객체로, 파라미터, 헤더, 쿠키 등을 처리할 수 있다.
+        response: 서버에서 클라이언트로 전송되는 응답 정보를 담고 있는 객체로, 헤더 설정, 쿠키 추가 등을 처리할 수 있다.
+        out: JSP 페이지에서 출력 스트림을 제공하는 객체로, HTML 콘텐츠를 클라이언트로 전송할 때 사용된다.
+        session: 클라이언트와 서버 간의 세션 정보를 관리하는 객체로, 사용자별 데이터를 저장하고 유지할 수 있다.
+        application: 웹 애플리케이션 전체에서 공유되는 정보를 저장하고 관리하는 객체이다.
+        config: JSP 페이지의 설정 정보를 담고 있는 객체로, 서블릿의 초기화 파라미터를 읽을 수 있다.
+        pageContext: JSP 페이지의 컨텍스트 정보를 제공하는 객체로, 페이지의 모든 정보를 관리한다.
+        page: 현재 JSP 페이지 자체를 나타내는 객체이다.
+        exception: JSP 페이지에서 발생한 예외 정보를 담고 있는 객체로, 에러 페이지에서 사용된다.
+
+    - JSP 페이지 예외 처리하기
+    webapp\error\error404.jsp
+    webapp\error\error500.jsp
+        
+        - 전체페이지(global)에 등록하려면 web.xml에 등록
+        <error-page>
+            <error-code>404</error-code>
+            <location>/error/error404.jsp</location>
+        </error-page>
+        
+        <error-page>
+            <error-code>500</error-code>
+            <location>/error/error405.jsp</location>
+        </error-page>
+
+        - 사용자가 잘못 작성한 주소 출력
+	    here.innerHTML = location.href
+    
+2. 자바 코드를 없애는 액션 태그
+    - 인클루드 액션 태그
+    - 포워드 액션 태그
+    - useBean, setProperty, getProperty 액션태그
+    webapp\jsp\1.jsp
+    webapp\jsp\2.jsp
+
+        - 인클루드 액션 태그 사용하기
+        - 표준(jsp로시작) 액션 태그
+        - include는 page를 컴파일 후 합친다.
+        <jsp:include page="합칠 페이지 경로"></jsp:include>    
+        <jsp:forward page="불러올 페이지 경로"></jsp:forward>
+
+        - Bean(객체) 만들기
+        webapp\jsp\1.jsp
+        webapp\jsp\2.jsp
+
+
+3. EL(expression Language), JSTL
+    - 표현 언어 : 자바코드가 들어가는 표현식을 좀 더 편리하게 사용하기 위해 도입된 출력 기능
+    webapp\jsp\elTest.jsp
+
+
+    - EL에서 제공하는 내장 객체의 종류와 기능
+
+        1. Scope 관련 객체
+        pageScope: 현재 페이지 범위에 저장된 속성에 접근
+        requestScope: 현재 요청 범위에 저장된 속성에 접근
+        sessionScope: 현재 세션 범위에 저장된 속성에 접근
+        applicationScope: 애플리케이션 범위에 저장된 속성에 접근
+            - 사용법
+                ${pageScope.attributeName}
+                ${requestScope.userName}
+                ${sessionScope.cart}
+                ${applicationScope.config}
+
+        2. 파라미터 관련 객체
+        param: 요청 파라미터의 값을 문자열로 반환
+        paramValues: 요청 파라미터의 값을 배열로 반환
+            - 사용법
+            ${param.userId}  <!-- 단일 값 -->
+            ${paramValues.interests[0]}  <!-- 배열 값 -->
+
+        3. 헤더 관련 객체
+        header: 요청 헤더의 값을 문자열로 반환
+        headerValues: 요청 헤더의 값을 배열로 반환
+            - 사용법
+            ${header["User-Agent"]}
+            ${headerValues["Accept-Language"][0]}
+
+        4. 쿠키 관련 객체
+        cookie: 클라이언트에서 전송된 쿠키에 접근
+            - 사용법
+            ${cookie.userId.value}
+
+        5. 기타 객체
+        initParam: 웹 애플리케이션 초기화 파라미터에 접근
+        pageContext: JSP 페이지의 컨텍스트 정보를 제공
+            - 사용법
+            ${initParam["configParam"]}
+            ${pageContext.request.method}
+    
+
+    - 표현 언어 내장 객체
+    webapp\jsp\elTest2.jsp
+        - has-a관계
+
+    - 커스텀 태그
+    webapp\jsp\jstlTest.jsp
+    webapp\jsp\jstlTest2.jsp
+        - 액션태그나 표현 언어를 사용하더라도 조건식이나 반복문 등의 자바 코드를 제거하기 위해서 도입된 기능
+    
+    
+    - Core 태그 라이브러리 사용하기
+        - <c:if> : webapp\emp\empAll.jsp > 테이블의 로그인 여부 기능 추가
+        <c:forTokens> : webapp\jsp\jstlTest2.jsp
+        <c:redirect> : webapp\jsp\jstlTest2.jsp
+
+    - 포매팅 태그 라이브러리 사용
+        webapp\emp\empAll.jsp
+        <fmt:formatDate pattern="yyyy-mm-dd hh:mm:ss" value="${emp.hire_date}"/>    
+        <fmt:formatNumber type="currency" currencySymbol="$" groupingUsed="true" value="${emp.salary}"></fmt:formatNumber>

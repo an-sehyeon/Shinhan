@@ -1,0 +1,158 @@
+-- application_office 테이블에 전체 순위를 저장
+
+MERGE INTO application_office ao
+USING (
+    SELECT 
+        ai.bno,
+        ai.housing_area,
+        ds.dependent_point,
+        nhs.non_home_point,
+        sas.account_point,
+        (ds.dependent_point + nhs.non_home_point + sas.account_point) AS total_score,
+        ai.is_married,
+        addl.address_point,
+        DBMS_RANDOM.VALUE AS sort_seed,
+        RANK() OVER (
+            PARTITION BY ai.housing_area
+            ORDER BY
+                (ds.dependent_point + nhs.non_home_point + sas.account_point) DESC,
+                addl.address_point DESC,
+                CASE ai.is_married WHEN 'Y' THEN 1 ELSE 0 END DESC,
+                DBMS_RANDOM.VALUE
+        ) AS area_rank
+    FROM applicant_info ai
+    JOIN dependent_score ds ON ai.dependent_count = ds.dependent_count
+    JOIN non_home_ownership_score nhs ON ai.non_home_start_date = nhs.non_home_start_date
+    JOIN subscription_account_score sas ON ai.account_open_date = sas.account_open_date
+    JOIN address_score adds ON ai.address = adds.address
+    JOIN address_list addl ON adds.address_num = addl.address_num
+) src
+ON (ao.bno = src.bno)
+WHEN MATCHED THEN
+    UPDATE SET 
+        ao.housing_area   = src.housing_area,
+        ao.total_score    = src.total_score,
+        ao.area_rank      = src.area_rank,
+        ao.is_married     = src.is_married,
+        ao.address_point  = src.address_point,
+        ao.sort_seed      = src.sort_seed,
+        ao.dependent_point = src.dependent_point,
+        ao.non_home_point = src.non_home_point,
+        ao.account_point = src.account_point
+WHEN NOT MATCHED THEN
+    INSERT (
+        bno, housing_area, total_score, area_rank, is_married, address_point,
+        sort_seed, dependent_point, non_home_point, account_point
+    )
+    VALUES (
+        src.bno, src.housing_area, src.total_score, src.area_rank, src.is_married,
+        src.address_point, src.sort_seed, src.dependent_point, src.non_home_point, src.account_point
+    );
+    commit;
+    delete from application_office where bno between 1 and 170;
+    select * from application_office;
+    
+    ----------------------------------------------------------------
+    
+-- 전체 순위를 조회하는 뷰 생성
+CREATE OR REPLACE VIEW view_all_rank AS
+SELECT 
+    ao.bno ,
+    ai.name ,
+    ai.reg_no ,
+    ai.phone ,
+    ao.housing_area,
+    ao.dependent_point ,
+    ao.non_home_point ,
+    ao.account_point ,
+    ao.total_score ,
+    ao.address_point ,
+    ao.is_married,
+    ao.area_rank
+FROM application_office ao
+JOIN applicant_info ai ON ao.bno = ai.bno;
+
+    
+    
+    
+    
+    select * from view_all_rank where bno = 43 and name = '문준영' and reg_no = '200613-3229609' and area_rank <= 30 ;
+    select * from view_all_rank where housing_area = 24;
+    
+    
+    
+    
+    
+    
+    select * from application_office;
+    insert into application_office(bno) values(168);
+    
+    select * from update_application_office_data;
+    
+    
+-- MERGE 구문을 저장하는 프로시저
+CREATE OR REPLACE PROCEDURE update_application_office_data AS
+BEGIN
+    MERGE INTO application_office ao
+    USING (
+        SELECT 
+            ai.bno,
+            ai.housing_area,
+            ds.dependent_point,
+            nhs.non_home_point,
+            sas.account_point,
+            (ds.dependent_point + nhs.non_home_point + sas.account_point) AS total_score,
+            ai.is_married,
+            addl.address_point,
+            DBMS_RANDOM.VALUE AS sort_seed,
+            RANK() OVER (
+                PARTITION BY ai.housing_area
+                ORDER BY
+                    (ds.dependent_point + nhs.non_home_point + sas.account_point) DESC,
+                    addl.address_point DESC,
+                    CASE ai.is_married WHEN 'Y' THEN 1 ELSE 0 END DESC,
+                    DBMS_RANDOM.VALUE
+            ) AS area_rank
+        FROM applicant_info ai
+        JOIN dependent_score ds ON ai.dependent_count = ds.dependent_count
+        JOIN non_home_ownership_score nhs ON ai.non_home_start_date = nhs.non_home_start_date
+        JOIN subscription_account_score sas ON ai.account_open_date = sas.account_open_date
+        JOIN address_score adds ON ai.address = adds.address
+        JOIN address_list addl ON adds.address_num = addl.address_num
+    ) src
+    ON (ao.bno = src.bno)
+    WHEN MATCHED THEN
+        UPDATE SET 
+            ao.housing_area   = src.housing_area,
+            ao.total_score    = src.total_score,
+            ao.area_rank      = src.area_rank,
+            ao.is_married     = src.is_married,
+            ao.address_point  = src.address_point,
+            ao.sort_seed      = src.sort_seed,
+            ao.dependent_point = src.dependent_point,
+            ao.non_home_point = src.non_home_point,
+            ao.account_point = src.account_point
+    WHEN NOT MATCHED THEN
+        INSERT (
+            bno, housing_area, total_score, area_rank, is_married, address_point,
+            sort_seed, dependent_point, non_home_point, account_point
+        )
+        VALUES (
+            src.bno, src.housing_area, src.total_score, src.area_rank, src.is_married,
+            src.address_point, src.sort_seed, src.dependent_point, src.non_home_point, src.account_point
+        );
+END;
+/
+
+commit;
+-- insert시 자동 생성되는 트리거
+CREATE OR REPLACE TRIGGER trg_merge_office_after_insert
+AFTER INSERT ON applicant_info
+FOR EACH ROW
+BEGIN
+    update_application_office_data;
+END;
+/
+
+
+    

@@ -1,0 +1,74 @@
+Day01(25.5.20)
+
+
+
+1. JSP
+    - Dynamic Web Project 생성
+        - appleShop > web.xml 체크
+
+2. 서블릿
+    - 서버 쪽에서 실행되면서 클라이언트의 요청에 따라 동적으로 서비스를 제공하는 자바 클래스
+    
+    - 서블릿 동작 과정
+    클라이언트 > 웹서버 > 웹 애플리케이션 서버(WAS) > 서블릿 > 역순
+
+    - src\main\java > com.shinhan.controller 패키지 생성
+        > FirstServlet (servlet파일 생성)
+            > URL mappings 설정
+            > init, destroy, service 선택 후 피니쉬
+            > FirstServlet.java에서 실습 확인
+            > @WebServlet({ "/FirstServlet", "/first" }) 주소 추가시 "/"필수
+            > web.xml에서 서블릿 등록하기
+
+    - get요청으로 한글이 넘어오면 자동으로 encoding, decoding된다 (깨짐없음)
+	- post는 한글이 넘어오면 요청문서의 body로 encoding없이 넘어온다.(깨짐)
+    - post일때 request.setCharacterEncoding("utf-8");
+
+    - HttpServletRequest와 HttpServletResponse를 사용하여 클라이언트 요청과 응답 처리        
+
+    - index.html에서 실습   
+    
+    - 절대경로 
+    ex) <form id="myfrm" action="${pageContext.request.servletContext.contextPath}/dept/deptinsert">
+
+    - appleShop\src\main\webapp\auth > login.jsp 생성
+    - appleShop > src > main > java > com > shinhan > controller > loginServlet.java 생성
+
+
+    [ src/main/java > controller > 서블릿 (요청을 받고 html에 위임)]
+        - set으로 데이터 저장 후 get으로 위임
+        - 데이터저장 = request.setAttribute()
+        - 위임 =  request.getRequestDispatcher("위임할 페이지 주소")
+			.forward(request, response)
+
+    [ webapp > html파일(서블릿으로부터 위임받고 화면 보여줌) ] 
+
+    
+    [servlet으로 Dept 부서 조회,입력...]
+    - webapp > dept > jsp파일
+    - java > com > shinhan > controller > java파일
+
+    - Servlet : 자바담당, HTML tag사용하는 것은 바람직하지 않다.
+	- JSP : HTML 담당, JAVA코드를 사용하지 않는 것이 바람직하다.
+	- 해결 -> 응답은 서블릿이 받고 자바코드수행하고 결과는 JSP에 위임하여 응답한다.
+
+
+    - 태그형태에서 반복문사용
+    https://tomcat.apache.org/download-taglibs.cgi
+    > 맨아래 Jar Files 파일4개 다운
+        - 사용법
+        상단에 작성 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <tbody>
+            <c:forEach items="${ deptListData }" var="dept">
+                <tr>
+                    <td>${dept.department_id }</td>
+                    <td>${dept.department_name }</td>
+                    <td>${dept.manager_id }</td>
+                    <td>${dept.location_id }</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+
+    [ servlet으로 emp 직원 조회... ]
+    - java > com > shinhan > controller2 > java파일
+    - webapp > emp > jsp파일

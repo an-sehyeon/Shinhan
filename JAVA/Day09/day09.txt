@@ -1,0 +1,75 @@
+Day09(24.4.11)
+
+(package : shinhan.day09)
+1. Inner 클래스 복습(Chatting.java)
+    - Inner Class 재정의 -> 익명구현class
+
+2. Exception 복습(LoginExample.java)
+
+3. Exception(FileWriterExample.java, MyFileWriter.java, ExceptionTest.java)
+    - try~catch~resource
+    - 리소스 자동닫기
+
+
+4. 12장 java.base 모듈
+    - java.bace : 모든 모듈이 의존하는 기본 모듈로, 모듈 중 유일하게 requires하지 않아도 사용할 수 있음
+    - java.lang : 자바 언어의 기본적인 클래스를 담고 있는 패키지.
+    - java.util : 자료구조와 관련된 컬렉션 클래스를 제공
+    - java.text : 날짜 및 숫자를 원하는 형태의 문자열로 만들어 주는 포맷 클래스를 제공
+    - java.time : 날짜 및 시간을 조작하거나 연산하는 클래스를 제공
+    - java.io : 입출력 스트림 클래스 제공
+    - java.net : 네트워크 통신과 관련된 클래스 제공
+    - java.nio : 데이터 저장을 위한 Buffer 및 새로운 입출력 클래스 제공
+
+5. Object클래스(ObjectTest.java, Coffee.java, PersonVO.java)
+    - 객체 동등 비교
+    - 객체 해시코드
+    - 객체 문자 정보
+    - lombok
+
+(package : shinhan.day09.lab)
+6. 12장 LAB1(클래스와 다형성)(CellPhoneMain.java)
+
+(package : shinhan.day09.lab2)
+7. 12장 LAB2(OverridingTest.java)
+
+(package : shinhan.day09)
+8. lombok 사용 MVC Test(StudentDTO.java, StudentDTO.java, StudentController.java, StudentView.java, StudentService.java)
+    - MVC 모델
+     Controller(C) 	-> 사용자와 소통(요청과 응답)
+     Service(Model)	-> 업무로직 (요청처리)
+     DAO(Model)		-> DB의 업무(CRUD작업)
+     DTO(Model)		-> Date Transfer 하기위한 설계
+     View(V)		-> display
+
+9. 어노테이션 Test(MemberTest.java, Member.java)
+
+10. 어노테이션 종류
+    - @Data
+    - @AllArgsConstructor
+    - @RequiredArgsConstructor
+    - @Builder
+    - @Nonnull
+    - 
+
+11. 시스템 (SystemInfoTest.java)
+
+12. String 클래스(StringTest.java)
+    - 인코딩, 디코딩
+    - StringBuilder, String Buffer
+    - StringTokenizer 클래스
+    - Wrapper class(포장class)
+
+    - 날짜와 시간 클래스 (DateTest.java)
+    - DecimalFormat : 숫자를 형식화된 문자열로 변환
+    - SimpleFormat
+
+
+13. 정규 표현식(RegExpressionTest.java)
+    - 문자 또는 숫자와 관련된 표현과 반복 기호가 결합된 문자열
+
+14. 리플렉션(.java)
+     - Class 객체로 관리하는 클래스와 인터페이스의 메타정보를 프로그램에서 읽고 수정하는 것
+        - 메타 정보 : 패키지 정보, 타입 정보, 멤버(생성자, 필드, 메소드)정보
+        
+

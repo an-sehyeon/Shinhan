@@ -1,0 +1,163 @@
+Day08(25.07.15)
+
+
+
+1. React JS
+    [개발 환경 준비]
+        - vscode에서 확장 프로그램 설치
+            - ESLint : 코드 문법 검사 도구
+            - Material Icon Theme : 폴더 및 파일 아이콘 커스터 마이징
+            - Error Lens : 코드 줄에 에러/경고 강조 표시
+            - Live Server : HTML/CSS/JavaScript 실시간 브라우저 미리보기
+            - Reactjs code snippets : 리액트 코드 자동완성 스니펫 제공
+            - Prettier - Code formatter : 코드 자동 정리
+
+        - node.js 다운로드
+            - https://nodejs.org/ko/download
+            - cmd -> node -v, npm -v 설치 확인
+                npm(Node Package Manager) : 자바스크립트 패키지 관리 도구
+                npx(Node Package eXecute) : 설치없이 패키지를 즉시 실행
+
+                - 코드에서 사용해야 하는 라이브러리는 npm으로 설치하여 node-modules에 저장하고 다른 파일에서 계속 재사용해야 한다.
+                - 일회용은 npx사용
+
+    [핵심 개발 도구]
+        - 바벨 
+        C:\shinhanDS\work\babeltest에서 테스트
+            - 자바스크립트 컴파일러
+            - 최신 자바스크립트 문법이나 JSX 문법을 구형 브라우저가 이해할 수 있는 코드로 변환
+             (cmd)
+             npm init : pakage.json 생성
+             npm i @babel/core : 바벨본체 설치
+             npm i @babel/preset-env : 타켓에 따른 컴파일
+             npm i @babel/cli : 바벨실행(커맨드라인)
+             npm i : node_modules 폴더 삭제후 명령어 실행하면 다시 생성             
+
+             package.json -> script안에 "build" : "babel src -d build", 코드 추가
+             .babelrc 파일 생성 : @babel/preset-env를 preset으로 넣어주면,
+                                해당 targets 브라우저 환경에 맞게 자바스크립트를 컴파일하도록 설정
+
+             npm run build
+
+        - 웹팩(Webpack)
+            - 모듈 번들러
+            - 여러 개로 나누어진 파일들(JS, CSS, 이미지 등)을 하나의 파일로 합쳐주고(번들링), 코드의 용량을 최적화하는 도구
+            - 웹사이트의 로딩 속도를 향상시키는데 결정적인 역할을 함
+            - Create React App (CRA)을 사용하면 복잡한 설정들이 모두 자동화됨
+             (cmd)
+             npm i webpack webpack-cli
+             package.json -> script안에 "bundle": "webpack --mode=development", 코드 추가
+
+
+    [CRA로 프로젝트 생성하기]
+        C:\shinhanDS\work\react-practice에서 테스트
+        (cmd)
+        npx create-react-app .      : CRA로 프로젝트 생성
+        npm run start               : 리액트 앱 실행
+
+
+    [React]
+        js 복습 : public/review에서 실습
+
+        [React란?]
+                - 사용자 인터페이스를 만들기 위한 JavaScript 라이브러리
+                - 빠르고 동적인 웹 애플리케이션 개발에 적합
+                - 컴포넌트 기반 : UI를 독립적이고 재사용 가능한 조각으로 나눔
+                - SPA(Single Page Application) 지원 : 화면 전체 새로고침 없이 필요한 부분만 업데이트
+                - JSX 문법 : HTML과 JavaScript를 함꼐 작성할 수 있어 직관적
+                - 실제 DOM보다 빠른 렌더링 성능
+
+            - SPA(Single Page Application)방식
+                - 최초 1회 전체 페이지 로드 -> 이후엔 필요한 데이터만 요청
+                - Ajax를 통한 데이터 바인딩 -> 전체 새로 고침 없이 콘텐츠 갱신
+                - JavaScript 기반 화면 렌더링 -> 빠르고 유연한 UI 구성
+
+            - DOM(Document of Object Model)
+                - HTML 문서의 요소를 제어하기 위해 문서의 각 항목을 계층으로 표현하여
+                    생성, 변형, 삭제할 수 있도록 돕는 인터페이스
+            
+            - Virtual DOM이란?
+                - 실제 DOM의 복사본
+                - DOM 변경을 미리 시뮬레이션하여 성능 최적화
+                - 변경 사항을 비교 후 필요한 부분만 실제 DOM에 반영
+                - 빠르고 효율적인 렌더링
+
+        [리액트 앱의 구성요소]
+            - public 폴더
+                - 앱의 정적 파일(HTML, 이미지 등) 저장
+                - index.html: 리액트 앱이 삽입될 html 틀
+                - favicon.ico: 브라우저 탭 아이콘 등
+
+            - src 폴더
+                - 실제 코딩이 이루어지는 공간(핵심 로직)
+                - 컴포넌트, css, JavaScript 모듈 등 포함
+                - App.js, index.js 등 리액트 앱의 시작점점
+
+        크롬에서 확장프로그램 설치 -> React Developer Tools 
+            - 웹 브라우저의 개발자 도구 내에서 리액트 컴포넌트 구조, Props, State를 시각적으로 확인하고 
+                수정할 수 있도록 도와주는 필수 확장 프로그램
+
+
+        [컴포넌트란?]
+            - 리액트 앱을 구성하는 최소 단위
+            - UI를 독립적이고 재사용 가능한 단위로 나눈 것
+
+            특징
+            1) MVC의 View를 독립적으로 구성하여 재사용 가능
+            2) 데이터를 입력받는 Props와 자체적으로 상태를 관리하는 state를 가짐
+            3) 컴포넌트의 이름은 항상 대문자로 시작해야 함
+            src/components1/WelcomeClass.jsx
+            src/components1/WelcomeFunc.jsx 
+            src/components1/App2.jsx 에서 실습
+
+        [HTML을 컴포넌트로 분리하기]
+            src/components1/Header.jsx
+            src/components1/Body.jsx
+            src/components1/Footer.jsx
+            src/components1/App3.jsx
+
+
+        [JSX란?]
+            - JavaScript + XML 형태의 확장 문법
+
+            - 특징
+                1) 공식적인 자바스크립트 문법은 아니며, 바벨에 의해 React.createElement()형태의 일반 자바스크립트 코드로 변환됨
+                2) HTML과 매우 유사하여 가독성이 높고 작성하기 쉬움
+                3) {}중괄호를 사용하여 자바스크립트 표현식을 넣을 수 있음
+
+        [JSX와 값 렌더링]
+            src/components1/RenderingTest.jsx
+            src/components1/UserStatus.jsx            
+            src/components1/App3.jsx
+
+
+        [조건부 렌더링]
+            src/components1/UserStatus.jsx
+            src/components1/App3.jsx
+            
+            - JSX 내부에서는 if문을 직접 사용할 수 없으므로, 주로 삼항 연산자나 && 연산자를 사용
+
+
+        [모듈 시스템]
+            src/utils/math.js
+            src/components1/App3.jsx            
+            - 자바스크립트 코드를 기능별로 별도의 파일(모듈)로 분리하여 관리하는 시스템
+            - export(내보내기) : 다른 파일에서 사용할 수 있도록 변수, 함수, 클래스 등을 공개함
+            - import(가져오기) : 다른 파일에서 export된 모듈을 가져와 사용함
+
+
+        [절대 경로 설정하기(모듈 경로 정리)]   
+            .jsconfig.json에서 절대 경로 설정 
+            - 절대 경로를 설정하여, 항상 프로젝트의 특정 폴더(src)를 기준으로 경로를 작성
+
+
+        [환경 변수 사용하기(.env)]
+            .env에서 환경변수 설정
+            src/components1/App3.jsx에서 확인
+            - API 키, 채널ID 등 코드에 직접 노출하고 싶지 않은 중요한 값을 외부 파일에 분리하여 관리하는 방법
+            - 프로젝트의 최상위 폴더(Root)에 .env 파일 생성
+            - .env 파일은 보안을 위해 .gitignore에 추가
+            - .ent 설정 : 변수 이름은 반드시 REACT_APP_으로 시작해야함
+                ex) REACT_APP_CHANNEL_ID=abc1234
+                    REACT_APP_IMAGE_PATH=c:/temp
+                    REACT_APP_SPRING_URL=http://localhost:9999

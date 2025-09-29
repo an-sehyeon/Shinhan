@@ -1,0 +1,93 @@
+Day01(25.07.28)
+
+
+
+
+1.DevOps
+https://meet.google.com/hgh-bizh-kmt?pli=1
+https://miro.com/welcomeonboard/cTBhWm5jSzBNTHd0MU1EMFlyMDI0cWE1dENBSktLMGxTOEpjb3NmNGpkcWMvck1wVkVrei9xN1dweU9kM2FQc3hnRHQ1ZFI4eXh1RGpicEw1MzJ3cG1jNXVDcTBuQklpaXFrMjd3RWVGMVNYbE5mNzMxL1VCdG9wSTE5YnJwV21QdGo1ZEV3bUdPQWRZUHQzSGl6V2NBPT0hdjE=?share_link_id=417673372426
+
+https://vlab.dustbox.kr/project/instances/
+ID = user12
+PW = vlabhorizon
+인스턴스 시작
+소스 -> 이미지 선택, 새로운 볼륨 생성 : 아니오 선택, lab-rocky-9 선택
+Flavor -> m1.medium 선택
+네트워크 -> net-infra 선택
+보안그룹 -> default 대신 iac 선택
+
+
+
+https://vconsole.vlab.dustbox.kr/wetty
+    명령어
+    ssh root@10.0.2.253
+    password : rocky
+    dnf install git -y
+    dnf install podman -y
+
+    git clone https://github.com/tangt64/codelab.git
+    cd codelab/java/blog/
+    password
+    ls
+    mv Dockerfile.db Containerfile.db
+    mv Dockerfile.web Containerfile.web
+    cat Containerfile.db
+
+    dnf install nano -y 설치
+    nano Containerfile.db
+    수정후 저장 -> 컨트롤 + O -> enter
+    나가기 컨트롤 + x
+
+    cat Containerfile.web
+    nano Containerfile.web
+
+    dnf search maven
+    dnf install maven-local-openjdk8 -y
+    
+    [pwd -> pom.xml에서 실행]
+    - Apache Maven은 Java 프로젝트의 빌드, 테스트, 배포, 의존성 관리를 도와주는 도구
+    - pom.xml 파일을 기반으로 프로젝트를 관리하기 위한 명령어
+    mvn clean package
+
+    dnf install wget -y
+
+    podman container rm --all --force       모든 컨테이너 중지
+    podman container ls --all
+    podman rmi --all     모든 이미지 삭제
+
+    wget http://10.0.0.250/docker-tomcat-8.5.15.tar
+    podman load -i docker-tomcat-8.5.15.tar
+
+    wget http://10.0.0.250/docker-postgres-9.2.19.tar
+    podman load -i docker-postgres-9.2.19.tar
+
+    [root@container ~]# podman images   [실행 결과 출력돼야됨]
+    REPOSITORY                  TAG         IMAGE ID      CREATED      SIZE
+    docker.io/library/tomcat    8.5.15      b8dfe9ade316  8 years ago  343 MB
+    docker.io/library/postgres  9.2.19      02b45836f2c8  8 years ago  272 MB
+
+    podman pod create --name blog --publish=8080:8080
+    podman pod ls
+
+    nano Containerfile.db -> FROM docker.io/library/postgres:9.2.19 변경
+    nano Containerfile.web -> From docker.io/library/tomcat:8.5.15 변경
+
+    podman container run -d --name kiki-web localhost/kiki-web:0.1
+    podman container run -d --name kiki-db localhost/kiki-db:0.1
+    podman build -f Containerfile.db -t kiki-db:0.1
+    podman build -f Containerfile.web -t kiki-web:0.1
+
+    podman pod create --name blog --publish=8080:8080
+    podman container run -d --name kiki-web --pod blog localhost/kiki-web:0.1
+    podman container run -d --name kiki-db --pod blog localhost/kiki-db:0.1
+
+    podman pod ls
+    podman port "INFRA ID"
+    curl
+    ip a s ens3
+    curl 10.0.4.109:8080
+
+    podman container logs kiki-web
+
+    dnf groupinstall "Server with GUI" -y
+    systemctl isolate graphical

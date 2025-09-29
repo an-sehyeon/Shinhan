@@ -1,0 +1,22 @@
+day02(25.4.2)
+
+1. 복습 (Review.java)
+
+2. 표준출력(모니터) (PrintTest.java)
+    - print() 메소드로 변수값 출력
+    - 출력: println(), print(), printf()
+
+    표준입력(키보드) : Scanner 타입 변수 활용
+    
+4. 연산자 (OperatorTest.java)
+    - 전위 연산자, 후위 연산자, 산술 연산자, 
+      비교 연산자, 논리 연산자, 대입 연산자, 삼항 연산자
+
+5. 조건문 if, switch (ConditionTEst.java)
+
+6. 반복문 (LoopingTest.java)
+    - for, while, do~while
+    - break, continue
+    - Math.random()
+
+7. while, switch (ScannerTest.java) **

@@ -1,0 +1,152 @@
+-- 데이터 사전
+select * from dict;
+
+select * 
+from dictionary
+where table_name like 'USER_%';
+
+select *
+from user_tables;
+
+select *
+from tab;
+
+select *
+from user_constraints
+where table_name = 'EMP1';
+
+select *
+from user_indexes
+where table_name = 'EMPLOYEES';
+
+select * from employees where email like 'S%';
+select * from employees where substr(email,1,1) like 'S%';
+
+select *
+from employees
+where salary between 10000 and 20000;
+
+create index idx_salary
+on employees(salary);
+
+-- Oracle은 primary key를 설정하면 자동으로 index가 만들어진다.
+-- primary key : not null, unique
+create table shinhan_one(
+    id number primary key,
+    name varchar2(30)
+);
+select * from shinhan_one;
+insert into shinhan_one(name) values('aa');
+insert into shinhan_one(id,name) values(1,'aa');
+
+create table shinhan_two(
+    id number constraint pk_shinhan_two primary key,
+    name varchar2(30)
+);
+insert into shinhan_two(name) values('aa');
+
+-- view : 테이블을 보는 창
+-- 직원이 근무한는 도시 출력(자주사용하는 sql문이라고 가정)
+select employee_id, first_name, city
+from employees, departments, locations
+where employees.department_id = departments.department_id
+and departments.location_id = locations.location_id;
+
+-- view 생성 문법
+create view view_emp_city
+as 
+select employee_id, first_name, city
+from employees, departments, locations
+where employees.department_id = departments.department_id
+and departments.location_id = locations.location_id;
+
+select * from view_emp_city;
+select * from dict;
+select * from user_views;
+
+-- 시퀀스 생성 문법
+create sequence seq_no;
+
+create table tbl_board(
+    bno number primary key,
+    title varchar2(30),
+    content varchar2(1000),
+    writer varchar2(30)
+);
+
+insert into tbl_board values(seq_no.nextval, 'db배우기', '쉽겠니', '안');
+select rownum, tbl_board.* from tbl_board;
+
+delete from tbl_board where bno in(5,6,7);
+commit;
+
+-- 동의어
+select *
+from sys.dual;
+
+select *
+from dual;
+
+create synonym emp for employees;
+select * from emp
+
+
+-- 제약조건
+create table tbl_major(
+    major_seq number primary key,
+    title varchar2(30)
+);
+
+create table tbl_student(
+    std_id char(5) constraint tbl_student_std_id_PK primary key, -- not null + unique
+    std_name varchar(30) constraint student_stdname_nn not null, -- null값은 허용하지 않음(필수칼럼)
+    major_seq number constraint student_major_fk references tbl_major(major_seq) on delete cascade,
+    gender char(1), constraint hender_chk check (gender in ('M','F')),
+    email varchar2(20) constraint email_unique UNIQUE, 
+    address varchar2(50)
+);
+
+
+select * from user_constraints where table_name = 'TBL_STUDENT';
+select * from user_constraints where table_name = 'TBL_MAJOR';
+insert into TBL_MAJOR values(100, '컴공');
+insert into TBL_MAJOR values(200, '전기');
+insert into TBL_MAJOR values(300, '스포츠');
+insert into tbl_student values('12345','학생1',100,'M','nocount','마포구');
+insert into tbl_student values('12346','학생2',100,'F','nocount2','마포구');
+insert into tbl_student values('12347','학생2',300,'F','nocount3','마포구');
+
+drop table TBL_MAJOR;
+select * from tbl_student
+select * from TBL_MAJOR
+delete from tbl_major where major_seq = 100;
+
+
+
+-- 문제 풀이
+-- q1
+create table dept_const(
+    deptno number(2) constraint DEPTCONST_DEPTNO_PK primary key,
+    dname varchar2(14) constraint DEPTCONST_DNAME_UNQ unique,
+    loc varchar2(13) constraint DEPTCONST_LOC_NN not null
+);
+
+create table emp_const(
+    enpno number(4) constraint empconst_empno_pk primary key,
+    ename varchar2(10) constraint empconst_ename_nn not null,
+    job varchar2(9),
+    tel varchar2(20) constraint empconst_tel_unq unique,
+    hiredate date,
+    sal number(7,2) constraint empconst_sal_chk check (sal between 1000 and 9999),
+    comm number(7,2),
+    deptno number(2) constraint empconst_deptno_fk references dept_const(deptno)
+);
+
+select table_name, constraint_name, constraint_type
+from user_constraints where table_name in('EMP_CONST', 'DEPT_CONST')
+order by 2;
+
+
+
+
+

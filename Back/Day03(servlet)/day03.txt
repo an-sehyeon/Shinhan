@@ -1,0 +1,57 @@
+Day03(25.5.22)
+
+
+
+1.로그인 기능(세션에 저장)
+    c:\shinhanDS\work\appleShop\src\main\java\com\shinhan\controller\login\LogoutServlet.java
+    appleShop\src\main\webapp\auth\login.jsp
+    appleShop\src\main\webapp\auth\loginExternal.js 
+
+2. 로그아웃 기능
+    controller\login\LogoutServlet.java
+    
+    2-1 로그인한 사용자만 접근 가능하도록 구현
+        controller2\emp\EmpListServlet.java
+        controller\login\LoginServlet.java
+            -  로그인을 하면 ${info}를 비워줘야됨
+        webapp\auth\login.jsp
+            -  <script>
+                var message = "${info}";
+                if(message != ""){
+                    alert(message);
+                } 
+                </script>
+                <c:set var="info" value="" scope="session"/>
+                <%--session.setAttribute("info","") 와 같은 의미 --%>
+
+
+
+3. 장바구니 담기 (세션에 저장)
+    - controller3\CartServletSession.java
+    - controller3\CartViewServletSession.java
+    - webapp\jsp\addCart2.jsp
+    - webapp\jsp\viewcart2.jsp
+
+4. 필터
+    브라우저에서 서블릿에 요청하거나 JSP에 접근할 때 필터를 거쳐가기 위함
+    shinhan\filter\EmcodingFilter.java
+    appleShop\src\main\java\com\shinhan\filter\TimerFilter.java
+    appleShop\src\main\java\com\shinhan\filter\AuthFilter.java : 로그인필터 > 로그인해야만 접근가능하도록 필터
+
+    - web.xml에서 필터 설정
+        - web.xml에서 Encoding 필터 등록하기
+            <filter>
+                <filter-name>encoding</filter-name>
+                <filter-class>com.shinhan.filter</filter-class>
+            </filter>
+            <filter-mapping>
+                <filter-name>encoding</filter-name>
+                <url-pattern>/*</url-pattern>
+            </filter-mapping>
+            
+5. Listener API
+    - 서블릿 관련 리스너들 : 서블릿에서 발생하는 이벤트에 대해서 처리를 할 수 있는 기능
+
+    shinhan\listener\AppLIstener.java
+    shinhan\listener\SessionCounterListener.java
+

@@ -1,0 +1,32 @@
+Day02(25.07.21)
+
+
+
+1. Python
+    - 코랩 -> 금융공학Day01-1,금융공학Day01-2에서 실습
+    - 자료구조
+        1) 리스트 : [   ]
+            - 인덱싱, 슬라이싱 가능
+            - 일반적인 연산 x
+
+        2) 튜플 : (     )
+            - 읽기 전용
+            - 한번 설정한 값 수정 x
+            
+        3) 딕셔너리 : { K : V }
+            
+
+    https://github.com/ws-l/shds_2025
+        - data.zip 다운
+            - adv.csv를 세션 저장소에 업로드, 데이터 프레임으로 읽기
+            - sales컬럼에 대해서 평균보다 크면 good, 아니면 bad라는 값을 갖도록 apply
+
+            - creditest2 -> credit
+            - default ... 컬럼 -> value_counts
+            - income, loan, age-> describe
+            - new_col : loan > income*0.5 True
+
+            - binary.csv -> binary
+            - admit -> groupby -> 다른 변수 평균 확인
+
+     

@@ -1,0 +1,101 @@
+Day04(25.4.23)
+
+- DQL(Data Query Language) : SELECT
+    - 작성순서, 해석순서
+    - 단일행함수 : substr(), length(), nvl().., 다중행함수 max(), sum()...
+    - JOIN (행을 연결) : inner join, outer join, self join, ANSI표준(using, on)
+    - SubQuery(main Query에 속한 select문) : 일반 서브쿼리, 스칼라 서브쿼리, 인라인 서브쿼리, 상관 서브쿼리
+
+
+1. 복습(SQL_LAB5(SELF JOIN)_6장2절)
+
+
+2. 서브쿼리
+    - SQL 구문을 실행하는데 필요한 데이터를 추가로 조회하고자 SQL 구문 내부에서 사용하는 select문을 의미.
+    - 서브쿼리의 결괏값을 사용하여 기능을 수행하는 영역은 메인쿼리라고 함
+
+    
+    - 실행결과가 하나인 단일행 서브쿼리
+        - subquery의 결과가 단일행인지, 다중행인지? 사용되는 연산자가 다르다
+        - 단일행 서브쿼리와 함수 
+        ex) 
+
+
+    - 실행 결과가 여러 개인 다중행 서브쿼리
+    - 다중행 연산자 
+        IN :
+        ANY, SOME : 
+        ALL : 
+        EXISTS : 
+
+
+    - 비교할 열이 여러 개인 다중열 서브쿼리
+    ex) select *
+        from employees
+        where (department_id, salary) in (
+            select department_id, max(salary)
+            from employees
+            group by department_id)
+        order by department_id asc;
+
+
+    - 상관형 Sub Query
+
+    - inline View (가상의 table)
+
+    - 스칼러 서브쿼리
+
+
+3.DML(Data Manipulation Language) 
+    - 데이터를 조작, 정의
+        - 데이터를 추가, 수정 삭제하는 데이터 조작어
+
+    - DML(Data Manipulation Language) 조작어 -> Insert, Update, Delete
+    - DDL(Data Definition Language) 정의어 -> create table, drop table,...
+
+    - table생성 후 employees테이블의 모든 값 insert
+    create table emp1
+    as select * from employees;
+    select * from emp1
+
+    - 원하는 컬럼만 insert
+    create table emp2
+    as select employee_id, first_name, salary from employees;
+    select * from emp2
+
+    - table의 구조만 복사하고 data는 insert는 하지않기
+    create table emp3
+    as select * from employees where 1=0;
+    select * from emp3;
+
+    - UPDATE
+
+
+    - DELETE
+
+
+  
+
+(package com.shinhan.day16)
+4. eclipse (CRUDTest2.java)
+    DB에서 테이블이 변경되면 DBUtil 클래스에서 " " 부분 변경
+    String userid=" ";	
+    String userpass=" "; 
+
+
+
+5. 트랜잭션
+     - 하나의 단위로 데이터를 처리하는 트랜잭션
+     - 
+
+
+6. 세션
+    - 데이터베이스 접속을 시작으로 여러 데이터베이스 
+
+
+7. 데이터 정의어
+    - 
+
+(package com.shinhan.emp)
+8. eclipse에서 모듈화
+(EmpDTO) -> (EmpView) -> (EmpDAO) -> (EmpService) -> (EmpController)

@@ -1,0 +1,44 @@
+Day10(25.07.17)
+
+
+
+1. useRef 복습
+    src/components3/VarCompare.jsx
+
+2. 프로젝트(앱 만들기)
+    src/project2/
+
+3. useReducer
+    src/components3/CounterReducerTest.jsx
+    src/components3/counterReducer.js
+    src/project2/TodoListUsingReducerApp.jsx
+    src/project2/data/todoReducer.js
+
+    - const [state ,dispatch] = useReducer(reducer, initialState);
+        state : 현재 상태 값, useReducer가 반환하는 첫 번째 요소
+        dispatch : 상태 변경을 유발하는 액션을 발생시키는 함수
+        reducer : (state, action) => newState형태의 함수, 현재 상태와 액션 객체를 받아 새로운 형태를 반환
+        initialState : 컴포넌트가 처음 렌더링도리 때 사용될 초기 상태 값
+    
+    - 동작흐름 : dispatch({type: 'INCREMENT'}) -> reducer 함수실행 -> 새로운 state반환 -> 컴포넌트 리렌더링
+
+4. 메모이제이션(Memoization)
+    src/components3/Comp1Parent.jsx
+    src/components3/Comp2Child.jsx
+
+    src/components3/Light.jsx
+    src/components3/SmartHome.jsx
+
+    - 동일한 연산 결과를 저장해 두었다가 다시 사용하여 불필요한 계산을 방지하는 기법
+    - 리액트에서 렌더링 시 발생할 수 있는 연산 낭비를 줄이는 방법
+
+    [React에서 사용하는 메모이제이션 관련 Hook]
+        - useMemo() : 복잡한 연산의 결과 값을 저장
+        - useCallback() : 함수 자체를 저장(함수 재생성 방지)
+        - React.memo() : 컴포넌트의 렌더링 결과를 저장(Props가 같으면 리렌더링 방지)
+
+        React.memo의 한계
+            - 부모 컴포넌트에서 함수를 정의하여 자식에게 props로 전달하면, 
+              부모가 리렌더링될 때마다 함수가 새로 생성
+            - 매번 새로 생성된 함수는 내용이 같더라도 이전에 만들어진 함수와는 다른 메모리 주소를 가짐
+            - React.memo로 감싸진 자식 컴포넌트는 매번 새로운 함수를 props로 받는다고 인식하여, 최적화가 실패하고 불필요한 리렌더링 발생

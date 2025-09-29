@@ -1,0 +1,20 @@
+day01(25.04.01)
+JDK 설치 -> 환경 변수 설정 -> 이클립스 설치 -> 이클립스 프로젝트 생성 -> 실행문과 세미콜론
+-> 변수와 타입(변수선언, 정수타입, 문자타입, 실수타입, 논리타입, 문자열타입, 자동,강제 형변환, 연산식 자동 형변환, 문자열 기본타입으로 변환)
+
+자료공유 : https://lrl.kr/UPTq
+
+1차 프로젝트 : SpringFramework + MyBatis 프레임워크 + JSP + MySQL
+2차 프로젝트 : SpringBoot + JPA 사용 + ReactJS + MariaDB
+
+
+1. java17, java 11 버전 다운로드
+2. 환경변수설정 (path)
+    - 자바(JDK)가 설치된 디렉토리 경로 복사 -> 속성 -> 고급시스템 설정 -> 환경변수 -> 시스템 변수 -> 새로 만들기 -> 변수이름 : JAVA_HOME, 변수 값 : 경로 붙여넣기 -> path 편집 -> 새로만들기 -> %JAVA_HOME%\bin 확인 -> 확인
+3. eclipse 24년 3월 버전 다운로드
+4. 프로젝트 생성 : create a project -> Java Project -> Project name : javaproject -> 
+
+줄맞추기(formating) : ctrl + shift + f
+
+모듈 : 패키지들의 묶음
+패키지 : 자바 class들의 묶음

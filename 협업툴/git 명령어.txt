@@ -1,0 +1,114 @@
+touch					- 문서 생성  시스템 명령어
+q					- end 
+git config --global user.name ""		- 전역 사용자 정보 설정
+git config --global user.email ""
+git config user.name ""			- 로컬 사용자 정보 설정
+git config user.email ""
+ls 					- 디렉토리 내 파일 목록 확인
+git init					- 현재 디렉토리를 Git 저장소로 초기화
+ls -al					- 숨김 파일 포함 전체 목록 상세 확인
+git status					- 깃 프로젝트 상태를 확인하는 명령어
+git add "파일명" or "."			- 워킹 디렉터리 내 문서를 스테이징 영역에 추가하는 명령어, "." : 현재 위치의 파일 전부
+git commit -m "커밋 메시지"			- 스테이징 영역 내에 대기 중인 문서를 리포지토리에 추가하는 깃 명령어
+git commit --amend -m "수정된 커밋 메시지"	- 최근 커밋 메시지 변경
+git log					- 커밋한 수정 이력을 확인하는 명령어
+touch .gitignore				- .gitignore라는 이름의 빈 파일을 생성, .gitignore 파일은 git이 무시할 파일이나 폴더 목록을 작성해 두는 설정 파일(git이 추적x)
+nano "파일명"				- 
+git rm "파일명"				- 커밋한 파일 삭제 명령어
+git commit -m "파일 삭제"			- 해당 파일을 삭제하고, 변경 사항을 새 커밋으로 남김
+git log -p					- 커밋의 변경사항까지 함께 출력하는 옵션
+git log --oneline				- 각 커밋을 요약해 한 줄 씩 출력하는 옵션
+git chechout 커밋해시			- 문서 내용을 특정 커밋의 내용으로 되돌리는 깃 명령어
+git reflog					- HEAD 포인터의 참조 이력을 출력하는 명령어
+git log -1					- 최신 commit 한 개 출력
+
+git reset					- 모든 add 취소
+git log --oneline				- 현재 커밋 몇 개 했는지 확인
+git update-ref -d HEAD			- 모든 커밋을 완전히 초기화
+git reset --mixed				- 커밋 기록 전체 취소, add상태도 취소 
+git reset HEAD~1				- 수정한 파일은 그대로 두고, 커밋도 취소하고 git add 한 것도 모두 취소
+git branch -d "로컬브랜치 이름"		- 로컬 브랜치 삭제하기
+git remote add origin 원격주소		- 원격저장소 등록하기
+git remote remove origin			- 기존에 연결되어 있는 원격 저장소와의 연결을 끊어주는 명령어
+git pull origin "브랜치 이름"			- pull
+git push origin "브랜치 이름"   		- push
+git clone https://github.com/an-sehyeon/web_inworld.git	- 전체 복제(web_inworld 폴더 생성, 그 안에 파일 들어감)
+git fetch origin 				- 원격 저장소 업데이트된 변경사항 반영
+git commit --amend -m "변경할 커밋 메시지"	- push 후 직전 commit 메시지 변경 
+git push origin "브랜치명" --force		-  변경한 commit메시지 원격에도 반영
+
+
+-- git과 github 연동
+echo "# TempRepository" > README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/an-sehyeon/ShinhanDS.git
+git push -u origin main
+
+===================================================================
+--  git config --global --add safe.directory 에러메시지 뜨는 경우
+git config --global --get-all safe.directory -> D:/"repository이름" 출력되지 않는경우 아래 코드 실행
+git config --global --add safe.directory D:/"repository이름"
+===================================================================
+
+===================================================================
+-- 한글 경로가 깨질 경우 출력 인코딩 설정 변경
+git config --global core.quotepath false
+===================================================================
+
+===================================================================
+-- warning: adding embedded git repository 에러
+-> 최상단에 .git이 있는데 하위폴더에 .git이 존재할때 발생, 하위폴더에 .git 삭제후 다시 실행
+===================================================================
+
+===================================================================
+-- ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 에러 발생시
+(로컬 브랜치와 원격 브랜치가 서로 다른 히스토리를 가지고 있어서 충돌)
+-> pull 후 push 하기 
+git pull origin main --rebase
+git push origin main
+===================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

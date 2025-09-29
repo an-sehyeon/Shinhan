@@ -1,0 +1,33 @@
+Day01(25.5.9)
+
+
+1. 톰캣 설치
+    - 포트번호 변경
+     톰캣파일 -> comf -> server.xml -> 8080 -> 9090으로 변경
+
+2. webshop 프로젝트 생성 (dynamic web project)
+    - webapp -> html파일 생성
+    - Servers -> tomcat 우클릭 -> Add and remove
+
+    http:// 도메인이름(또는 ip address):port/path(webshop)/페이지
+
+    export -> C:\shinhanDS\devtools\apache-tomcat-9.0.102\webapps 경로에 war 생성
+    
+    실제 서버 연결 : apache-tomcat -> bin -> cmd -> startup
+
+
+  3. 실습(web/webapp/day01)
+    1.html - 기본태그1
+    2.html - 기본태그2
+    3.html - 기본태그3
+    4.html - <img alt="" src="">, <video>, <table>
+    searchByDept.html - input태그
+    index.html - <a>
+
+    - 폼<form> 실습
+    input_form.html, input1.jsp, empdetail.jsp, 
+    searchByJob.html, empByJob.jsp, 
+    searchByDept.html, selectBydept.jsp 
+    
+
+    

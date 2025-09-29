@@ -1,0 +1,32 @@
+Day07(25.08.18)
+
+1. 복습
+        1. pom.xml  security라이브러리 추가
+        2. pom.xml  jwt관련 라이브러리 추가
+        3. jwt토큰사용.....templates는 불필요
+        4. com.shinhan.sbproject.security 패키지의 파일들
+        SecurityUser.java    ...... 우리의 Member와 Security의 User Mapping
+        PasswordConfig.java ..... pass암호화
+        MemberService.java ..... 인증
+        CorsConfig.java .... SOP정책에 의해 다른 origin접속불가를 허용 global setting
+        SecurityConfig.java .....
+                    Security설정, 로그인해야하는지, 없어도 접근되는지
+                    csrf토큰활성화하는지, cors설정 사용하는지
+                    jwt토큰사용을 위해
+                    http.addFilterBefore(new JwtAuthFilter(memberService, jwtUtil),
+                        UsernamePasswordAuthenticationFilter.class);	
+        4. jwt토큰사용
+        com.shinhan.sbproject.security.jwt
+        1) JwtUtil :  토큰만들기, 유효한지체크, 토큰내의 정보 추출
+        2) AuthServiceLigin : 로그인시 토큰발급을 사용하기
+        3) JwtAuthFilter : Authorization처리 ( 토큰들어오면 유효한지?
+                    토큰내의 정보 추출하기)
+        4) LoginControllerJWT  : 로그인 post, 회원가입 ,
+                                    로그인 응답시 Token과 mid를 return
+                authService.login(request)
+
+
+
+
+
+

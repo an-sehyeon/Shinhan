@@ -1,0 +1,24 @@
+테이블 목록
+
+사용자정보(applicant_info) = 접수번호(bno), 이름(name), 주민번호(reg_no), 전화번호(phone), 지역(adress), 부양가족 수(dependent_count), 무주택 시작 날짜(non_home_start_date), 결혼 유무(is_married), 통장개설연도(account_open_date), 평형수(housing_area) 
+
+접수처(application_office) = 평형수(housing_area), 접수번호(bno), 이름(name), 점수(count)
+
+주소 점수(address_score) =  주소(address), 지역번호(address_num)
+
+지역목록(addresslist) = 지역번호(address_num), 주소에 따른 가점(address_point)
+
+부양가족 점수(dependent_score) = 부양가족 수(dependent_count), 부양가족 수에 따른 가점(dependent_point) [1명당 5점씩, 최대 35점 부여]
+
+통장 기간 점수(subscription_account_score) =  통장 개설 연도(account_open_date), 통장기간에 따른 가점(account_point) [1점부터 17점까지 부여]
+
+무주택 기간 점수(non_home_ownership_score) =  무주택 기간(non_home_start_date), 무주택 시점에 따른 가점(non_home_point) [1년이상 부터 시작, 1년마다 2점씩, 최대 32점까지 부여, 30세 미만 미혼 무주택자는 0점 부여]
+
+평수에 맞는 분양금(unit_price_by_area) = 평형수(housing_area), 계약금(down_payment), 중도금(interim_payment), 잔금(balance_payment), 분양금(total_price)
+
+
+
+
+
+
+

@@ -1,0 +1,118 @@
+select * from dependent_score;
+select * from address_list;
+select * from address_score;
+select * from subscription_account_score;
+select * from non_home_ownership_score;
+select * from unit_price_by_area;
+commit;
+
+
+insert into dependent_score(dependent_count,dependent_point) values(0,0);
+insert into dependent_score(dependent_count,dependent_point) values(1,5);
+insert into dependent_score(dependent_count,dependent_point) values(2,10);
+insert into dependent_score(dependent_count,dependent_point) values(3,15);
+insert into dependent_score(dependent_count,dependent_point) values(4,20);
+insert into dependent_score(dependent_count,dependent_point) values(5,25);
+insert into dependent_score(dependent_count,dependent_point) values(6,30);
+insert into dependent_score(dependent_count,dependent_point) values(7,35);
+
+
+-- address_list
+insert into address_list values(1,5);
+
+insert into address_list values(2,4);
+insert into address_list values(3,4);
+insert into address_list values(4,4);
+insert into address_list values(5,4);
+insert into address_list values(6,4);
+insert into address_list values(7,4);
+
+insert into address_list values(8,3);
+
+insert into address_list values(9,2);
+insert into address_list values(10,2);
+insert into address_list values(11,2);
+insert into address_list values(12,2);
+insert into address_list values(13,2);
+insert into address_list values(14,2);
+insert into address_list values(15,2);
+
+insert into address_list values(16,1);
+
+
+
+-- address_score
+insert into address_score values('서울',1);
+
+insert into address_score values('부산',2);
+insert into address_score values('대구',3);
+insert into address_score values('인천',4);
+insert into address_score values('광주',5);
+insert into address_score values('대전',6);
+insert into address_score values('울산',7);
+
+insert into address_score values('경기',8);
+
+insert into address_score values('경북',9);
+insert into address_score values('경남',10);
+insert into address_score values('충남',11);
+insert into address_score values('충북',12);
+insert into address_score values('전남',13);
+insert into address_score values('전북',14);
+insert into address_score values('강원',15);
+
+insert into address_score values('제주',16);
+
+
+-- SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values(to_date('2024-01-01','yyyy--mm-dd'),1);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2025',0);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2024',1);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2023',2);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2022',3);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2021',4);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2020',5);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2019',6);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2018',7);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2017',8);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2016',9);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2015',10);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2014',11);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2013',12);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2012',13);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2011',14);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2010',15);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2009',16);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('2008',17);
+insert into SUBSCRIPTION_ACCOUNT_SCORE(account_open_date,account_point) values('vip',17);
+
+
+
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(0,0);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(1,2);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(2,4);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(3,6);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(4,8);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(5,10);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(6,12);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(7,14);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(8,16);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(9,18);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(10,20);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(11,22);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(12,24);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(13,26);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(14,28);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(15,30);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(16,32);
+insert into non_home_ownership_score(non_home_start_date,non_home_point) values(100,32);
+
+
+
+-- unit_price_by_area
+insert into unit_price_by_area(HOUSING_AREA,DOWN_PAYMENT,INTERIM_PAYMENT,BALACE_PAYMENT,TOTAL_PRICE) values(24,'62,870,000','377,220,000','188,610,000','628,700,000');
+insert into unit_price_by_area(HOUSING_AREA,DOWN_PAYMENT,INTERIM_PAYMENT,BALACE_PAYMENT,TOTAL_PRICE) values(34,'148,730,000','892,380,000','446,190,000','1,487,300,000');
+insert into unit_price_by_area(HOUSING_AREA,DOWN_PAYMENT,INTERIM_PAYMENT,BALACE_PAYMENT,TOTAL_PRICE) values(48,'207,890,000','1,247,340,000','623,670,000','2,078,900,000');
+commit;
+
+
+
