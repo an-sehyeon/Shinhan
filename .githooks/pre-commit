@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+LIMIT=$((100*1024*1024))  # 100MB
+
+# 스테이징된 추가/수정 파일 검사
+git diff --cached --name-only --diff-filter=ACM -z | \
+while IFS= read -r -d '' f; do
+  [ -f "$f" ] || continue
+  size=$(wc -c < "$f" | tr -d '[:space:]')
+  if [ "$size" -ge "$LIMIT" ]; then
+    human=$(command -v numfmt >/dev/null && numfmt --to=iec "$size" || echo "${size}B")
+    echo "❌ pre-commit: '$f' is $human (>=100MB). Remove from staging or use Git LFS."
+    exit 1
+  fi
+done

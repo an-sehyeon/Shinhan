@@ -1,0 +1,61 @@
+# Archives
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+
+# Installers
+*.exe
+*.msi
+*.dmg
+*.pkg
+*.deb
+*.rpm
+*.AppImage
+
+# Docs
+*.pdf
+
+# Logs & temps
+*.log
+*.tmp
+*.bak
+*.swp
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Node / Frontend
+node_modules/
+dist/
+build/
+.cache/
+.vite/
+coverage/
+
+# Java / Spring
+target/
+out/
+.gradle/
+build/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+
+# IDE / Tools
+.vscode/
+.idea/
+*.iml
+
+# Your local big resource folders (필요 시 추가)
+자료모음/
+work/
+devtools/

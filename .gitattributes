@@ -1,0 +1,29 @@
+# 텍스트 기본: LF
+* text=auto eol=lf
+
+# 바이너리(개행 변환 금지)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.7z binary
+*.rar binary
+*.tar binary
+*.gz binary
+*.tgz binary
+*.mp4 binary
+*.mov binary
+*.avi binary
+*.mp3 binary
+*.wav binary
+*.exe binary
+*.msi binary
+*.dmg binary
+*.pkg binary
+*.deb binary
+*.rpm binary
+*.AppImage binary

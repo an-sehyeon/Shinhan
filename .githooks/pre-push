@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+LIMIT=$((100*1024*1024))
+found=0
+
+# pre-push 표준입력 파싱
+read remote_name remote_url
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ -z "${local_ref:-}" ] && break
+
+  if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
+    range="$local_sha"
+  else
+    range="$remote_sha..$local_sha"
+  fi
+
+  # 범위 내 blob 크기 검사
+  while read -r type id rest; do
+    [ "$type" = "blob" ] || continue
+    size=$(git cat-file -s "$id" 2>/dev/null || echo 0)
+    if [ "$size" -ge "$LIMIT" ]; then
+      path=$(git rev-list --objects -n 1 "$id" --all | awk '{print $2}')
+      human=$(command -v numfmt >/dev/null && numfmt --to=iec "$size" || echo "${size}B")
+      echo "❌ pre-push: Large blob detected: ${path:-$id} ($human)"
+      found=1
+    fi
+  done < <(git rev-list --objects --filter=blob:none "$range" | git cat-file --batch-check)
+done
+
+if [ "$found" -ne 0 ]; then
+  echo "Push blocked. Clean large files (use Git LFS or rewrite history)."
+  exit 1
+fi
