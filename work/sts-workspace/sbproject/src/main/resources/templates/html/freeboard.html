@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<th:block th:replace="~{/layout/exLayout2 :: setContent(~{this::content2})}">  
+   <th:block th:fragment = "content2">
+       
+	<h1>Board목록</h1>
+	<h2 th:text="${greeting}"></h2>
+	<h2>[[${greeting}]]</h2>
+	<p>로그인 Member : [[${session.loginUser}]]</p>
+	<p>param : [[${param.score}]]</p>
+	<table border="1" th:with="searchNo=20">
+		<thead>
+			<tr>
+				<th>bno</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>내용</th>
+				<th>생성일</th>
+				<th>수정일</th>
+				<th>추가</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="board:${blist}">
+			<td th:text="${board.bno}"></td>
+			<td>[[${board.title}]]</td>
+			<td>[[${board.writer}]]</td>
+			<td>[[${board.content}]]</td>
+			<td>[[${#temporals.format(board.regDate, 'yyyy-MM-dd')}]]</td>
+			<td>[[${#temporals.format(board.modDate, 'yyyy-MM-dd')}]]</td>
+			<td th:text="${board.bno==searchNo?'주인공':'손님'}"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	
+	<script th:inline="javascript">
+		var boardList = /*[[${blist}]]*/ [];
+		boardList.forEach((item, index)=>{
+			console.log(index + "번째", item)
+		});
+	
+	</script>
+	   </th:block>
+</th:block>	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

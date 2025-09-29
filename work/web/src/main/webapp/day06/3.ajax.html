@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax(비동기통신)연습</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(function(){
+	$("#btn1").on("click",f1);
+	$("#btn2").on("click",f2);
+	$("#btn3").on("click",f3);
+	$("#btn4").on("click",f4);
+	$("#btn5").on("click",f5);
+	$("#btn6").on("click",f6);
+	$("#btn7").on("click",f7);
+	$("#btn8").on("click",f8);
+	$("#btn9").on("click",f9);
+	$("#deptInsert").on("click",f_deptInsert);
+	$("#deptInsert2").on("click",f_deptInsert2);
+	$("#deptInsert3").on("click",f_deptInsert3);
+	
+	
+	// 수정버튼을 누르면 페이지가 이동됨, 이동하지않고 Ajax로 처리하기
+	// default event취소하기
+	$("#here").on("submit", "form", function(event){
+		alert("수정버튼 클릭");
+		
+		alert($(this).val());
+		
+		var url = "/web/day02/jsp/deptupdate.jsp";
+		var job = "";
+		var buttonText = $("input[type='submit']").val();
+		if(buttonText == "입력"){
+			job = "insert";
+		}else if(buttonText == "수정"){
+			job = "update";
+		}else{
+			event.preventDefault();
+			return;
+		}
+	var obj = {
+			job : job,
+			department_id : $("input[name='department_id']").val(),
+			department_name : $("input[name='department_name']").val(),
+			location_id : $("input[name='location_id']").val(),
+			manager_id : $("input[name='manager_id']").val(),
+	};
+	
+	$.ajax({
+		url:"/web/day02/jsp/deptupdate.jsp",
+		data:obj,
+		success:function(responseData){
+			$("#here").html(responseData);
+		},
+		
+	});
+	event.preventDefault();			// update.jsp로 가는 action취소(why? ajax처리하기위해서)
+});
+	
+
+
+	
+	function f1(){
+		// 화면이동없이 서버에 갔다가 data를 가지고 돌아온다.
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","2.html", false);	// 비동기여부  false이면 동기를 의미
+		xhr.send();	// 동기이면 응답이 올때가지 기다림
+		var response = xhr.responseText;
+		$("#here").html(response);
+	}
+	function f2(){
+		// 화면이동없이 서버에 갔다가 data를 가지고 돌아온다.
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","2.html", true);	// 비동기여부  true이면 비동기를 의미
+		/* xhr.onreadystatechange = function(){
+			if(xhr.readyState==4 && xhr.status==200){
+				var response = xhr.responseText;
+				$("#here").html(response);
+			}
+		}; */
+		xhr.onload = function(){
+			var response = xhr.responseText;
+			$("#here").html(response);
+		}
+		xhr.send();	// 비동기이면 응답을 기다리지 않는다.
+	}
+	function f3(){
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","data.xml", true);
+		xhr.onload = function(){
+			if(xhr.status ==200){
+				console.log(xhr.responseXML);
+				var doc = xhr.responseXML;
+				var arr = doc.getElementsByTagName("student");
+				var output = "<ul>";
+				for(let i=0;i<arr.length;i++){
+					const name = arr[i].getElementsByTagName("name")[0].textContent;
+					
+					const score = arr[i].getElementsByTagName("score")[0].textContent;
+					output += `<li>이름은 ${name} 점수는 ${score} </li>`;
+				}
+				output += "</ul>";
+				$("#here").html(output);
+			}
+		};
+		xhr.send();
+	}
+	
+	function f4(){
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","data.json", true);
+		xhr.onload = function(){
+			if(xhr.status ==200){
+				console.log(typeof(xhr.responseText)); // String
+				// string -> object
+				var arr = JSON.parse(xhr.responseText);
+				console.log(arr, typeof(arr));
+				
+				var output = "<ul>";
+				arr.forEach(item=>{
+					output += `<li>이름은 ${item.name} 점수는 ${item.score} </li>`;
+				});
+				output += "</ul>";
+				$("#here").html(output);
+			}
+		}
+			xhr.send();
+	}
+	
+	function f5(){
+		$("#here").load("2.html");
+	}
+	
+	function f6(){
+		$.getJSON("data.json",function(responseDate){
+			console.log(typeof(responseDate));
+			$.each(responseDate, (index,item)=>{
+				console.log(item.name, item.score);
+				console.log(`이름:${item.name} 점수:${item.score}`);
+			});
+		});
+	}
+	
+	function f7(){
+		$.ajax({
+			url:"data.json",
+			type:"get",
+			success: function(responseDate){
+				$.each(responseDate, (index,item)=>{
+				console.log(`이름:${item.name} 점수:${item.score}`);
+				});
+			},
+			error:function(xhr, status, err){
+				alert(status);
+			}
+		});
+	}
+	
+	
+		
+		
+		
+	
+	function f8(){
+		// 페이지 이동 없음
+		var deptid = $("#deptid").val();
+		console.log(deptid);
+		$.ajax({
+			url:`/web/day02/jsp/deptdetail.jsp?dept_id=${deptid}`,
+			//url: "../day02/jsp/deptdetail.jsp",
+			//data:{"dept_id":deptid},	//{deptid}
+			//type:"get",
+			success: function(responseData){
+				$("#here").html(responseData);
+			}
+		});
+	}
+	
+	function f9(){
+		// 페이지 이동
+		var deptid = $("#deptid").val();
+		location.href=`/web/day02/jsp/deptdetail.jsp?dept_id=${deptid}`;
+	}
+	
+	function f_deptInsert(){
+		$.ajax({
+			url:"/web/day02/jsp/deptinsert.jsp",
+			success:function(responsHTML){
+				$("#here").html(responsHTML);
+			}
+		});
+		
+	}
+	
+	function f_deptInsert2(){
+		// serialize연습
+		var path = $("#here form").serialize();
+		console.log(path);
+		
+		var obj = {};
+		var arr = path.split("&");
+		$.each(arr, (index, item)=>{
+			var arr2 = item.split("=");
+			// 문자 -> 부호화(encode) -> 문자(decode)
+			obj[arr2[0]] = decodeURIComponent(arr2[1]);	//{키:값, 키2:값2,.......}
+		});
+		console.log(obj);
+		
+		$.ajax({
+			//url:"/web/day02/jsp/deptupdate.jsp?" + path,
+			url:"/web/day02/jsp/deptupdate.jsp?",
+					data:obj,
+			type:"post",
+			success:()=> {console.log("입력성공");}
+		});
+	}
+	
+	function f_deptInsert3(){
+		var arr = $("#here form").serializeArray();
+		console.log(arr);		//[{name:"칼럼이름", value:"값"}] ==> {"칼럼이름" : "값"}
+		var obj = {};
+		for(let i in arr){
+			obj[arr[i].name] = arr[i].value;
+		}
+		console.log(obj);
+		
+		$.ajax({
+			//url:"/web/day02/jsp/deptupdate.jsp?" + path,
+			url:"/web/day02/jsp/deptupdate.jsp?",
+			data:obj,
+			type:"post",
+			success:()=> {console.log("입력성공");}
+		});
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+});	
+</script>
+</head>
+<body>
+	<a href="2.html">화면이동1</a>)
+	<button onclick= "location.href ='2.html'">화면이동2</button>
+	<button id="btn1">JS이용AJAX(동기)</button>
+	<button id="btn2">JS이용AJAX(비동기)</button>
+	<button id="btn3">JS이용AJAX(XML load)</button>
+	<button id="btn4">JS이용AJAX(JSON load)</button>
+	<button id="btn5">jQuery이용AJAX(load)</button>
+	<button id="btn6">jQuery이용AJAX(get JSON)</button>
+	<button id="btn7">jQuery이용AJAX(ajax)</button>
+	<hr>
+	<input type="number" id="deptid" value="10">
+	<button id="btn8">부서이름 가져오기</button>
+	<button id="btn9">부서이름찾으로가기</button>
+	<button id="deptInsert">부서등록</button>
+	<button id="deptInsert2">부서등록(serialize)</button>
+	<button id="deptInsert3">부서등록(serializeArray)</button>
+	
+	<hr>
+	<div id="here">
+	
+	</div>
+</body>
+</html>

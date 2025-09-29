@@ -1,0 +1,5 @@
+package com.create.chacha.domains.seller.areas.store.storeurl.service.serviceImpl;
+
+public class StoreUrlServiceImpl {
+
+}

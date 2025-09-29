@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>입력Form연습</title>
+</head>
+<body>
+	<h1>입력Form연습</h1>
+	<!-- 입력값을 서버프로그램으로 보낸다. 
+		action : 서버프로그램이름
+		method : 전달방식 get/post 
+			get(default) - 주소창에 값이 보인다. 자릿수제한(256~4096byte), 보안 X
+			post - 주소창이 값이 안 보임. 자릿수 제한 없음. 보안에 좋음
+		submit : 서버에 전송하기 (action으로 간다.)
+		전송되는 input은 name이 있어야 값이 전송된다.
+		
+		label, input은 inline요소임
+	-->
+	<form action="jsp/input1.jsp" method="post">
+		<label for="a">username1: </label>
+		<input name="username1" id="a">
+		<br>
+		<label for="b">username2: </label>
+		<input type="text" name="username2" id="b">
+		<br>
+		<label>password:</label>
+		<input type="password" name="password">
+		<input type="submit" value="서버에 전송">
+	</form><hr>
+	<!-- 상대경로보다 절대경로가 더 좋음 : 소스가 이동되어도 경로는 변화없음 -->
+  	<form action="/webshop/day1/jsp/empdetail.jsp" method="get">
+		<label>직원번호: </label>
+		<input name="empid" value="100">
+		<input type="submit" value="직원상세보기">
+	</form>
+</body>
+</html>

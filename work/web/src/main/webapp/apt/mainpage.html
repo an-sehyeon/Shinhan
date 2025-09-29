@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MainPage</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(function(){
+	$("#adminbtn").on("click",f_adminpage);
+	$("#beforebtn").on("click",f_beforepage);
+	$("#afterbtn").on("click",f_afterpage);
+	
+	function f_adminpage(){
+		window.location.href="/web/apt/adminlogin.html";
+	}
+	function f_beforepage(){
+		window.location.href="/web/apt/preReg.html";
+	}
+	function f_afterpage(){
+		window.location.href="/web/apt/applicant.html";
+	}
+});
+
+</script>
+</head>
+<body>
+	<h1>환영합니다.</h1>
+	<p>선택하세요
+	<br>
+	<hr>
+	<button id="adminbtn">관리자</button>		
+	<button id="beforebtn">사전접수자</button>		
+	<button id="afterbtn">접수신청</button>		
+</body>
+</html>

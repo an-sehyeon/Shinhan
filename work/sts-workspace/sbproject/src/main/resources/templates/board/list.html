@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<th:block th:replace="~{layout/exLayout2 :: setContent(~{this::content2})}">
+		<th:block th:fragment="content2">
+		
+		<script th:inline="javascript">
+		// message가 없으면 null로, 있으면 JS 문자열 리터럴로 치환됨
+		  /*<![CDATA[*/
+		  var message = /*[[${message}]]*/ null;
+		  if (message) {
+		    alert(message);
+		  }
+		  /*]]>*/
+		</script>
+
+		
+			<!-- 조건추가 -->
+			<form th:action="@{/board/list.do}" method="get" id="searchForm">
+				<div class="input-group">
+					<input type="hidden" name="page" th:value="${pageInfo.page}">
+					<input type="hidden" name="size" th:value="${pageInfo.size}">
+					<div class="input-group-prepend">
+						<select class="custom-select" name="type">
+							<option value="t" th:selected="${pageInfo.type=='t'}">제목</option>
+							<option value="c" th:selected="${pageInfo.type=='c'}">내용</option>
+							<option value="w" th:selected="${pageInfo.type=='w'}">작성자</option>
+							<option value="tc" th:selected="${pageInfo.type=='tc'}">제목+내용</option>
+							<option value="tcw" th:selected="${pageInfo.type=='tcw'}">제목+내용+작성자</option>
+						</select> <input class="form-control" name="keyword"
+							th:value="${pageRequestDTO.keyword}" />
+					</div>
+					<div class="input-group-prepend" id="button-addon4">
+						<button type="submit" class="btn btn-outline-secondary btn-search">Search</button>
+						<button type="reset" class="btn btn-outline-secondary btn-clear">Clear</button>
+					</div>
+				</div>
+			</form>
+			
+			<table class="table table-striped" style="width:80%; margin:0 auto; border:1px solid #ddd;">
+				<thead>
+					<tr>
+						<th>bno</th>
+						<th>title</th>
+						<th>writer</th>
+						<th>content</th>
+						<th>regDate</th>
+						<th>modDate</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="board : ${boardresult.getDtoList()}">
+						<td>
+						<a th:href="@{/board/detail.do(bno=${board.bno})}">[[${board.bno}]]</a>
+						</td>
+							
+						<td>
+						<a th:href="@{/board/detail.do(bno=${board.bno})}">[[${board.title}]]</a>
+						</td>
+						
+						<td>[[${board.writer}]]</td>
+						<td>[[${board.content}]]</td>
+						<td>[[${board.regDate}]]</td>
+						<td>[[${board.modDate}]]</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>page정보:[[${pageInfo}]]</p>
+			<!-- 페이지번호 목록 -->
+			<ul
+				class="pagination h-100 justify-content-center align-items-center">
+				<li class="page-item" th:if="${boardresult.prev}"><a
+					class="page-link"
+					th:href="@{/board/list.do(page=${boardresult.start - 1},size=${pageInfo.size},type=${pageInfo.type},keyword=${pageInfo.keyword})}"
+					tabindex="-1">Previous</a></li>
+				<li th:each="page : ${boardresult.pageList}" class="page-item"
+					th:classappend="${boardresult.page == page} ? ' active' : ''">
+					<a class="page-link"
+					th:href="@{/board/list.do(page=${page},size=${pageInfo.size},type=${pageInfo.type},keyword=${pageInfo.keyword})}">
+						[[${page}]]페이지 </a>
+				</li>
+				<li class="page-item" th:if="${boardresult.next}"><a
+					class="page-link"
+					th:href="@{/board/list.do(page=${boardresult.end + 1},size=${pageInfo.size},type=${pageInfo.type},keyword=${pageInfo.keyword})}">
+						Next </a></li>
+			</ul>
+
+		</th:block>
+	</th:block>
+</body>
+</html>

@@ -1,0 +1,24 @@
+.myH1 {
+  color: blue;
+  background-color: blueviolet;
+}
+
+.header {
+  color: red;
+  text-align: center;
+  min-height: 20vh;
+  /* #요소의 최소 높이를 브라우저 높이의 20%로 설정,
+  최소한 그만큼의 높이는 유지하라는 의미;*/
+}
+.body-section {
+  text-align: center;
+  color: green;
+  min-height: 60vh;
+}
+.footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  color: blue;
+  min-height: 10vh;
+}

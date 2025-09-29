@@ -1,0 +1,65 @@
+/* 전체 컨테이너 스타일 */
+.notfound-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.notfound-content {
+  max-width: 600px;
+}
+
+.notfound-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1;
+  color: #007bff;
+}
+
+.notfound-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #343a40;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.notfound-description {
+  color: #6c757d;
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+}
+
+.notfound-button {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 50px; 
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}
+
+.notfound-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
+}
+
+.notfound-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}

@@ -1,0 +1,221 @@
+:root {
+  --primary-color: #007bff;
+  --primary-hover-color: #0056b3;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --light-gray-color: #f8f9fa;
+  --medium-gray-color: #dee2e6;
+  --dark-gray-color: #343a40;
+  --text-color: #212529;
+  --background-color: #f4f7f6;
+  --white-color: #ffffff;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 기본 폰트 및 배경 설정 */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  background-color: #f8f9fa;
+  color: #343a40;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 전체 앱 컨테이너 */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 메인 헤더 스타일 */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  height: 60px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #dee2e6;
+}
+.main-header .logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav-link {
+  color: var(--dark-gray-color);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.nav-link:hover { color: #007bff; }
+
+.welcome-msg {
+    color: #555;
+    font-size: 0.9rem;
+    margin-right: 10px;
+}
+
+.logout-button, .login-button {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+.logout-button:hover, .login-button:hover {
+    background-color: var(--primary-hover-color);
+    color: var(--white-color);
+    border-color: var(--primary-hover-color);
+}
+
+/* 메인 콘텐츠 영역 */
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 페이지 컨테이너 공통 스타일 */
+.page-container {
+  width: 100%;
+  max-width: 1200px;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* 게시판 레이아웃 스타일 */
+.board-layout {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+}
+.board-sidebar {
+  flex: 0 0 220px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  height: fit-content;
+}
+.board-sidebar h2 {
+  margin-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+.board-sidebar a {
+  display: block;
+  text-decoration: none;
+  color: #495057;
+  padding: 12px 15px;
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.board-sidebar a:hover {
+  background-color: #007bff;
+  color: white;
+}
+.board-content {
+  flex-grow: 1;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* 테이블 스타일 (게시판 목록) */
+.board-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+.board-table th, .board-table td {
+  padding: 12px;
+  border-bottom: 1px solid #dee2e6;
+}
+.board-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+.board-table td a:hover {
+  text-decoration: underline;
+}
+
+/* 상세 페이지 스타일 */
+.detail-info { margin-bottom: 10px; color: #868e96; }
+.detail-content { min-height: 150px; margin: 20px 0; background-color: #f8f9fa; padding: 20px; border-radius: 8px; }
+.detail-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+    color: #666;
+    background-color: var(--light-gray-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+}
+.detail-info-item span {
+    font-weight: 500;
+    color: var(--dark-gray-color);
+    margin-right: 8px;
+}
+.button-group { margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end; }
+.list-button, .edit-button, .delete-button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  transition: opacity 0.2s; }
+.list-button:hover, .edit-button:hover, .delete-button:hover { opacity: 0.8; }
+.list-button { background-color: #6c757d; color: white; }
+.edit-button { background-color: #28a745; color: white; }
+.delete-button { background-color: #dc3545; color: white; }
+
+/* 글쓰기/수정 페이지 스타일 */
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+.form-textarea { resize: vertical; min-height: 200px; }
+.submit-button, .back-button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}

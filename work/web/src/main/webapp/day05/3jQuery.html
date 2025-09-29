@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.greenColor{
+		border: 5px dotted green;
+		font-size: 30px;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+//$(document).ready();
+$(function(){
+	$("#btn1").on("click",f1);
+	$("#btn2").on("click",f2);
+	$("#btn3").on("click",f3);
+	$("#btn4").on("click",f4);
+	$("#btn5").on("click",f5);
+	$("#btn6").on("click",f6);
+	$("#btn7").on("click",f7);
+	$("#btn8").on("click",f8);
+	$("#btn9").on("click",f9);
+	
+	
+});
+function f9(){
+	var str = `
+	<friends>
+		<name>홍길동</name>
+		<age>20</age>
+	</friends>
+	<friends>
+		<name>김대현</name>
+		<age>40</age>
+	</friends>
+	<friends>
+		<name>윤민혁</name>
+		<age>50</age>
+	</friends>
+			  `;
+	var xmlObj = $.parseXML(str);
+	$(xmlObj).find("friends").each(function (index, element){
+		console.log($(element).find("name").text());
+	});
+	
+};
+
+function f8(){
+	$("h1").first().css("background-color","green");
+	$("h1").eq(0).css("color","orange");
+	
+	$("h1").last().css("background-color","green");
+	$("h1").eq(-1).css("color","orange");
+}
+
+function f7(){
+	$("h1").filter(":nth-child(2n)").css("color","red").end()
+		   .filter(":nth-child(2n+1)").css("background-color","green")
+}
+
+function f6(){
+	//$("h1:nth-child(2n)");
+	//$("h1:nth-child(even)").css("color","red");
+	
+	//$("h1").filter(":nth-child(even)").css("color","red");
+	
+	var obj = {color:"red", "background-color":"pink",border:"2px solid green"};
+	
+	$("h1").filter(function(index,item){
+		var s = $(item).text();			//js -> innerHTML
+		return s == 'jQuery2' || s == 'jQuery3';
+	}).css(obj);
+	
+};
+
+function f5(){
+	var obj1 = {name:"홍길동"};
+	obj1.age = 20;
+	var obj2 = {"주소":"마포구 연남동"};
+	$.extend(obj1,obj2,{phone:"010-1234-1234"});
+	console.log(obj1);
+	$("#here").html(JSON.stringify(obj1));
+};
+
+function f4(){
+	$("h1:first-child").addClass("greenColor");
+};
+
+function f3(){
+	$("h1:nth-of-type(2n)").css("background-color","orange");
+	$("h1:nth-of-type(odd)").css("background-color","pink");
+};
+
+function f2(){
+	$("h1").each(function(index, item){
+		if(index%2==0){
+			$(item).css("color","red");
+		}else{
+			$(item).css("color","blue");
+		}
+	});
+};
+
+function f1(){
+	var arr = [	{name:"네이버", link:"http://www.naver.com"},
+				{name:"다음", link:"http://www.daum.com"},
+				{name:"구글", link:"http://www.google.com"}
+		];
+	var str ="<ul>";
+	$.each(arr, function(index, item){
+		str += `<li><a href="${item.link}">${item.name}</a></li>`;
+	});
+	$("#here").html(str + "</ul>");
+};
+</script>
+</head>
+<body>
+	<h1>jQuery1</h1>
+	<h1>jQuery2</h1>
+	<h1>jQuery3</h1>
+	<h1>jQuery4</h1>
+	<h1>jQuery5</h1>
+	<h1>jQuery6</h1>
+	<button id="btn1">배열1</button>
+	<button id="btn2">배열2</button>
+	<button id="btn3">배열3</button>
+	<button id="btn4">addClass</button>
+	<button id="btn5">extend</button>
+	<button id="btn6">filter</button>
+	<button id="btn7">end</button>
+	<button id="btn8">eq,last,first</button>
+	<button id="btn9">parseXML</button>
+	<div id="here">여기</div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<style>
+	img { border:1px solid gray; }
+</style>
+<script>
+	$(function(){
+		$("#btn1").on("click",f1);
+		$("#btn2").on("click",f2);
+		$("#btn3").on("click",f3);
+		$("#btn4").on("click",f4);
+		$("#btn5").on("click",f5);
+		$("#btn6").on("click",f6);
+	});
+	function f1(){
+		var obj = {	width:function(index){return 10*(5-index+1);},
+				   	height:function(index){return 10*(5-index+1);}
+		};
+		$("img").attr(obj);
+	};
+	function f2(){
+		$("img:nth-of-type(1)").removeAttr("src");
+	};
+	function f3(){
+		var colorArr = ["red","green","blue"];
+		var obj = {
+				color:function(index){return colorArr[index];},
+				"background-color":"orange"
+		}
+		$("h1").css(obj);
+	};
+	function f4(){
+		$("h1").each(function(index,item){
+			var s = $(this).text();
+			var s2 = $(this).html();
+			console.log(s2);
+			index = parseInt(index);
+			$(this).html(function(){return s + "%%%%" + (index+1);});
+		});
+	};
+	function f5(){
+		$("#box").empty();
+	}
+	function f6(){
+		var obj1 = $("<img />").attr("src","images/img7.jpg");
+		var obj2 = $("<img />").attr("src","images/img8.jpg");
+		var obj3 = $("<img />").attr("src","images/img9.jpg");
+		var obj4 = $("<img />").attr("src","images/img10.jpg");
+		
+		$(obj1).appendTo("#box");	// 뒤에 추가
+		$(obj2).appendTo("#box");	// 앞에 추가
+		$(obj3).insertAfter("#box");	
+		$(obj4).insertBefore("#box");	
+		
+	}
+</script>
+<body>
+	<h1>1.jQuery!!!!<span>A</span></h1>
+	<h1>2.jQuery!!!!<span>B</span></h1>
+	<h1>3.jQuery!!!!<span>C</span></h1>
+	<h1>4.jQuery!!!!<span>D</span></h1>
+	<button id="btn1">이미지속성변경</button>
+	<button id="btn2">이미지속성지우기</button>
+	<button id="btn3">css함수</button>
+	<button id="btn4">html, text함수</button>
+	<button id="btn5">remove,empty</button>
+	<button id="btn6">이미지추가</button>
+	<hr>
+	<div id="box" style="border: 1px solid red">
+		<img src="images/img1.jpg"/>
+		<img src="images/img2.jpg"/>
+		<img src="images/img3.jpg"/>
+		<img src="images/img4.jpg"/>
+		<img src="images/img5.jpg"/>
+		<img src="images/img6.jpg"/>
+	</div>	
+</body>
+</html>

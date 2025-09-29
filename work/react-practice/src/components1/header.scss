@@ -1,0 +1,25 @@
+/*
+.scss => css로 컴파일된다. 
+*/
+
+$main_color: #333;
+$primary_color: blue;
+
+.box {
+  color: $main_color;
+  padding: 10px;
+  border: 1px dotted yellowgreen;
+  background-color: aqua;
+
+  &:hover {
+    color: red;
+  }
+}
+.container {
+  padding: 20px;
+  background-color: green;
+
+  h1 {
+    color: blue;
+  }
+}

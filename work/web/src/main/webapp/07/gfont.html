@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <title>구글 폰트 사용하기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+	<style>
+	  /* 크롬브라우저는 기본 font-size: 16px 
+	  		p : 16px
+	  		h1 : 2em (2배)
+	  */
+      #container {
+      	font-size: 20px;
+      	font-family: "Nanum Brush Script", cursive;
+      }
+      h1 {
+      	/* font-size: 1.5em; */
+      	font-size: 2rem;	/* root 기준으로 n배 */
+      }
+      p.aa {
+      	/* font-weight: bold; */
+      	font-weight: 100;	/* 100~900 굵기 */
+      	font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+  <div id="container">
+    <h1>HTML+CSS+JavaScript</h1>
+    <p>1. p 태그입니다.</p>
+    <p class="aa">2. p 태그입니다.</p>
+  </div>
+  </body>
+</html>

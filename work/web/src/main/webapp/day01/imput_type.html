@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>입력type연습</title>
+</head>
+<body>
+	<h1>입력type연습</h1>
+	<fieldset>
+			<legend>입력</legend>
+			<input name = "aa"><br>
+			<input name = "bb">
+		</fieldset>
+		<fieldset>
+			<legend>버튼</legend>
+			<input type="button" value="버튼1"><br>
+			<input type="button" value="버튼2">
+		</fieldset>
+		<fieldset>
+			<legend>입력테스트</legend>
+			text : <input type="text"><br>
+			number : <input type="number"><br>
+			password : <input type="password"><br>
+			search : <input type="search"><br>		
+			url(http://) : <input type="url"><br>		
+			email(@) : <input type="email"><br>		
+			tel(pattern) : <input type="tel" pattern="[01]{3}-[0-9]{3,4}-[0-9]{4}"><br>		
+		</fieldset>
+		<fieldset>
+			<legend>좋아하는 과목 (하나만 선택)</legend>
+			<input type="radio" name="subject" checked="checked">Java<br>
+			<input type="radio" name="subject">HTML<br>
+			<input type="radio" name="subject">Python<br>
+		</fieldset>
+		<fieldset>
+			<legend>좋아하는 음료 (하나만 선택)</legend>
+			<input type="radio" name="drink" checked="checked">커피<br>
+			<input type="radio" name="drink">콜라<br>
+			<input type="radio" name="drink">사이다<br>
+		</fieldset>
+		<fieldset>
+			<legend>좋아하는 과목 (중복가능)</legend>
+			<input type="checkbox" name="subject2" checked="checked">Java<br>
+			<input type="checkbox" name="subject2">HTML<br>
+			<input type="checkbox" name="subject2">Python<br>
+		</fieldset>
+		<fieldset>
+			<legend>좋아하는 음료 (중복가능)</legend>
+			<input type="checkbox" name="drink2" checked="checked">커피<br>
+			<input type="checkbox" name="drink2">콜라<br>
+			<input type="checkbox" name="drink2">사이다<br>
+		</fieldset>
+		<fieldset>
+			<legend>음량</legend>
+			<input type="range" min="0" max="100" step="5" value="60">
+		</fieldset>
+		<fieldset>
+			<legend>달력</legend>
+			date: <input type="date"><br>
+			month: <input type="month"><br>
+			time: <input type="time"><br>
+			datetime: <input type="datetime"><br>
+			datetime-local: <input type="datetime-local"><br>
+			week: <input type="week">
+		</fieldset>
+		<fieldset>
+			버튼: <input type="button"><br>
+			reset(input을 되돌리기): <input type="reset"><br>
+			image: <input type="image" src="/webshop/images/shinhanlogo.png" width="20"><br>
+			file: <input type="file">
+		</fieldset>
+</body>
+</html>

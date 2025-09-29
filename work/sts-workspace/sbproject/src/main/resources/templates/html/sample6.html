@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>sample6</h1>
+
+	 <h2>링크연습</h2>
+	 <ul>
+	 	<li>
+	 		<a th:href="@{http://localhost:7979/html/freeboard}">freeboard가기(절대1)</a>
+	 	</li>
+	 	<li>
+	 		<a th:href="@{/html/freeboard}">freeboard가기(절대2)</a>
+	 	</li>
+	 	<li>
+	 		<a th:href="@{freeboard}">freeboard가기(상대1)</a>
+	 	</li>
+	 	<li>
+	 		<a th:href="@{~/html/freeboard}">freeboard가기(다른 context)</a>
+	 	</li>
+	 	<li>
+	 		<a th:href="@{freeboard(score=88)}">freeboard가기(param)</a>
+	 	</li>
+	 </ul>
+
+ 	<h2 th:text="${now}"></h2>
+	<h2>[[${#dates.format(now, "yyyy-MM-dd")}]]</h2>
+	<br><br>
+	
+	<p>[[${price}]]
+	<p>[[${#numbers.formatInteger(price,3,"COMMA")}]]
+	<br><br>
+	
+	<p>[[${title}]]
+	<p>[[${#strings.toUpperCase(title)}]]
+	<br><br>
+	
+	<ul>
+		<li th:each="myitem:${options}">
+			[[${myitem}]]
+		</li>
+	</ul>
+</body>
+</html>

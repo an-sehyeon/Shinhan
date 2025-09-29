@@ -1,0 +1,96 @@
+ @charset "UTF-8";
+
+h1 {
+  margin: 60px auto 50px auto; /* 위쪽 60px, 아래쪽 20px */
+  max-width: 600px;
+  padding: 5px;
+  width: 100%;
+}
+
+.table-fill {
+  margin: auto;
+  margin-bottom: 30px; /* 테이블 아래 여백 */
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 100px; /* 버튼 아래 여백 */
+}
+
+
+
+/* ----------------------------------------- */
+
+
+
+.center-container {
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  gap: 20px;               /* 버튼 사이 간격 */
+  margin-top: 30px;
+}
+
+
+
+/* 버튼 공통 스타일 */
+.btn {
+  margin: 1rem;
+  font-weight: 600;
+  border: none;
+  padding: 10px 20px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #E4C1F9;  /* 라벤더 파스텔 */
+  color: #3E2163;              /* 진보라 */
+  transition: all 0.3s ease;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 버튼을 둥글게 */
+.btn-round {
+  border-radius: 50px;
+}
+
+/* marquee 효과용 */
+.btn-marquee {
+  overflow: hidden;
+}
+
+.btn-marquee:hover {
+  transform: scale(1.05);
+  background-color: #d0a8ec; /* hover 시 어울리는 진한 라벤더 */
+}
+
+/* 안쪽 span 텍스트에 움직이는 효과 */
+.btn-marquee span {
+  display: block;
+  padding: 0 20px;
+  animation: move-left 2s linear infinite;
+  position: relative;
+}
+
+/* 텍스트 복제해서 자연스럽게 무한 루프 효과 */
+.btn-marquee span::after {
+  position: absolute;
+  content: attr(data-text);
+  top: 0;
+  left: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* 텍스트 이동 애니메이션 */
+@keyframes move-left {
+  to {
+    transform: translateX(-100%);
+  }
+}
+ 

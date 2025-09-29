@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;com.shinhan.day09.lab6.FIndCharacters.java&apos; to &apos;FindCharacters.java&apos;&#x0D;&#x0A;- Original project: &apos;javaproject&apos;&#x0D;&#x0A;- Original element: &apos;com.shinhan.day09.lab6.FIndCharacters.java&apos;&#x0D;&#x0A;- Renamed element: &apos;com.shinhan.day09.lab6.FindCharacters.java&apos;" description="Rename compilation unit &apos;FIndCharacters.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;com.shinhan.day09.lab6{FIndCharacters.java" name="FindCharacters.java" references="false" stamp="1744672404604" version="1.0"/>
+</session>

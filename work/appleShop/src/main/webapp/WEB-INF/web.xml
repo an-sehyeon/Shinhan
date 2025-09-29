@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>appleShop</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  
+  
+  <!-- error페이지 등록 -->
+ <error-page> 
+    <error-code>404</error-code>
+    <location>/error/error404.jsp</location>
+</error-page>
+
+<error-page>
+    <error-code>500</error-code>
+    <location>/error/error500.jsp</location>
+</error-page>
+  
+  
+  
+  <!-- filter등록하기 -->
+<!--   <filter>
+  	<filter-name>encoding</filter-name>
+  	<filter-class>com.shinhan.filter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>encoding</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping> -->
+  
+  
+  
+  <!-- 웹어플리케이션에 파라메터 전달 -->
+  <context-param>
+  	<param-name>DBName</param-name>
+  	<param-value>XE</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>userId</param-name>
+  	<param-value>hr</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>userPass</param-name>
+  	<param-value>hr</param-value>
+  </context-param>
+  
+  
+  <!-- 서블릿 등록하기 -->
+  <!-- 1.서블릿 class에서 @WebServlet -->
+  <!-- 2.web.xml에서 등록 -->
+<!--   <servlet>
+  	<servlet-name>getting</servlet-name>
+  	<servlet-class>com.shinhan.controller3.GetServlet</servlet-class>
+  	<init-param>
+  		<param-name>lunch</param-name>
+  		<param-value>포케</param-value>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>getting</servlet-name>
+  	<url-pattern>/get</url-pattern>
+  </servlet-mapping> 
+  <servlet>
+  	<servlet-name>myServlet1</servlet-name>
+  	<servlet-class>com.shinhan.controller.FirstServlet</servlet-class>
+  	<load-on-startup>2</load-on-startup>
+  </servlet>  -->
+
+
+<!--   <servlet-mapping>
+  	<servlet-name>myServlet1</servlet-name>
+  	<url-pattern>/first3</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>myServlet1</servlet-name>
+  	<url-pattern>/first</url-pattern>
+  </servlet-mapping> -->
+  
+  
+  
+  
+  
+  
+</web-app>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="true"/>
+		<item key="selection" value="getAvailableClassesByDate"/>
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="member"/>
+			<item value="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"/>
+			<item value="border rounded-md px-3 py-2 min-h-[100px]"/>
+			<item value="getDailySettlementByClass"/>
+			<item value="getMonthlySettlementsByStore"/>
+			<item value="getMonthlySettlementsByMain"/>
+			<item value="getDailySalesByStore"/>
+			<item value="websocket"/>
+			<item value="CreatedAt"/>
+			<item value="product"/>
+			<item value="At"/>
+			<item value="Create"/>
+			<item value="리뷰"/>
+			<item value="principal"/>
+			<item value="store"/>
+		</list>
+		<list key="replacehistory">
+			<item value="s.url"/>
+			<item value="f_success"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="717"/>
+		<item key="DIALOG_Y_ORIGIN" value="257"/>
+		<item key="DIALOG_WIDTH" value="286"/>
+		<item key="DIALOG_HEIGHT" value="389"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+</section>

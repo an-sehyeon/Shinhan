@@ -1,0 +1,111 @@
+package com.create.chacha.domains.shared.insertai.seller.service;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
+
+@Service
+@PropertySource("classpath:application.properties")
+public class OpenAiService {
+
+    @Value("${openai.api.key}")
+    private String openaiApiKey;
+
+    private WebClient client() {
+        ExchangeStrategies strategies = ExchangeStrategies.builder()
+                .codecs(c -> c.defaultCodecs().maxInMemorySize(10 * 1024 * 1024))
+                .build();
+
+        return WebClient.builder()
+                .baseUrl("https://api.openai.com")
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + openaiApiKey)
+                .exchangeStrategies(strategies)
+                .build();
+    }
+
+    public String generateText(String system, String user) {
+        String body = """
+        {
+          "model": "gpt-4o-mini",
+          "messages": [
+            {"role": "system", "content": %s},
+            {"role": "user",   "content": %s}
+          ],
+          "temperature": 0.7
+        }
+        """.formatted(json(system), json(user));
+
+        try {
+            String resp = client().post()
+                    .uri("/v1/chat/completions")
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                    .bodyValue(body)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(resp);
+            return root.path("choices").get(0).path("message").path("content").asText(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+        /*** ⬇⬇⬇ 여기부터 ‘로고 이미지 생성’ 메서드 추가 ⬇⬇⬇ ***/
+
+        /**
+         * DALL·E 기반 로고 이미지 생성
+         * @param prompt  로고 설명(사용자 프롬프트)
+         * @param size    "1024x1024" | "512x512" | "256x256" (null/빈값이면 1024x1024)
+         * @param model   기본 "dall-e-3"
+         * @return Base64 인코딩된 PNG 이미지(b64_json) 본문 (data URL 헤더 없음)
+         */
+        public String generateLogoImage(String prompt, String size, String model) {
+            if (prompt == null || prompt.isBlank()) return null;
+
+            String useSize  = (size == null || size.isBlank()) ? "1024x1024" : size;
+            String useModel = (model == null || model.isBlank()) ? "dall-e-3" : model;
+
+            // 요청 JSON — 기존 스타일과 동일하게 문자열로 구성
+            String body = """
+            {
+              "model": %s,
+              "prompt": %s,
+              "n": 1,
+              "size": %s,
+              "response_format": "b64_json"
+            }
+            """.formatted(json(useModel), json(prompt), json(useSize));
+
+            try {
+                String resp = client().post()
+                        .uri("/v1/images/generations")
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .bodyValue(body)
+                        .retrieve()
+                        .bodyToMono(String.class)
+                        .block();
+
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode root = mapper.readTree(resp);
+                // data[0].b64_json 추출
+                return root.path("data").get(0).path("b64_json").asText(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        /** JSON 문자열 이스케이프 헬퍼 — 기존 스타일 유지 */
+        private String json(String s) {
+            return "\"" + s.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n") + "\"";
+        }
+    }

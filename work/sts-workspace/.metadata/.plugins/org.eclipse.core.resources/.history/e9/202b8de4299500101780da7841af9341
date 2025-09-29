@@ -1,0 +1,30 @@
+package com.create.chacha.domains.seller.areas.store.storeurl.service.serviceImpl;
+
+
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.create.chacha.common.util.LegacyAPIUtil;
+import com.create.chacha.common.util.dto.LegacyStoreDTO;
+import com.create.chacha.domains.seller.areas.store.storeurl.service.StoreUrlService;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class StoreUrlServiceImpl implements StoreUrlService {
+
+    private final LegacyAPIUtil legacyApiUtil;
+
+    @Override
+    public Optional<String> findMyStoreUrl(Long memberId) {
+        // 레거시로 memberId 전송 → storeInfo 수신
+        LegacyStoreDTO storeInfo = legacyApiUtil.getLegacyStoreData(memberId);
+
+        if (storeInfo == null || storeInfo.getStoreUrl() == null || storeInfo.getStoreUrl().isBlank()) {
+            return Optional.empty();
+        }
+        return Optional.of(storeInfo.getStoreUrl());
+    }
+}

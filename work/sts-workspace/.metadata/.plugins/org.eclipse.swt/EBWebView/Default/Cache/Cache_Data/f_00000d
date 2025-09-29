@@ -1,0 +1,645 @@
+
+
+
+
+
+
+ 
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<!--
+ ! Copyright (c) 2000, 2018 IBM Corporation and others.
+ !
+ ! This program and the accompanying materials 
+ ! are made available under the terms of the Eclipse Public License 2.0
+ ! which accompanies this distribution, and is available at
+ ! https://www.eclipse.org/legal/epl-2.0/
+ !
+ ! SPDX-License-Identifier: EPL-2.0
+ ! 
+ ! Contributors:
+ !     IBM Corporation - initial API and implementation
+ -->
+
+
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+
+<title>Search Results</title>
+
+<style type="text/css">
+/*******************************************************************************
+ * Copyright (c) 2000, 2011 IBM Corporation and others.
+ *
+ * This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License 2.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ * 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *******************************************************************************/
+
+body {
+    
+	color: CanvasText;
+	font: icon;
+	font-size: .875rem;
+	padding: 0px;
+	border: 0px;
+	margin-top: 5px;
+	margin-bottom: 8px;
+	margin-left: 5px;
+	margin-right: 5px;
+	cursor: default;
+}
+
+table {
+	font: icon;
+	font-size: .875rem;
+	width: 100%;
+	table-layout: fixed;
+}
+
+a {
+	text-decoration:none; 
+	padding:0px;
+}
+
+a:hover {
+	text-decoration:underline; 
+}
+
+.category {
+	font-weight: bold;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.sectiontitle {
+	background-color: ButtonFace;
+	font-weight:bold;
+	margin-top:7px;
+}
+
+.results .active { 
+	background:Highlight;
+	color:HighlightText;
+	width:100%;
+	height:100%;
+}
+
+.showall {
+    text-decoration:underline; 
+    color:#0066FF; 
+	cursor:pointer;
+}
+
+#menu {
+	position:absolute;
+	display:none;
+	background:ButtonFace;
+	border:2px outset;
+	padding:2px 0px;
+}
+
+.selectedMenuItem {
+	background:Highlight;
+	color:HighlightText;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.unselectedMenuItem {
+	background:ButtonFace;
+	color:CanvasText;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.icon {
+	width: 23px;
+	padding-left: 0px;
+}
+
+.description {
+	display: block;
+}
+.location {
+	display: block;
+	font-size:80%;
+	overflow:visible;
+	white-space:nowrap;
+}
+.location, .location a {
+	color:#006633;
+}
+.active .location, .active .location a {
+	color:HighlightText;
+}
+
+@media (prefers-color-scheme: dark) {
+	body { 
+		color: #f0f0f0; 
+		background: #3d3d3d;
+	}
+
+	#titleText,
+	#searchLabel,
+	#scopeLabel,
+	#scope,
+	a,
+	a.active
+	a.nolink:link, 
+	a.nolink:visited {
+		color:#ffffff;
+	}
+
+	.button a:hover, .buttonMenu a:hover { 
+		border-top:1px solid #3d3d3d; 
+		border-left:1px solid #3d3d3d; 
+		border-right:1px solid #3d3d3d; 
+		border-bottom:1px solid #3d3d3d;
+	}
+
+	table {
+		background:#3d3d3d;
+	}
+	.tab {
+		background:#7b7c7b
+	}
+
+	form {
+		background:#3d3d3d;
+	}
+	
+	.separator {
+
+	}
+	
+	input{
+		background:#a0a0a0;
+	}
+
+	.button a, .buttonMenu a { 
+		border:1px solid #3d3d3d;;
+	}
+	
+	/* darken images to add some comfort while reading in dark theme */
+	img {
+		opacity: .75;
+		transition: opacity .5s ease-in-out;
+	}
+	img:hover {
+		opacity: 1;
+	}
+
+	.location, .location a {
+		color:#00cc66;
+	}
+}
+
+</style>
+
+
+<base target="ContentViewFrame">
+<script type="text/javascript" src="utils.js"></script>
+<script type="text/javascript" src="list.js"></script>
+<script type="text/javascript" src="view.js"></script>
+<script type="text/javascript">	
+
+var cookiesRequired = "This\u0020feature\u0020requires\u0020cookies\u0020to\u0020be\u0020enabled\u0020in\u0020your\u0020browser\u002E";	
+var showCategories = false;
+var scope ="All\u0020topics";
+
+function refresh() { 
+	window.location.replace("searchView.jsp?searchWord\u003Dedit\u0025\u0032\u0030custom\u0026maxHits\u003D\u0035\u0030\u0030");
+}
+
+function isShowLocations() {
+	var value = getCookie("showLocations");
+	return value ? value == "true" : true;
+}
+
+function isShowDescriptions() {
+	var value = getCookie("showDescriptions");
+	return value ? value == "true" : true;
+}
+
+function setShowCategories(value) { 	    
+	parent.searchToolbarFrame.setButtonState("show_categories", value);
+	var searchWord = "edit\u0020custom";
+	    window.location="searchView.jsp?searchWord=" + encodeURIComponent(searchWord) 
+	       + "&showSearchCategories=" + value +
+	       "&scope=" + encodeURIComponent(scope);    
+}
+
+function setShowLocations(value) {
+	setCookie("showLocations", value);
+	var newValue = isShowLocations();
+	parent.searchToolbarFrame.setButtonState("show_locations", newValue);
+	if (value != newValue) {
+		alert(cookiesRequired);
+	} else {
+		setCSSRule(".location", "display", value ? "block" : "none");
+	}
+}
+
+function setShowDescriptions(value) {
+	setCookie("showDescriptions", value);
+	var newValue = isShowDescriptions();   	
+	parent.searchToolbarFrame.setButtonState("show_descriptions", newValue);
+	if (value != newValue) {
+	    alert(cookiesRequired);
+	} else { 
+	    setCSSRule(".description", "display", value ? "block" : "none");
+	}
+}
+
+function toggleShowCategories() {
+	setShowCategories(!showCategories);
+}
+
+function toggleShowLocations() {
+	setShowLocations(!isShowLocations());
+}
+
+function toggleShowDescriptions() {
+	setShowDescriptions(!isShowDescriptions());
+}
+
+function onShow() { 
+}
+</script>
+
+
+</head>
+
+<body dir="ltr">
+
+
+<p><b>10 matches in All topics&#58;</b>
+
+    &nbsp;<a class="showall" onclick="rescope();" >Change scope</a>
+
+</p>
+
+
+<table class="results" cellspacing='0'>
+
+
+
+<tr class='list' id='r0'>
+	<td class='icon'>
+
+
+
+	<img src="images/topic.svg" alt=""/>
+
+
+
+	</td>
+	<td align='left'>
+		<a class='link' id='a0' 
+		   href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;pde&#46;doc&#46;user&#47;tasks&#47;pde_customization&#46;htm&#63;resultof&#61;%22%65%64%69%74%22%20%22%63%75%73%74%6f%6d%22%20" 
+		   onmouseover="showStatus(event);return true;"
+		   onmouseout="clearStatus();return true;"
+		   title="Plug&#45;in Development Environment Guide">
+
+
+
+        Customizing a Headless Build</a>
+	</td>
+</tr>
+<tr><td class='icon'></td><td><div class="location"><a href="&#46;&#46;&#47;nav&#47;2">Plug&#45;in Development Environment Guide</a> &#8250; <a href="&#46;&#46;&#47;nav&#47;2_2">Tasks</a> &#8250; <a href="&#46;&#46;&#47;nav&#47;2_2_1">PDE Build Advanced Topics</a></div></td></tr>
+<tr id='d0'>
+	<td class='icon'>
+	</td>
+	<td align='left'>
+		<div class="description">
+			There are multiple methods for customizing a headless build&#58; Using a customTargets&#46;xml file Using an allElements&#46;xml file Using a customAssembly&#46;xml file Using feature or p&#46;&#46;&#46;
+		</div>
+	</td>
+</tr>
+
+
+<tr class='list' id='r1'>
+	<td class='icon'>
+
+
+
+	<img src="images/topic.svg" alt=""/>
+
+
+
+	</td>
+	<td align='left'>
+		<a class='link' id='a1' 
+		   href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;pde&#46;doc&#46;user&#47;reference&#47;extension&#45;points&#47;org_eclipse_pde_ui_newExtension&#46;html&#63;resultof&#61;%22%65%64%69%74%22%20%22%63%75%73%74%6f%6d%22%20" 
+		   onmouseover="showStatus(event);return true;"
+		   onmouseout="clearStatus();return true;"
+		   title="Plug&#45;in Development Environment Guide">
+
+
+
+        Extension Wizards</a>
+	</td>
+</tr>
+<tr><td class='icon'></td><td><div class="location"><a href="&#46;&#46;&#47;nav&#47;2">Plug&#45;in Development Environment Guide</a> &#8250; <a href="&#46;&#46;&#47;nav&#47;2_3">Reference</a> &#8250; <a href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;pde&#46;doc&#46;user&#47;reference&#47;extension&#45;points&#47;index&#46;html">Extension Points Reference</a></div></td></tr>
+<tr id='d1'>
+	<td class='icon'>
+	</td>
+	<td align='left'>
+		<div class="description">
+			org&#46;eclipse&#46;pde&#46;ui&#46;newExtension Description&#58; This extension point should be used to contribute wizards that will be used to create and edit new extensions in PDE plug&#45;in ma&#46;&#46;&#46;
+		</div>
+	</td>
+</tr>
+
+
+<tr class='list' id='r2'>
+	<td class='icon'>
+
+
+
+	<img src="images/topic.svg" alt=""/>
+
+
+
+	</td>
+	<td align='left'>
+		<a class='link' id='a2' 
+		   href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;pde&#46;doc&#46;user&#47;guide&#47;tools&#47;editors&#47;ctx_help_editor&#47;ctx_help_editor&#46;htm&#63;resultof&#61;%22%65%64%69%74%22%20%22%63%75%73%74%6f%6d%22%20" 
+		   onmouseover="showStatus(event);return true;"
+		   onmouseout="clearStatus();return true;"
+		   title="Plug&#45;in Development Environment Guide">
+
+
+
+        Context Help Editor</a>
+	</td>
+</tr>
+<tr><td class='icon'></td><td><div class="location"><a href="&#46;&#46;&#47;nav&#47;2">Plug&#45;in Development Environment Guide</a> &#8250; <a href="&#46;&#46;&#47;nav&#47;2_3">Reference</a> &#8250; <a href="&#46;&#46;&#47;nav&#47;2_3_2">Editors</a></div></td></tr>
+<tr id='d2'>
+	<td class='icon'>
+	</td>
+	<td align='left'>
+		<div class="description">
+			Context&#45;sensitive help is a mechanism that enables linking a user interface part with a specific help topic&#46; When the user activates the associated user interface part&#44; the&#46;&#46;&#46;
+		</div>
+	</td>
+</tr>
+
+
+<tr class='list' id='r3'>
+	<td class='icon'>
+
+
+
+	<img src="images/topic.svg" alt=""/>
+
+
+
+	</td>
+	<td align='left'>
+		<a class='link' id='a3' 
+		   href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;jdt&#46;doc&#46;user&#47;reference&#47;ref&#45;dialog&#45;tostring&#46;htm&#63;resultof&#61;%22%65%64%69%74%22%20%22%63%75%73%74%6f%6d%22%20" 
+		   onmouseover="showStatus(event);return true;"
+		   onmouseout="clearStatus();return true;"
+		   title="Java Development User Guide">
+
+
+
+        Generate toString&#40;&#41; dialog</a>
+	</td>
+</tr>
+<tr><td class='icon'></td><td><div class="location"><a href="&#46;&#46;&#47;nav&#47;1">Java Development User Guide</a> &#8250; <a href="&#46;&#46;&#47;nav&#47;1_4">Reference</a> &#8250; <a href="&#46;&#46;&#47;nav&#47;1_4_10">Wizards and Dialogs</a></div></td></tr>
+<tr id='d3'>
+	<td class='icon'>
+	</td>
+	<td align='left'>
+		<div class="description">
+			The Generate toString&#40;&#41; dialog provides means to include specific member fields and methods in generated toString&#40;&#41; method&#46; Use Generate toString&#40;&#41;&#46;&#46;&#46; from the Source menu &#46;&#46;&#46;
+		</div>
+	</td>
+</tr>
+
+
+<tr class='list' id='r4'>
+	<td class='icon'>
+
+
+
+	<img src="images/topic.svg" alt=""/>
+
+
+
+	</td>
+	<td align='left'>
+		<a class='link' id='a4' 
+		   href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;platform&#46;doc&#46;user&#47;reference&#47;ref&#45;60&#46;htm&#63;resultof&#61;%22%65%64%69%74%22%20%22%63%75%73%74%6f%6d%22%20" 
+		   onmouseover="showStatus(event);return true;"
+		   onmouseout="clearStatus();return true;"
+		   title="Eclipse Platform User Guide">
+
+
+
+        Window Menu</a>
+	</td>
+</tr>
+<tr><td class='icon'></td><td><div class="location"><a href="&#46;&#46;&#47;nav&#47;0">Eclipse Platform User Guide</a> &#8250; <a href="&#46;&#46;&#47;nav&#47;0_4">Reference</a> &#8250; <a href="&#46;&#46;&#47;nav&#47;0_4_3">User interface information</a> &#8250; <a href="&#46;&#46;&#47;nav&#47;0_4_3_5">Workbench Menus</a></div></td></tr>
+<tr id='d4'>
+	<td class='icon'>
+	</td>
+	<td align='left'>
+		<div class="description">
+			This menu allows you to display&#44; hide&#44; and otherwise manipulate the various views&#44; perspectives&#44; and actions in the Workbench&#46; New Window This command opens a new Workbench&#46;&#46;&#46;
+		</div>
+	</td>
+</tr>
+
+
+<tr class='list' id='r5'>
+	<td class='icon'>
+
+
+
+	<img src="images/topic.svg" alt=""/>
+
+
+
+	</td>
+	<td align='left'>
+		<a class='link' id='a5' 
+		   href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;jdt&#46;doc&#46;user&#47;tips&#47;jdt_tips&#46;html&#63;resultof&#61;%22%65%64%69%74%22%20%22%63%75%73%74%6f%6d%22%20" 
+		   onmouseover="showStatus(event);return true;"
+		   onmouseout="clearStatus();return true;"
+		   title="Java Development User Guide">
+
+
+
+        Tips and Tricks &#40;JDT&#41;</a>
+	</td>
+</tr>
+<tr><td class='icon'></td><td><div class="location"><a href="&#46;&#46;&#47;nav&#47;1">Java Development User Guide</a> &#8250; </div></td></tr>
+<tr id='d5'>
+	<td class='icon'>
+	</td>
+	<td align='left'>
+		<div class="description">
+			The following tips and tricks give some helpful ideas for increasing your productivity&#46; See also Platform Tips and Tricks for general Eclipse tips and What&#39;s New &#40;JDT&#41; for &#46;&#46;&#46;
+		</div>
+	</td>
+</tr>
+
+
+<tr class='list' id='r6'>
+	<td class='icon'>
+
+
+
+	<img src="images/topic.svg" alt=""/>
+
+
+
+	</td>
+	<td align='left'>
+		<a class='link' id='a6' 
+		   href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;pde&#46;doc&#46;user&#47;tasks&#47;pde_fetch_phase&#46;htm&#63;resultof&#61;%22%65%64%69%74%22%20%22%63%75%73%74%6f%6d%22%20" 
+		   onmouseover="showStatus(event);return true;"
+		   onmouseout="clearStatus();return true;"
+		   title="Plug&#45;in Development Environment Guide">
+
+
+
+        Fetching from Repositories</a>
+	</td>
+</tr>
+<tr><td class='icon'></td><td><div class="location"><a href="&#46;&#46;&#47;nav&#47;2">Plug&#45;in Development Environment Guide</a> &#8250; <a href="&#46;&#46;&#47;nav&#47;2_2">Tasks</a> &#8250; <a href="&#46;&#46;&#47;nav&#47;2_2_1">PDE Build Advanced Topics</a></div></td></tr>
+<tr id='d6'>
+	<td class='icon'>
+	</td>
+	<td align='left'>
+		<div class="description">
+			The infrastructure offered by PDE Build provides steps to fetch the source code and pre&#45;built plug&#45;ins from a repository as part of the build process &#40;see the eclipse&#46;fetch&#46;&#46;&#46;
+		</div>
+	</td>
+</tr>
+
+
+<tr class='list' id='r7'>
+	<td class='icon'>
+
+
+
+	<img src="images/topic.svg" alt=""/>
+
+
+
+	</td>
+	<td align='left'>
+		<a class='link' id='a7' 
+		   href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;linuxtools&#46;docker&#46;docs&#47;Linux_Tools_Project&#47;Docker_Tooling&#47;User_Guide&#47;Docker&#45;Tooling&#45;Perspective&#46;html&#63;resultof&#61;%22%65%64%69%74%22%20%22%63%75%73%74%6f%6d%22%20" 
+		   onmouseover="showStatus(event);return true;"
+		   onmouseout="clearStatus();return true;"
+		   title="Docker Tooling User Guide">
+
+
+
+        Docker Tooling User Guide &#45; Docker Tooling Perspective</a>
+	</td>
+</tr>
+<tr><td class='icon'></td><td><div class="location"><a href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;linuxtools&#46;docker&#46;docs&#47;Linux_Tools_Project&#47;Docker_Tooling&#47;User_Guide&#47;User&#45;Guide&#46;html">Docker Tooling User Guide</a> &#8250; <a href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;linuxtools&#46;docker&#46;docs&#47;Linux_Tools_Project&#47;Docker_Tooling&#47;User_Guide&#47;User&#45;Guide&#46;html">Docker Tooling User Guide</a></div></td></tr>
+<tr id='d7'>
+	<td class='icon'>
+	</td>
+	<td align='left'>
+		<div class="description">
+			Docker Tooling Perspective Docker Tooling User Guide Updating This Document Docker Tooling Perspective A new perspective known as the Docker Tooling Perspective is added&#46; This perspective brings up th
+		</div>
+	</td>
+</tr>
+
+
+<tr class='list' id='r8'>
+	<td class='icon'>
+
+
+
+	<img src="images/topic.svg" alt=""/>
+
+
+
+	</td>
+	<td align='left'>
+		<a class='link' id='a8' 
+		   href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;egit&#46;doc&#47;help&#47;EGit&#47;Contributor_Guide&#47;Builds&#46;html&#63;resultof&#61;%22%65%64%69%74%22%20%22%63%75%73%74%6f%6d%22%20" 
+		   onmouseover="showStatus(event);return true;"
+		   onmouseout="clearStatus();return true;"
+		   title="EGit Documentation">
+
+
+
+        EGit Contributor Guide &#45; Builds</a>
+	</td>
+</tr>
+<tr><td class='icon'></td><td><div class="location"><a href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;egit&#46;doc&#47;help&#47;EGit&#47;User_Guide&#47;User&#45;Guide&#46;html">EGit Documentation</a> &#8250; <a href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;egit&#46;doc&#47;help&#47;EGit&#47;Contributor_Guide&#47;Contributor&#45;Guide&#46;html">EGit Contributor Guide</a></div></td></tr>
+<tr id='d8'>
+	<td class='icon'>
+	</td>
+	<td align='left'>
+		<div class="description">
+			Builds Running EGit from Eclipse Documentation Builds The central EGit and JGit builds run on the Jenkins build infrastructure provided by the Eclipse foundation&#46; EGit Jenkins instance JGit Jenkins in
+		</div>
+	</td>
+</tr>
+
+
+<tr class='list' id='r9'>
+	<td class='icon'>
+
+
+
+	<img src="images/topic.svg" alt=""/>
+
+
+
+	</td>
+	<td align='left'>
+		<a class='link' id='a9' 
+		   href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;egit&#46;doc&#47;help&#47;EGit&#47;User_Guide&#47;Tasks&#46;html&#63;resultof&#61;%22%65%64%69%74%22%20%22%63%75%73%74%6f%6d%22%20" 
+		   onmouseover="showStatus(event);return true;"
+		   onmouseout="clearStatus();return true;"
+		   title="EGit Documentation">
+
+
+
+        EGit User Guide &#45; Tasks</a>
+	</td>
+</tr>
+<tr><td class='icon'></td><td><div class="location"><a href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;egit&#46;doc&#47;help&#47;EGit&#47;User_Guide&#47;User&#45;Guide&#46;html">EGit Documentation</a> &#8250; <a href="&#46;&#46;&#47;topic&#47;org&#46;eclipse&#46;egit&#46;doc&#47;help&#47;EGit&#47;User_Guide&#47;User&#45;Guide&#46;html">EGit User Guide</a></div></td></tr>
+<tr id='d9'>
+	<td class='icon'>
+	</td>
+	<td align='left'>
+		<div class="description">
+			Tasks Concepts Reference Tasks Creating Repositories Considerations for Git Repositories to be used in Eclipse The short story When setting up Git Repositories with EGit&#44; there are two recommendations
+		</div>
+	</td>
+</tr>
+
+</table>
+
+
+
+<script type="text/javascript">
+	selectTopicById('');
+</script>
+
+</body>
+</html>

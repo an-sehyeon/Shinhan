@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+  <student>
+    <name>Kim</name>
+    <score>85</score>
+  </student>
+  <student>
+    <name>Lee</name>
+    <score>90</score>
+  </student>
+</students>

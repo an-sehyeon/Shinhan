@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	//클릭이벤트(click)
+	//이벤트속성(on+이벤트이름(click)
+	//이벤트핸들러(eventhandler, listener) : 이벤트발생의 동작(함수)
+	//console.log(window);
+	function f1(){
+		console.log("선언적함수")
+		
+	}
+	
+	window. onload=function(){
+		//alert('load..rendering후 발생');
+		btn2.onclick = function(){
+			console.log("익명함수");
+		};
+		
+		//var b3 = document.querySelector("button:nth-child(4)");
+		var b3 = document.querySelector("button:nth-of-type(3)");
+		b3.onclick = function(){
+			console.log("익명함수...Selector로 찾기");
+		};
+		
+		var b4 = document.querySelector("#btn4");
+		b4.onclick = function(){
+			this.style.color = "red";
+			this.style.backgroundColor = "orange";
+			
+			document.querySelector("h1:first-child").style.backgroundColor="yellow";
+		};
+		
+		var nameObj = document.querySelector("#username");
+		nameObj.onkeyup = function(){
+			here.innerHTML = this.value;
+		};
+		
+		deptid.onchange = function(){
+			here.innerHTML = this.value;
+		};
+		
+		here.innerHTML = 
+		document.querySelector("#deptid > option[selected]").value;
+		
+	};
+</script>
+</head>
+<body>
+	<h1>JavaScript Event에 대하여</h1>
+	<button onclick="f1();">버튼1(inline javascript)</button>
+	<button id="btn2">버튼2</button>
+	<button>버튼3</button>
+	<button id="btn4">버튼4</button>
+	<br>
+	<hr>
+	<label>이름:</label>
+	<input id="username">
+	<br>
+	<hr>
+	<label>부서선택</label>
+	<select id="deptid">
+		<option value="a">개발부</option>
+		<option value="b" selected>영업부</option>
+		<option value="c">총무부</option>
+		<option value="d">SI사업부</option>
+	</select>
+	<hr>
+	<div id="here">여기</div>
+</body>
+</html>

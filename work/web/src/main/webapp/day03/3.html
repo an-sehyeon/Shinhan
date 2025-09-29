@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	console.log("1.header작성");
+	
+	function call2(){
+		console.log('버튼2 클릭시 수행된다');
+	}
+</script>
+</head>
+<body>
+<script>
+	console.log("2.body 위쪽 작성");
+</script>
+	<h1>자바스크립트 연습</h1>
+	<p>작성위치</p>
+	
+	<button onclick="console.log('클릭시 수행된다');">클릭1</button>
+	<button onclick="call2();">클릭2</button>
+	
+	<ul>
+		<li>inline javascript</li>
+		<li>internal javascript
+			<ul>
+				<li>header</li>
+				<li>body윗쪽</li>
+				<li>body아래쪽</li>
+			</ul>
+		</li>
+		<li>external javascript</li>
+	</ul>
+<script>
+	console.log("3.body 아래쪽 작성");
+</script>
+<script src="external.js"></script>	
+<script>
+	f1();
+	f2();
+</script>
+</body>
+</html>

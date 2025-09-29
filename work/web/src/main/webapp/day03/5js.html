@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+	<div id="container">
+		<h1>자바스크립트 TEST</h1>
+		<button id="btn1" class="btn btn-primary">변수의 범위1</button>
+		<button class="btn btn-secondary">변수의 범위2</button>
+		<button class="btn btn-info">변수의 범위3</button>
+		<button onclick="call4();" class="btn btn-success">호이스팅</button>
+		<button id="btn7" class="btn btn-warning">함수선언과 사용</button>
+		<button id="btn8" class="btn btn-warning">선언적함수와 익명함수1</button>
+		<button id="btn9" class="btn btn-warning">선언적함수와 익명함수2</button>
+	</div>
+	<hr>
+	<div id="here"></div>
+	
+	
+
+<script>
+// 1. 선언적함수 : 이름이 있는 함수
+function f8(){
+	
+};
+
+// 2. 익명함수 : 이름이 없는 함수 
+// 익명함수가 변수에 할당됨, 리터럴 방식, a=10 b="자바스크립트"
+var f8_2 = function(){
+	here.innerHTML = this.innerHTML;
+};	// 문장의 끝은 ;를 붙여야됨
+
+btn8.onclick = f8_2;
+btn9.onclick = f8_2;
+
+
+// 화살표함수...> 자바의 람다표현식과 같다.
+var f8_2 = ()=>here.innerHTML = this.innerHTML;;
+
+var f8_3 = function(a,b){
+	var c = a+b;
+	console.log(c);
+	return c;
+};
+
+var f8_4 = (a,b)=>{
+	var c = a+b;
+	console.log(c);
+	return c; 
+};
+
+
+// 즉시실행함수
+(function(x,y){
+	alert("즉시실행함수" + (x+y));
+})(10,20);
+	
+</script>
+
+
+<script>
+var b7 = document.querySelector("#btn7");
+b7.onclick = function(){
+	var result = call7(10,20);
+	here.innerHTML += "<br><h1>" + result + "</h1>" 
+};
+function call7(a,b){		// 매개변수, argument, parameter
+	return a+b;
+};
+	
+</script>
+
+
+<script>
+	// 호이스팅 단계를 거치고 나서 실행이 시작된다. (var로 선언된 변수들을 가장위로 끌어올린다.)
+	document.getElementById("here").innerHTML = js;
+	var js = "자바스크립트";
+	here.innerHTML += "<br>" + js;
+	
+	f1(); // 호이스팅 단계를 거치고 나서 실행됨...var과 function를 가장위로 끌어올린다.
+	function f1(){
+		alert("호이스팅!!!");
+	}
+	
+	var v1=10;
+	{
+		var v2 = 20;	// 전역변수
+		let v3 = 30;
+	}
+	console.log(v1+v2);
+	
+	function f2(){
+		var v4 = 20;	// 지역변수
+	}
+	console.log(v1+v4);
+	
+	
+	function call4(){
+		here.innerHTML += "<br>" + js + sql;	// 호이스팅 단계를 거치고 나서 실행이 시작된다.
+		var sql = " ORACLE 문법을 학습함";
+		here.innerHTML += "<br>" + js + sql;
+	}
+</script>	
+	
+<script>
+	var score = 100; //함수외부에 있으면 전역변수
+	const score4 = 400;		// 상수
+	//var b1 = document.getElementById("btn1"); 
+	var b1 = document.querySelector("#btn1");
+	var b2 = document.querySelector("button:nth-of-type(2)");
+	var b3 = document.querySelector("button:nth-of-type(3)");
+	
+	b3.onclick = function(){
+		var sum = 0;
+		for(let i=1;i<=10;i++){		// let는 {}내에서만 유효
+			sum += i;
+			console.log(i);
+		}
+		// let 변수는 {}안에서만 유효하기때문에 에러
+		document.querySelector("#here").innerHTML = (i-1) + "까지 합계는 " + sum;
+	}
+	
+	b1.onclick = function(){
+		var score2 = 200;	// 지역변수
+		score3 = 300;	// 전역변수
+		//score4 = 500	// 상수는 변경불가
+		console.log("ID로 접근하기 " + b1.innerHTML + "score합계 : " + (score + score2));
+		//console.log("i=" + i);
+	};
+	b2.onclick = function(){
+		//console.log("selector로 접근하기 " + b2.innerHTML + "score합계 : " + (score + score2));	// score2는 지역변수
+		console.log("selector로 접근하기 " + b2.innerHTML + "score합계 : " + (score + score3));
+	};
+</script>	
+</body>
+</html>

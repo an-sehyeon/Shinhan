@@ -1,0 +1,93 @@
+.say-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 16px;
+  background-color: #f8f9fa;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* 버튼들을 감싸는 그룹 */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* 모든 버튼의 공통 스타일 */
+.say-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.say-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* 일반 버튼 스타일 */
+.say-button {
+  background-color: #dee2e6;
+  color: #495057;
+}
+.say-button:hover {
+  background-color: #ced4da;
+}
+
+/* 색상 버튼별 스타일 */
+.say-button.color-red {
+  color: #e03131;
+  border-color: #f03e3e;
+  background-color: white;
+}
+.say-button.color-red:hover {
+  background-color: #f03e3e;
+  color: white;
+}
+
+.say-button.color-green {
+  color: #2f9e44;
+  border-color: #37b24d;
+  background-color: white;
+}
+.say-button.color-green:hover {
+  background-color: #37b24d;
+  color: white;
+}
+
+.say-button.color-blue {
+  color: #1971c2;
+  border-color: #1c7ed6;
+  background-color: white;
+}
+.say-button.color-blue:hover {
+  background-color: #1c7ed6;
+  color: white;
+}
+
+/* 구분선 스타일 */
+.divider {
+  border: none;
+  border-top: 1px solid #e9ecef;
+  margin: 25px 0;
+}
+
+.message-display {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 20px 0 10px 0;
+  min-height: 50px;
+}
+
+/* 현재 색상 텍스트 스타일 */
+.color-status {
+  font-size: 0.9rem;
+  color: #868e96;
+  margin: 0;
+}

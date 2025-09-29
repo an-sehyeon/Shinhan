@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<body>
+
+		<div class="modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">등록/수정</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<input class="form-control" type="text" name="replyText" placeholder="댓글" /> 
+							<input class="form-control" type="text" name="replyer" placeholder="작성자" /> 
+							<input type="text"name="rno"> 
+							<input type="hidden" name="regDate">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-warning replyModify">수정</button>
+						<button type="button" class="btn btn-primary replySave">입력</button>
+						<button type="button" class="btn btn-danger replyRemove">삭제</button>
+						<button type="button"
+							class="btn btn-outline-secondary replyClose"
+							data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

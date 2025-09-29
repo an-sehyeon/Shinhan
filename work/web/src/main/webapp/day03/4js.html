@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+	button:nth-of-type(1){
+	border: 2px dotted red;
+	}
+</style>
+
+
+</head>
+<body>
+	<h1>JavaScript사용하기</h1>
+	<button id="btn1" class="btn btn-success">기본문법1</button>
+	<button onclick="alert('2번째버튼')" class="btn btn-success">인라인JS</button>
+	<button onclick="call3();" class="btn btn-success">인라인JS2</button>
+	
+	<button id="btn4" class="btn btn-success">입출력</button>
+	<button id="btn5" class="btn btn-success">자기소개</button>
+	<button id="btn6" class="btn btn-success">변수타입</button>
+	
+	
+	<div id="here" style="width: 500px; height:300px; border: 2px solid green">
+	소개란
+	</div>
+	
+	
+	
+<script>
+	var b6 = document.getElementById("btn6");
+	b6.onclick = function(){
+		var here = document.getElementById("here");
+		// 변수타입 : number, string, boolean, undefined, object(배열포함), function, null
+		// 자바는 변수선언시 data의 타입을 지정한다. 
+		// javascript은 값을 할당하면 그때 타입을 지정한다.
+		var data;
+		here.innerHTML += "<br> 값 = " + data + " 타입은 " + typeof(data);
+		data = 100;
+		here.innerHTML += "<br> 값 = " + data + " 타입은 " + typeof(data);
+		
+		data = "JavaScript";
+		here.innerHTML += "<br> 값 = " + data + " 타입은 " + typeof(data);
+		
+		data = 10 >20;
+		here.innerHTML += "<br> 값 = " + data + " 타입은 " + typeof(data);
+
+		data = [100, true, "abc", undefined, function(){}];
+		here.innerHTML += "<br> 값 = " + data + " 타입은 " + typeof(data);
+
+		data = function(){alert("OK")};
+		here.innerHTML += "<br> 값 = " + data + " 타입은 " + typeof(data);
+
+		data = { name: "홍길동", age:20};
+		here.innerHTML += "<br> 값 = " + data + " 타입은 " + typeof(data);
+
+		data = 10/0.0;
+		here.innerHTML += "<br> 값 = " + data + " 타입은 " + typeof(data);
+		
+		var score = 100;
+		data = score == "100";
+		data2 = score === "100";
+		data3 = score != "100";
+		data4 = score !== "100";
+		here.innerHTML += "<br>" + data + "..." + data2 + "..." + data3 + "..." + data4;
+	}
+	
+	var b5 = document.getElementById("btn5");
+	b5.onclick = function(){
+		var here = document.getElementById("here");
+		here.innerHTML += "<br> 나의 이름은 an.....";
+	}
+	
+	var b4 = document.getElementById("btn4");
+	b4.onclick = function(){
+		alert("입출력 버튼을 누름")
+		var result = confirm("계속하시겠습니까?");
+		alert(result);
+		var age = prompt("당신의 나이는 몇살?",20);
+		alert(Number(age) +1)
+	};
+
+	function call3(){
+		alert("3번째버튼");
+	}
+
+	var b1 = document.getElementById("btn1");
+	console.dir(b1);
+	b1.onclick = function(){
+		console.log("버튼1을 누름");
+	};
+</script>	
+</body>
+</html>

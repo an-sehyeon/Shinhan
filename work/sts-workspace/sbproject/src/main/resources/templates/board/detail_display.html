@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<body>
+		<form th:action="@{/board/update.do}" method="post">
+			<div class="mb-3 row">
+				<label for="bno" class="col-sm-2 col-form-label">bno</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" readonly="readonly"
+						name="bno" th:value="${board.bno}">
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="title" class="col-sm-2 col-form-label">title</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="title"
+						th:value="${board.title}">
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="content" class="col-sm-2 col-form-label">content</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="content"
+						th:value="${board.content}">
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label for="writer" class="col-sm-2 col-form-label">작성자</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="writer"
+						th:value="${board.writer}">
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label class="col-sm-2 col-form-label">작성일</label>
+				<div class="col-sm-10">
+					<input type="text" readonly="readonly" class="form-control"
+						name="regDate" th:value="${board.regDate}">
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label class="col-sm-2 col-form-label">수정일</label>
+				<div class="col-sm-10">
+					<input type="text" readonly="readonly" class="form-control"
+						name="modDate" th:value="${board.modDate}">
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<div class="col-sm-10">
+					<input type="submit" value="수정" class="btn btn-success"> <a
+						th:href="@{/board/delete.do(bno=${board.bno})}"
+						class="btn btn-danger"> 삭제 </a>
+				</div>
+			</div>
+		</form>
+</body>
+</html>

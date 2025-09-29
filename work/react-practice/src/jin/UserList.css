@@ -1,0 +1,123 @@
+/* 전체 컨테이너 스타일 */
+.user-list-container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+/* 라이트 테마 */
+.user-list-container.light {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+/* 다크 테마 */
+.user-list-container.dark {
+  background-color: #212529;
+  color: #f8f9fa;
+}
+
+/* 헤더 섹션 (제목 + 테마 버튼) */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.header-section h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.theme-button {
+  padding: 8px 16px;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.light .theme-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.dark .theme-button {
+  background-color: transparent;
+  color: #007bff;
+}
+
+.theme-button:hover {
+  opacity: 0.8;
+}
+
+/* 평균 나이 텍스트 */
+.average-age {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #6c757d;
+  margin-bottom: 20px;
+}
+
+.dark .average-age {
+    color: #adb5bd;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #dee2e6;
+  margin-bottom: 20px;
+}
+
+.dark hr {
+  border-top: 1px solid #495057;
+}
+
+/* 유저 정보 카드 목록 */
+.user-info-list {
+  display: grid;
+  gap: 20px;
+}
+
+/* 개별 유저 정보 카드 */
+.user-info-card {
+  padding: 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.light .user-info-card {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+}
+
+.dark .user-info-card {
+  background-color: #343a40;
+  border: 1px solid #495057;
+}
+
+.user-info-card p {
+  margin: 0 0 10px 0;
+  font-size: 1rem;
+}
+
+.update-age-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  background-color: #28a745;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.update-age-button:hover {
+    background-color: #218838;
+}

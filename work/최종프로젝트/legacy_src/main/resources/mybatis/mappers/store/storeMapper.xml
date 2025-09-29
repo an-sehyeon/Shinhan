@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.chacha.create.common.mapper.store.StoreMapper">
+
+	<resultMap id="storeResultMap" type="storeEntity">
+		<id property="storeId" column="store_id" />
+		<result property="logoImg" column="logo_img" />
+		<result property="sellerId" column="seller_id" />
+		<result property="storeName" column="store_name" />
+		<result property="storeDetail" column="store_detail" />
+		<result property="storeUrl" column="store_url" />
+		<result property="saleCnt" column="sale_cnt" />
+		<result property="viewCnt" column="view_cnt" />
+	</resultMap>
+
+	<select id="selectAll" resultMap="storeResultMap">
+		SELECT
+		s.store_id,
+		s.logo_img,
+		s.seller_id,
+		s.store_name,
+		s.store_detail,
+		s.store_url,
+		/* ===== 판매 수 계산: ORDER_OK, SHIPPED, DELIVERED만 집계 ===== */
+		NVL((
+		SELECT COUNT(DISTINCT oi.order_id)
+		FROM product p
+		JOIN order_detail od ON od.product_id = p.product_id
+		JOIN order_info oi ON oi.order_id = od.order_id
+		WHERE p.store_id = s.store_id
+		AND oi.order_status IN ('ORDER_OK', 'SHIPPED', 'DELIVERED')
+		), 0) AS sale_cnt,
+		s.view_cnt
+		FROM store s
+		WHERE s.store_url IS NOT NULL
+	</select>
+
+
+	<select id="selectByStoreId" resultMap="storeResultMap">
+		SELECT * FROM store WHERE
+		store_id = #{storeId}
+	</select>
+
+	<select id="selectByStoreUrl" resultMap="storeResultMap">
+		SELECT * FROM store
+		WHERE
+		store_url = #{storeUrl}
+	</select>
+
+	<select id="selectBySellerId" resultMap="storeResultMap">
+		SELECT * FROM store
+		WHERE seller_id = #{sellerId}
+	</select>
+
+	<select id="selectForCountUrlByStoreUrl" resultType="int">
+		SELECT COUNT(*) FROM store WHERE store_url = #{storeUrl}
+	</select>
+
+	<select id="selectForCountProductByMemberId" resultType="int">
+		SELECT
+		COUNT(p.product_id) AS product_count
+		FROM seller s
+		JOIN store st ON s.seller_id =
+		st.seller_id
+		JOIN product p ON st.store_id = p.store_id
+		WHERE
+		s.member_id = #{memberId}
+		GROUP BY s.member_id
+	</select>
+
+	<insert id="insert" parameterType="storeEntity">
+		INSERT INTO store (store_id,
+		seller_id, logo_img, store_name, store_detail, store_url)
+		VALUES
+		(seq_store_id.NEXTVAL, #{sellerId}, #{logoImg}, #{storeName},
+		#{storeDetail}, #{storeUrl})
+	</insert>
+
+	<update id="update" parameterType="storeEntity">
+		UPDATE store
+		SET seller_id =
+		#{sellerId},
+		logo_img = #{logoImg},
+		store_name = #{storeName},
+		store_detail = #{storeDetail},
+		store_url = #{storeUrl},
+		sale_cnt =
+		#{saleCnt},
+		view_cnt = #{viewCnt}
+		WHERE store_id = #{storeId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM store WHERE
+		store_id = #{storeId}
+	</delete>
+
+	<select id="selectByStoreInfo" resultMap="storeResultMap"
+		parameterType="string">
+		SELECT store_name, store_detail, logo_img
+		FROM store
+		WHERE store.store_Url = #{storeUrl}
+	</select>
+
+	<select id="selectForThisStoreInfo" resultType="storeInfoDTO"
+		parameterType="string">
+		SELECT s.store_name, s.logo_img, sel.member_id
+		FROM store
+		s
+		join seller sel on s.seller_id = sel.seller_id
+		WHERE s.store_url =
+		#{storeUrl}
+	</select>
+
+	<update id="updateStoreInfo" parameterType="storeEntity">
+		UPDATE store
+		SET
+		logo_img = #{logoImg},
+		store_name = #{storeName},
+		store_detail =
+		#{storeDetail}
+		WHERE store_id = #{storeId}
+	</update>
+
+	<select id="selectForSellerIdByStoreId" resultType="int"
+		parameterType="int">
+		SELECT seller_id FROM store
+		WHERE store_id = #{storeId}
+	</select>
+
+	<update id="updatePersonalCheck" parameterType="int">
+		UPDATE seller
+		SET personal_check = 1
+		WHERE seller_id = #{sellerId}
+	</update>
+
+	<select id="selectForSellerDetail" resultType="SellerEntity"
+		parameterType="String">
+		SELECT sel.seller_id, sel.member_id, sel.opening_date, sel.account,
+		sel.account_bank, sel.profile_info, sel.personal_check
+		FROM store s
+		join seller sel on s.seller_id = sel.seller_id
+		WHERE s.store_url = #{storeUrl}
+	</select>
+
+	<update id="updateClick" parameterType="int">
+		UPDATE store
+		SET view_cnt = view_cnt + 1
+		WHERE store_id = #{storeId}
+	</update>
+	
+	  <select id="selectStoreUrlByMemberId" parameterType="long" resultType="string">
+	    SELECT s.store_url
+	    FROM STORE s
+	    JOIN SELLER se ON s.seller_id = se.seller_id
+	    WHERE se.member_id = #{memberId}
+	    AND ROWNUM = 1
+	  </select>
+
+</mapper>

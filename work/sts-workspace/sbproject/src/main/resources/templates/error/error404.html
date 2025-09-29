@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+</head>
+<body>
+	<th:block
+		th:replace="~{/layout/exLayout2 :: setContent(~{this::content3} )}">
+		<th:block th:fragment="content3">
+		 
+	<div>
+		<img th:src="@{/images/healing.jpg}" />
+		<h1>★★★서버에서 보낸메시지★★★</h1>
+		<h2>인라인방법:[[${msg}]]</h2>
+		<p th:text="${msg}">tag속성사용방법</p>
+		<h2 id="here"></h2>
+	</div>
+
+
+	<script>
+		here.innerHTML = "입력주소 확인:" + location.href;
+	</script>
+</body>
+</th:block>
+</th:block>
+</html>

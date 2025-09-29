@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>타이틀</title>
+	</head>
+	<script src="extenal1.js"></script>
+	<style>
+		img { border:1px solid gray; }
+	</style>
+	<body>
+		<h1>DOM(Document Object Model)사용하기</h1>
+		<button id="btn1">이미지변경1</button>
+		<button id="btn2">이미지변경2</button>
+		<button id="btn3">이미지변경3</button>
+		<button id="btn4">동적객체생성1</button>
+		<button id="btn5">동적객체생성2</button>
+		<button id="btn6">동적객체삭제</button>
+		<br><br>
+		<div style="border:1px solid green;"onclick="alert('img의 부모');">
+			<h2>이미지</h2>
+			<img id="img1" src="../17/images/tree-5.jpg"/>
+		</div>
+		<hr>
+		<div id = "here">
+			여기
+		</div>
+		<hr>
+		<h2>버블링 연습(default : 자식이벤트가 부모로 전달된다.)</h2>
+		<div onclick = "alert('p부모의 부모 div클릭');">
+			<div onclick = "alert('p부모 div 요소');">
+				<p onclick = "alert('p클릭');">p요소입니다.</p>
+			</div>
+		</div>
+	</body>
+</html>

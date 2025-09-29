@@ -1,0 +1,12 @@
+package com.create.chacha.domains.seller.areas.store.storeurl.service;
+
+
+import java.util.Optional;
+
+public interface StoreUrlService {
+    /**
+     * memberId를 기준으로 레거시에서 스토어 정보를 조회하고 storeUrl을 반환한다.
+     * @return storeUrl Optional (없으면 empty)
+     */
+    Optional<String> findMyStoreUrl(Long memberId);
+}

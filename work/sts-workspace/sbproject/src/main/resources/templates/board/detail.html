@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<th:block
+		th:replace="~{/layout/exLayout2 :: setContent(~{this::content2})}">
+		<th:block th:fragment="content2">
+			 
+			<!-- 상세보기 -->
+			<div th:replace="board/detail_display"></div>
+			<!-- 댓글추가  -->
+			<div th:replace="board/detail_reply"></div>
+			
+			<!-- Modal : 댓글추가하거나 상세보기에 이용할 예정 -->
+			<div th:replace="board/detail_modal"></div>
+			
+			<script th:inline="javascript">
+			var token = $("meta[name='_csrf']").attr("content");
+			 var header = $("meta[name='_csrf_header']").attr("content");
+			 console.log(token)	
+			 
+			 var beforeSend = function(xhr){ 
+			 	xhr.setRequestHeader(header, token);
+			 }
+			 
+			 function ajax_send(){
+					if(token && header) {
+						$(document).ajaxSend(function(event, xhr, options) {
+							xhr.setRequestHeader(header, token);
+						});
+					}
+			 }
+			
+			  var bno = /*[[${board.bno}]]*/ 0;
+			  $(function(){
+				  $(".replySelectAll").click(f_selectAll);
+				  $(".addReply").click(f_add);
+				  $(".replyClose,.close").click(f_close);
+				  $(".replySave").click(f_save);
+				  //page load시에는 .card-body가 없다. add누르면 코드로 만들어진다.
+				  //부모에 코드를 붙인다. 
+				  $(".replyList").on("click", ".card-body", f_detailDisplay);
+				  //수정버튼 클릭시 DB에 저장
+				  $(".replyModify").click(f_update);
+				  $(".replyRemove").click(f_delete);
+				  
+			  });
+			  
+			  
+			  function f_delete(){
+			  	var rno = $("input[name='rno']").val();
+			  	 $.ajax({
+					  url:`/replies/${rno}`,
+					  beforeSend,
+					  method:"delete",
+					  success: f_success
+				  });
+			  }
+			  
+			  function f_update(){				 
+				  var rno = $("input[name='rno']").val();
+				  var replyText = $("input[name='replyText']").val();
+				  var replyer = $("input[name='replyer']").val();
+				  
+				  var insertData = {replyText, replyer, bno};
+				  var path = `/replies/${rno}`;
+				  $.ajax({
+				  	  beforeSend,
+					  url:path,
+					  method:"put",
+					  data: JSON.stringify(insertData),
+					  contentType:"application/json;charset=UTF-8", 
+					  success: f_success
+				  });
+			  }
+			  
+			  function f_detailDisplay(){
+				  var rno = $(this).data("rno");
+				  var textData = $(this).data("title");
+				  var replyer = $(this).data("replyer");
+				  
+				  //var textData2 = $(this).find(".card-title").html();
+				  //var replyer2 = $(this).find(".card-subtitle").html();
+				  
+				  
+				  $("input[name='replyText']").val(textData);
+				  $("input[name='replyer']").val(replyer);
+				  $("input[name='rno']").val(rno);
+				  $(".modal").show();
+			  }
+			  function f_save(){
+				  
+				  var replyText = $("input[name='replyText']").val();
+				  var replyer = $("input[name='replyer']").val();
+				  
+				  var insertData = {replyText, replyer};
+				  var path = `/board/${bno}/replies`;
+				  $.ajax({
+					  url:path,
+					  beforeSend,
+					  method:"post",
+					  data: JSON.stringify(insertData),
+					  contentType:"application/json;charset=UTF-8", 
+					  success: f_success
+				  });
+			  }
+			  function f_success(responseData){
+				  alert(responseData);
+				  f_close(); //모달닫기 
+				  f_selectAll();//댓글다시조회
+				  
+			  }
+			  function f_add(){
+				  $("input[name='replyText']").val("");
+				  $("input[name='replyer']").val("");
+				  $("input[name='rno']").val("");
+				  $(".modal").show();
+			  }
+			  function f_close(){
+				  $(".modal").hide();
+			  }
+			  
+			  
+			  function f_selectAll(){
+				  var bno = /*[[${board.bno}]]*/ 0;
+				  $.ajax({
+					  url:`/board/${bno}/replies`,
+					  success:f_display
+				  });
+			  }
+			  function f_display(replyList){
+				  //console.log(replyList)
+				  var output = '';
+				  //$(".replyCount").html("Reply Count : " + replyList.length);
+				  $.each(replyList, function(index, reply){
+					  output += `
+						  <div class="col-sm-6 col-md-4 col-lg-3">
+							  <div class='card card-body' 
+							           data-rno='${reply.rno}' 
+							           data-title='${reply.replyText}' 
+							           data-replyer='${reply.replyer}'>
+			  				        <b>${reply.rno}</b>
+			  				        <h5 class='card-title' >${reply.replyText}</h5>
+			  				        <h5 class='card-subtitle mb-2 text-muted' >${reply.replyer}</h5>
+			  				        <p class='card-text mb-2 text-muted card-regdate'>등록일: ${reply.regDate.split("T")[0]} </p>
+			  				        <p class='card-text mb-2 text-muted'>수정일: ${reply.modDate.split("T")[0]} </p>
+			  				  </div>
+		  			     </div> `;
+					   
+				  });		 
+				  $(".replyList").html(output); 
+
+				  
+			  }
+			</script>
+
+		</th:block>
+	</th:block>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>table 연습</title>
+<style type="text/css">
+	h1 { background-color: blue; color: white; }
+	table, caption, th, td { 
+		border: 1px solid black;
+		border-collapse: collapse;
+		text-align: center; }
+	td, th {
+		padding: 5px;
+	}
+</style>
+</head>
+<body>
+<header>
+</header>
+<main>
+	<h1>신한금융SW아카데미 5기</h1>
+	<!-- alt는 이미지를 대체하는 문자열
+	default경로 ==> http://localhost:9090
+	상대경로: 현재문서의 위치 기준
+	절대경로: (default경로 이후) /로 시작
+	img는 인라인 요소 ... content만큼만 자리를 차지한다.
+	-->
+	<img alt="activity이미지" src="../images/activity.jpg", width="5%"></img>
+	<img alt="힐링이미지" src="../images/healing.jpg", width="50"></img>
+	<img alt="신한로고이미지" src="http://localhost:9090/web/images/shinhanlogo.png", width="50">
+	<video 
+	controls="controls"
+	muted="muted"
+	src="../video/7조 프로젝트 녹화.mp4" width="70%" >
+	</video>
+	<table>
+		<caption> <strong>FullStack 커리큘럼</strong> </caption>
+		<thead>
+			<tr>
+				<th rowspan="2">과정</th>
+				<th rowspan="2">과목</th>
+				<th colspan="2">일정</th>
+			</tr>
+			<tr>
+				
+				<td>시작</td>
+				<td>종료</td>
+			</tr>
+			<tr>
+				<td rowspan="3">FrontEnd</td>
+				<td>HTML</td>
+				<td colspan="2">5월 9일</td>
+			</tr>
+			<tr>
+				<td>CSS</td>
+				<td colspan="2">5월 12일</td>
+			</tr>
+			<tr>
+				<td>JavaScript</td>
+				<td>5월 13일</td>
+				<td>5월 18일</td>
+			</tr>
+			<tr>
+				<td rowspan="4">BackEnd</td>
+				<td>JAVA</td>
+				<td>5/_</td>
+				<td>5/_</td>
+			</tr>
+			<tr>
+				<td>DB</td>
+				<td>5/_</td>
+				<td>5/_</td>
+			</tr>
+			<tr>
+				<td>Spring</td>
+				<td>5/_</td>
+				<td>5/_</td>
+			</tr>
+			<tr>
+				<td>SpringBoot</td>
+				<td>5/_</td>
+				<td>5/_</td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+		<tfoot></tfoot>
+	</table>
+</main>
+<footer>
+</footer>
+</body>
+</html>

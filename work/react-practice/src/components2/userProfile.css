@@ -1,0 +1,111 @@
+.profile-card {
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+}
+.profile-header {
+  background: skyblue;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+.profile-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.profile-body {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.input-group input {
+  padding: 12px;
+  border: 1px solid lightgray;
+  font-size: 1rem;
+}
+.input-group input:focus {
+  outline: none;
+  border-color: skyblue;
+}
+.add-item-container {
+  display: flex;
+  gap: 10px;
+}
+.add-item-container input {
+  flex-grow: 1;
+}
+/* 추가 버튼 */
+.add-button {
+  padding: 0 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  background-color: #2193b0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.add-button:hover {
+  background-color: #1a748b;
+  transform: translateY(-2px);
+}
+/* '좋아하는 것' 목록 리스트 */
+.favorites-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.favorite-item {
+  background-color: #eef8fb;
+  color: #2193b0;
+  padding: 8px 12px;
+  margin: 10px 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.favorite-item p {
+  margin: 0;
+}
+/* 삭제 버튼 */
+.remove-button {
+  background: none;
+  border: none;
+  color: #b0c4de;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.5;
+}
+.favorite-item:hover .remove-button {
+  opacity: 1;
+  color: #ff6b6b;
+  transform: scale(1.1);
+}
+.profile-footer {
+  background-color: #f8f9fa;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+.profile-footer h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 같은 타입의 Bean이 여러개인 경우 primary="true"를 설정하면 @Autowired할 때 우선적으로 가져옴 -->
+	
+
+	<bean class="com.chacha.create.util.DataSourceConfig"/>
+	
+		<!-- AwsS3Properties Bean 등록 -->
+<!-- 	<bean id="awsS3Properties" class="com.chacha.create.util.s3.AwsS3Properties">
+	    <property name="accessKeyId" value="${aws.s3.access-key-id}"/>
+	    <property name="secretAccessKey" value="${aws.s3.secret-access-key}"/>
+	    <property name="region" value="${aws.s3.region}"/>
+	    <property name="bucketName" value="${aws.s3.bucket-name}"/>
+	</bean>
+	
+	3) AwsS3Config: 생성자 주입
+	<bean id="awsS3Config" class="com.chacha.create.util.s3.AwsS3Config">
+	    <constructor-arg ref="awsS3Properties"/>
+	</bean>
+	
+	4) S3Client: awsS3Config의 팩토리 메서드로 생성
+	<bean id="s3Client" factory-bean="awsS3Config" factory-method="buildS3Client"/>
+	
+	5) S3Uploader: S3Client와 설정값들로 생성
+	<bean id="s3Uploader" class="com.chacha.create.util.s3.S3Uploader">
+	    <constructor-arg ref="s3Client"/>
+	    <constructor-arg value="${aws.s3.bucket-name}"/>
+	    <constructor-arg value="10MB"/>
+	</bean> -->
+</beans>

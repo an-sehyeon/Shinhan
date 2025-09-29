@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chacha.create.common.mapper.product.ProductMapper">
+
+  <resultMap id="productResultMap" type="productEntity">
+    <id property="productId" column="product_id"/>
+    <result property="storeId" column="store_id"/>
+    <result property="typeCategoryId" column="type_category_id"/>
+    <result property="dcategoryId" column="d_category_id"/>
+    <result property="productName" column="product_name"/>
+    <result property="price" column="price"/>
+    <result property="productDetail" column="product_detail"/>
+    <result property="stock" column="stock"/>
+    <result property="productDate" column="product_date"/>
+    <result property="lastModifiedDate" column="last_modified_date"/>
+    <result property="saleCnt" column="sale_cnt"/>
+    <result property="viewCnt" column="view_cnt"/>
+    <result property="flagshipCheck" column="flagship_check"/>
+    <!-- delete_check를 쓰면 여기도 매핑 추가 -->
+  </resultMap>
+
+	<resultMap id="DailyEntryMap"
+		type="com.chacha.create.common.dto.product.ProductDailySettlementDTO$DailyEntry">
+		<result column="date" property="date" />
+		<result column="amount" property="amount" />
+	</resultMap>
+
+    <resultMap id="StoreProductSettlementMap"
+               type="com.chacha.create.common.dto.product.StoreProductSettlementDTO">
+        <result column="settlement_date" property="settlementDate"/>
+        <result column="amount" property="amount"/>
+        <result column="account" property="account"/>
+        <result column="bank" property="bank"/>
+        <result column="update_at" property="updateAt"/>
+    </resultMap>
+    
+    <resultMap id="AISummaryResultMap" type="aiSummaryDTO">
+	    <result property="avg_price" column="avgPrice"/>
+	    <result property="min_price" column="minPrice"/>
+	    <result property="max_price" column="maxPrice"/>
+	    <result property="median_price" column="medianPrice"/>
+	    <result property="q1_price" column="q1Price"/>
+	    <result property="q3_price" column="q3Price"/>
+	    <result property="product_count" column="productCount"/>
+	    <result property="price_stddev" column="priceStddev"/>
+	</resultMap>
+    
+	
+  
+
+  <select id="selectAll" resultMap="productResultMap">
+    SELECT * FROM product
+  </select>
+
+  <select id="selectByProductId" resultMap="productResultMap">
+    SELECT * FROM product WHERE product_id = #{productId}
+  </select>
+
+  <select id="selectByStoreId" resultMap="productResultMap">
+    SELECT * FROM product WHERE store_id = #{storeId}
+  </select>
+
+  <insert id="insert" parameterType="productEntity">
+  <selectKey keyProperty="productId" resultType="int" order="BEFORE">
+    SELECT seq_product_id.NEXTVAL FROM dual
+  </selectKey>
+  INSERT INTO product (
+    product_id, store_id, type_category_id, d_category_id, product_name,
+    price, product_detail, stock, product_date, last_modified_date,
+    sale_cnt, view_cnt, flagship_check, delete_check
+  ) VALUES (
+    #{productId}, #{storeId}, #{typeCategoryId}, #{dcategoryId}, #{productName},
+    #{price}, #{productDetail,jdbcType=CLOB},
+    #{stock},
+    NVL(#{productDate,jdbcType=TIMESTAMP}, SYSDATE),
+    SYSDATE, 0, 0, 0, 0
+  )
+	</insert>
+
+  <update id="update" parameterType="productEntity">
+    UPDATE product
+    SET
+      store_id = #{storeId},
+      type_category_id = #{typeCategoryId},
+      d_category_id = #{dcategoryId},
+      product_name = #{productName},
+      price = #{price},
+      product_detail = #{productDetail,jdbcType=CLOB},
+      stock = #{stock},
+      -- product_date 는 생성일이므로 수정하지 않음
+      last_modified_date = SYSDATE,
+      sale_cnt = #{saleCnt},
+      view_cnt = #{viewCnt},
+      flagship_check = #{flagshipCheck}
+    WHERE product_id = #{productId}
+  </update>
+
+  <delete id="delete" parameterType="int">
+    DELETE FROM product WHERE product_id = #{productId}
+  </delete>
+
+  <select id="selectForStoreIdByStoreUrl" resultType="int">
+    SELECT store_id FROM store WHERE store_url = #{storeUrl}
+  </select>
+
+  <select id="selectForStoreIdByProductId" resultType="int">
+    SELECT store_id FROM product WHERE product_id = #{productId}
+  </select>
+
+	<select id="selectListForDropdownByStoreUrl"
+		parameterType="string"
+		resultType="com.chacha.create.common.dto.product.ProductlistDTO">
+
+		SELECT
+		p.product_id AS productId,
+		p.product_name AS
+		productName,
+		i.p_img_url AS pimgUrl
+		FROM store s
+		JOIN product p
+		ON
+		p.store_id = s.store_id
+		LEFT JOIN p_img i
+		ON i.product_id = p.product_id
+		AND i.p_img_seq = 1
+		WHERE s.store_url = #{storeUrl}
+		AND
+		NVL(p.delete_check, 0) = 0
+		ORDER BY p.last_modified_date DESC
+	</select>
+
+<select id="selectProductDailyAmounts"
+        parameterType="int"
+        resultMap="DailyEntryMap">
+
+  SELECT
+    TO_CHAR(TRUNC(o.order_date), 'YYYY-MM-DD') AS "date",
+    NVL(SUM(od.order_cnt * od.order_price), 0)  AS "amount"
+  FROM order_detail od
+  JOIN order_info o ON o.order_id = od.order_id
+  WHERE od.product_id = #{productId}
+    AND o.order_status = 'ORDER_OK'
+  GROUP BY TRUNC(o.order_date)
+  ORDER BY "date" ASC
+</select>
+
+<!-- 스토어 전체 상품 정산 내역 조회 -->
+<select id="selectStoreProductSettlements" parameterType="string"
+        resultMap="StoreProductSettlementMap">
+
+    SELECT
+        TO_CHAR(ADD_MONTHS(TRUNC(oi.order_date, 'MM'), 1), 'YYYY-MM-DD') AS settlement_date,
+        NVL(SUM(od.order_cnt * od.order_price), 0) AS amount,
+        se.account AS account,
+        se.account_bank AS accountBank,
+        TO_CHAR(MAX(p.last_modified_date), 'YYYY-MM-DD HH24:MI:SS') AS update_at
+    FROM store s
+             JOIN product p ON p.store_id = s.store_id
+             JOIN order_detail od ON od.product_id = p.product_id
+             JOIN order_info oi ON oi.order_id = od.order_id
+             JOIN seller se ON se.seller_id = s.seller_id
+    WHERE s.store_url = #{storeUrl}
+      AND oi.order_status = 'ORDER_OK'
+      AND NVL(p.delete_check, 0) = 0
+    GROUP BY ADD_MONTHS(TRUNC(oi.order_date, 'MM'), 1),
+             se.account,
+             se.account_bank
+    ORDER BY settlement_date ASC
+</select>
+
+ <!-- 
+        상품 매출 조회
+        - order_info(order_date, order_status)
+        - order_detail(order_cnt, order_price)
+        - product(store_id)
+        조건:
+          * store_id = #{storeId}
+          * order_status = 'ORDER_OK'
+        결과:
+          * ymd = 주문 발생일 (YYYY-MM-DD)
+          * amt = 해당 일자의 총 매출 (수량 * 가격)
+    -->
+    <select id="findDailyProductSalesByStore"
+            parameterType="String"
+            resultType="com.chacha.create.common.dto.product.ProductSalesResponseDTO">
+        SELECT
+            TO_CHAR(oi.order_date, 'YYYY-MM-DD') AS ymd,
+            NVL(SUM(od.order_cnt * od.order_price), 0) AS amt
+        FROM order_info oi
+                 JOIN order_detail od ON oi.order_id = od.order_id
+                 JOIN product p ON od.product_id = p.product_id
+                 JOIN store s ON s.store_id = p.store_id
+        WHERE s.store_url = #{storeUrl}
+          AND oi.order_status = 'ORDER_OK'
+        GROUP BY TO_CHAR(oi.order_date, 'YYYY-MM-DD')
+        ORDER BY ymd ASC
+    </select>
+
+
+	<update id="updateClick" parameterType="int">
+	    UPDATE product
+	    SET view_cnt = view_cnt + 1
+	    WHERE product_id = #{productId}
+	</update>
+	
+	<select id="findForCategoryPriceSummaryByCategoryName" parameterType="String" resultMap="AISummaryResultMap">
+        SELECT 
+            AVG(p.price) as avg_price,
+            MIN(p.price) as min_price,
+            MAX(p.price) as max_price,
+            PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY p.price) as median_price,
+            PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY p.price) as q1_price,
+            PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY p.price) as q3_price,
+            COUNT(*) as product_count,
+            STDDEV(p.price) as price_stddev
+        FROM product p 
+        JOIN d_category dc ON p.d_category_id = dc.d_category_id 
+        WHERE dc.d_category_name = #{categoryName}
+        AND p.delete_check = 0
+        AND p.price > 0
+	</select>
+
+	
+</mapper>

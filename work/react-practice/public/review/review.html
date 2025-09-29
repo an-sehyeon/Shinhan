@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>ES6 문법정리</h1>
+
+    <script type="module" src="./app.js"></script>
+    <script>
+      console.log("1.-------------");
+      window.addEventListener("DOMContentLoaded", () => {
+        const result = window.clean(" Hello~~ ");
+        console.log("2." + result);
+      });
+    </script>
+
+    <script>
+      const names = ["홍길동", "김길동", "박길동", "김기도"];
+      const users = [
+        { name: "이가윤1", isActive: true },
+        { name: "이가윤2", isActive: false },
+        { name: "이가윤3", isActive: true },
+      ];
+      const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      //names.forEach(function(name){})
+      const names2 = names.map((name) => name + "@daum.net");
+      const names3 = names.filter((name) => name.substring(0, 1) === "김");
+      const names4 = users.filter((user) => user.isActive);
+
+      const result = numbers.reduce((sum, n) => sum + n, 100); //sum의 초기값=100,sum = sum+n
+      console.log("reduce:" + result);
+      names.forEach((name) => console.log("forEach:", name));
+      names2.forEach((name) => console.log("map:", name));
+      names3.forEach((name) => console.log("filter1:", name));
+      names4.forEach((obj) => console.log("filter2:", obj));
+    </script>
+
+    <script>
+      //class,  상속, class내에 정의되는 함수는 function예약어 사용불가
+      //부모접근 super,
+      class Animal {
+        constructor(name) {
+          this.name = name;
+          console.log("Animal생성자실행");
+        }
+        speak() {
+          console.log(`${this.name}이 소리를 냅니다.!!`);
+        }
+      }
+      class Dog extends Animal {
+        constructor(name, age) {
+          super(name);
+          this.age = age;
+          console.log("Dog생성자실행");
+        }
+        speak() {
+          console.log(`${this.name}가 멍멍 소리를 냅니다.(${this.age})`);
+        }
+      }
+      var ani = new Animal("하하");
+      ani.speak();
+
+      var dog1 = new Dog("뽀삐", 3);
+      dog1.speak();
+    </script>
+
+    <script>
+      //6.스프레드연산자
+      //1)배열
+      const subject2 = ["자바스크립트", "리엑트"];
+      //2)객체
+      const student2 = { name: "홍길동", major: "컴공" };
+
+      var subject3 = [...subject2, "스프링"]; //기존data복사후 추가함
+      const student3 = { ...student2, major: "경제학과", 학번: 12345 };
+      console.log(subject3, student3);
+
+      var test1 = [subject2, "스프링"];
+      var test2 = { student2, major: "경제학과", 학번: 12345 };
+      console.log(test1);
+      console.log(test2);
+    </script>
+    <script>
+      //5.구조분해할당
+      //1)배열
+      const subject = ["자바스크립트", "리엑트"];
+      //2)객체
+      const student = { name: "홍길동", major: "컴공" };
+
+      const [sub1, sub2] = subject;
+      const { name, major } = student;
+
+      console.log(sub1, sub2);
+      console.log(name, major);
+    </script>
+
+    <script>
+      //4.화살표함수(=>)....다른언어는 람다식 (->)
+      const f_sum = function (a, b) {
+        return a + b;
+      };
+      const f_sum2 = (a, b) => a + b;
+      console.log(f_sum(1, 2), f_sum2(3, 4));
+    </script>
+    <script>
+      //3.백틱
+      var myname = "자바스크립트";
+      console.log(
+        "우리는 프론트기술중에" + myname + "기반  reactjs를 배운다. "
+      );
+      console.log(`우리는 프론트기술중에 ${myname} 기반  reactjs를 배운다. `);
+    </script>
+    <script>
+      //2.호이스팅
+      call();
+      //함수아님 call2();
+      var call2 = function () {
+        console.log(
+          "호이스팅안됨....할당후에만 호출가능 ...(리터럴함수에서 사용)...."
+        );
+      };
+      call2();
+      function call() {
+        console.log("호이스팅....(선언적함수에서 사용)....");
+      }
+    </script>
+
+    <script>
+      //1.const, var, let 구분하여 사용하기
+      console.log(a); //undefined...호이스팅,변수선언되었지만 초기화안됨
+      //오류 console.log(b);
+      //오류 console.log(c);
+      var a = 10;
+      const b = 20;
+      {
+        let c = 30; //block내에서 유효
+      }
+      a = 100;
+      //c = 400;
+      //상수는 값 변경불가 b = 200;
+      //console.log(a + b + c);
+    </script>
+  </body>
+</html>
