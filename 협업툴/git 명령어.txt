@@ -74,6 +74,33 @@ git push origin main
 
 
 
+===================================================================
+[프로젝트 git 연동]
+$ git clone https://github.com/kirk0221/chacha_create1.git
+git branch -a
+git stash
+rm -rf target/classes/
+git fetch -all
+git switch feature/storeUrl_productlist/an
+git switch -c feature/manager_storelist/an origin/feature/manager_storelist/an  원격에는 존재하지만 로컬에는 없을때
+
+[기능 완성 후 push 코드]
+git add .
+git commit -m "✨ feat: 스토어 메인  페이지 추가"
+git push  origin feature/store_main/an
+
+
+git stash                # 작업 내용 임시 저장
+git fetch origin         # 원격 변경사항 가져오기
+git pull origin develop  # develop 브랜치 최신 내용 병합
+git stash pop            # 저장해둔 작업 복원
+
+# 1. 작업 중인 변경사항이 필요 없다면, 강제로 덮어씌우기
+git fetch origin
+git reset --hard origin/revert_develop
+===================================================================
+
+
 
 
 
