@@ -1,0 +1,37 @@
+
+1.  용어                    의미
+    컬럼(필드)              테이블의 속성
+    튜플(로우,레코드)       테이블의 각각의 데이터 한 행
+    컬럼 헤더               컬럼을 설명하는 부분
+
+2. SQL 개요 및 구성
+    - 정의어 (DDL : Data Definition Language)
+    - 조작어 (DML : Data Mainpulation Language)
+    - 제어어 (DCL : Data Control Language)
+    - 트랜잭션 제어 (Transaction Control Language)
+
+3. 관계 대수와 SQL
+    - 관계 대수 연산자          SQL절               설명
+      셀렉션(Selection)        where절             튜플(행)을 선택
+      프로젝션(Projection)     select절            속성(열)을 추출
+
+4. SELECT 문 핵심 구조와 해석 순서
+    1) SELECT 문 작성 순서
+        SELECT -> FROM -> WHERE -> GROUP BY -> HAVING -> ORDER BY
+    2) 컴퓨터가 해석하는 순서
+        FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY
+        (FWGHSO)
+    3) SELECT 문 주요 요소
+        - DISTINCT는 중복 제거
+
+5. 별칭(alias) 사용법과 주의점
+    - 별칭은 AS 키워드를 사용하지만 생략 가능.
+    - 별칭 명명 규칙
+        1. 숫자 및 특수문자 사용 금지(단, 쌍따옴표로 감싸면 가능)
+        2. 예약어(예 : select, from 등) 사용 금지
+    - where 절은 select 절보다 먼저 실행되므로, where에서 컬럼 별칭 사용 불가
+
+6. 문자열 연결과 함수
+    - 함수 종류             설명                                       예시
+      문자열 연결(concat)   오라클은 ||, SQL은 + 연산자 사용            select first_name || last_name as full_name
+      문자 함수             예 : SUBSTR, TRIM                         SUBSTR('David',1,2) = 'Da'
