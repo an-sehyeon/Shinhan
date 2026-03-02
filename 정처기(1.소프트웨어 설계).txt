@@ -123,7 +123,7 @@
             - Use Case Diagram, Data Flow Model, State Model, Goal-Based Model, User Interactions, Object Model, Data Model
 
         - UML(Unified Modeling Language)
-            - 객체지향 소프트웨어 개발 과정에서 시스템 분석, 설계 구현 드의 산출물을 명세화, 시각화, 문서화 할 때 사용하는 모델링 기술과 방법론을 통합하여 만든 범용 모델링 언어.
+            - 객체지향 소프트웨어 개발 과정에서 시스템 분석, 설계 구현 등의 산출물을 명세화, 시각화, 문서화 할 때 사용하는 모델링 기술과 방법론을 통합하여 만든 범용 모델링 언어.
             
         - 럼바우(Rumbaugh) 객체지향 분석 기법
             - 객체 모델링 : 객체를 다이어그램으로 표시
